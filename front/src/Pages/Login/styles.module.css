@@ -1,0 +1,122 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, rgba(var(--dark-blue)), rgba(var(--soft-blue)));
+  background-image: url('../../assets/cultivo.jpg');
+  background-position: center;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+.container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  opacity: .9;
+  background: linear-gradient(45deg, rgba(0,0,0,.9), rgba(var(--dark-blue), 1));
+}
+.loginContainer {
+  background: rgba(var(--bg-color));
+  width: min(90%, 40rem);
+  z-index: 2;
+  border-radius: 2rem;
+  min-height: 30rem;
+  padding: 2rem;
+  border-radius: 6% 94% 6% 94% / 94% 6% 94% 6%;
+}
+.loginContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+.loginContainer form img {
+  width: 14rem;
+  height: 14rem;
+  object-fit: contain;
+  background: rgba(var(--soft-blue));
+  border-radius: 100%;
+  border: .5rem solid rgba(var(--bg-color));
+  padding: .5rem;
+  margin-top: -10.3rem;
+}
+.loginContainer h2 {
+  font-size: 3.6rem;
+}
+.input_group {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  width: 100%;
+  position: relative;
+}
+.input_group input {
+  width: 100%;
+  border-radius: 9999px;
+  /* box-shadow: 1rem 1rem 1rem rgba(0,0,0,.1); */
+  padding: 1.2rem;
+  outline: none;
+  padding-left: 5rem;
+  transition: .3s all ease-in-out;
+  background: rgba(var(--soft-blue),.2);
+}
+.input_group input:focus {
+}
+.input_group i {
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+}
+.input_group i svg {
+  fill: none;
+  stroke: rgba(var(--blue));
+  width: 3.6rem;
+  transition: .3s all ease-in-out;
+  transform: rotate(15deg);
+}
+.input_group input:focus ~ i svg,
+.input_group input:valid ~ i svg {
+  stroke: rgba(var(--dark-blue));
+  transform: rotate(0deg);
+}
+.showPassBtn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+.showPassBtn svg {
+  fill: none;
+  height: 2rem;
+  stroke: rgba(var(--dark-blue));
+  transition: .3s all ease-in-out;
+}
+.showPassBtn:hover svg {
+  stroke: rgba(var(--blue));
+}
+
+
+
+
+.loginContainer form .submitBtn {
+  background: rgba(var(--gold-yellow));
+  width: min(100%, 25rem);
+  border-radius: 9999px;
+  padding: 1.2rem;
+  font-weight: bold;
+  transition: .3s all ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+}
+.submitBtn svg {
+  fill: none;
+  width: min-content;
+  transform: rotate(180deg);
+}
+.loginContainer form .submitBtn:hover {
+  background: rgba(var(--orange),.7);
+}
+.loginContainer form a:hover {
+  color: rgba(var(--blue));
+}

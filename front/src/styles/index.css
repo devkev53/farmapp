@@ -1,0 +1,17 @@
+body {
+  background: rgb(var(--bg-color));
+  overflow: hidden;
+}
+
+
+#root {
+  display: grid;
+  grid-template-columns: 100% auto;
+}
+
+
+@media (min-width: 768px) {
+  #root {
+    grid-template-columns: auto auto;
+  }
+}
