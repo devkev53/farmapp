@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext as _
 from users.models import User
+# from core.tasks import send_emails_users
 
 # Register your models here.
 
@@ -30,3 +31,11 @@ class UserAdmin(BaseUserAdmin):
   # search_fields = ('',)
   # date_hierarchy = ''
   ordering = ('id',)
+  actions = ['send_emails_actions',]
+
+  def send_emails_actions(self, request, queryset, *args, **kwargs):
+    # send_emails_users.delay()
+    updated_rows = queryset
+    print(updated_rows)
+
+    return True
