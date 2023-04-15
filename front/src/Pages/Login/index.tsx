@@ -43,10 +43,7 @@ const index = () => {
   useEffect(() => {
     userInfo !== USER_STATES.NOT_LOGGED && navigate('/')
   }, [userInfo])
-
-
-
-
+  
   return (
     <div className={styles.login}>
       <div className={styles.container}></div>
