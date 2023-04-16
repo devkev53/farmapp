@@ -47,7 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
   def preview_img(self):
     if not self.image:
-      data = 'https://robohash.org/%s.png' % self.username
+      data = 'https://api.multiavatar.com/%s.svg' % self.username
     else:
       data = self.image.url
       # print(data)
