@@ -106,7 +106,7 @@
   .sidebar {
     position: sticky;
     top: 0;
-    width: 25rem;
+    max-width: 25rem;
     transition: .3s all ease;
     
   }
@@ -140,7 +140,7 @@
   }
   .expandBtn:hover {
     transform: translateX(-15%);
-    background-color: rgba(0,0,0,.3);
+    backgrootund-color: rgba(0,0,0,.3);
   }
   
   .expandBtn svg {
