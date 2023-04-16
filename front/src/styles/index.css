@@ -8,10 +8,12 @@ body {
   display: grid;
   grid-template-columns: 100% auto;
 }
-
+.right {
+  width: 100%;
+}
 
 @media (min-width: 768px) {
   #root {
-    grid-template-columns: auto auto;
+    display: flex;
   }
 }

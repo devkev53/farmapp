@@ -7,6 +7,7 @@ import { AuthContextProvider } from "../context/authContext"
 // import Pages
 import Dashboard from '../Pages/Home'
 import Login from '../Pages/Login'
+import Plantations from '../Pages/Plantations'
 import Error404 from '../Pages/Error404'
 
 import LoginRoute from "./LoginRoute"
@@ -23,6 +24,7 @@ function App() {
 
           <Route element={<ProtectedRoutes/>}>
             <Route path="/" element={<Dashboard/>}/>
+            <Route path="/plantations" element={<Plantations/>}/>
           </Route>
           
           <Route path="*" element={<Error404/>}/>

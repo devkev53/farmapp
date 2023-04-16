@@ -3,7 +3,7 @@ export interface userInfoI {
   username: string;
   email: string;
   name: string;
-  lastName: string;
+  last_name: string;
   image: string  
 }
 

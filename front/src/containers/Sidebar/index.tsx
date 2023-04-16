@@ -4,11 +4,12 @@ import logo from '../../assets/PGII.svg'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { menuContract, menuSubject } from '../../services/menu-subject.service'
-
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const index = () => {
   const [isMenuExpand, setIsMenuExpand] = useState(true)
   const [isShowMenu, setIsShowMenu] = useState(false)
+  const {user} = useAuthContext()
 
   useEffect(() => {
     menuSubject.getSubject().subscribe((value) => { 
@@ -19,6 +20,11 @@ const index = () => {
   const handleContractMenu = () => {
     setIsMenuExpand(!isMenuExpand)
     menuContract.setSubject(isMenuExpand)
+  }
+
+  const handleCloseMenu = () => {
+    setIsShowMenu(false)
+    menuSubject.setSubject(false)
   }
 
   return (
@@ -41,7 +47,7 @@ const index = () => {
             </svg>
           </button>
 
-          <button onClick={() => setIsShowMenu(false)} className={styles.closeMenuBtn}>
+          <button onClick={handleCloseMenu} className={styles.closeMenuBtn}>
             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -51,8 +57,12 @@ const index = () => {
         </div>
         <div className={styles.userInfo}>
           <picture>
-            <img src="https://robohash.org/pickles123" alt="avatar" />
-            <p>User</p>
+            {user !== null && user?.image === null
+              ? (<img src="https://robohash.org/pickles123" alt="avatar" />)
+              : (<img src={user?.image} alt={user?.username} />)
+            }
+            <p>{user !== null && `${user?.name} ${user?.last_name}`}</p>
+            <small>{user !== null && user?.username}</small>
           </picture>
         </div>
         <div className={styles.menuContainer}>

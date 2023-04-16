@@ -4,11 +4,13 @@ import Menu from '../../components/Menu'
 import logo from '../../assets/PGII.svg'
 import { useEffect, useState } from 'react';
 import { menuSubject } from '../../services/menu-subject.service';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import 'animate.css';
 
 const index = () => {
 
   const [isShowUserOptions, setIsShowUserOptions] = useState(false)
+  const {user} = useAuthContext()
 
   const handleClickOpenMenu = () => {
     menuSubject.setSubject(true)
@@ -30,8 +32,11 @@ const index = () => {
         </button>
         <div onClick={() => setIsShowUserOptions(!isShowUserOptions)} className={styles.userInfo}>
           <picture>
-            <img src="https://robohash.org/pickles123" alt="avatar" />
-            <p>User</p>
+            {user !== null && user?.image === null
+              ? (<img src="https://robohash.org/pickles123" alt={user?.username} />)
+              : (<img src={user?.image} alt={user?.username} />)
+            }
+            <p>{user !== null && user?.username}</p>
           </picture>
         </div>
         {/* <div className={`${styles.userOptions} ${isShowUserOptions && styles.showOptions}  animate__animated animate__fadeInDown`}>
