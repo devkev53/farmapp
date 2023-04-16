@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 
 from rest_framework import viewsets, status
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 
@@ -9,7 +9,7 @@ from users.api.serializers.user_serializers import UserSerializer, UserUpdateSer
 
 class UserViewset(viewsets.GenericViewSet):
     serializer_class = UserListSerializer
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self, pk=None):
         ''' Obtain the queryset an validate with PK '''
@@ -22,11 +22,13 @@ class UserViewset(viewsets.GenericViewSet):
     def get_object(self, pk):
         return get_object_or_404(self.serializer_class.Meta.model, pk=pk)
     
+    # List all active Users
     def list(self, request):
         users = self.get_queryset()
         users_serializer = self.serializer_class(users, many=True)
         return Response(users_serializer.data, status=status.HTTP_200_OK)
 
+    # Create a new User
     def create(self, request):
         user_serializer = UserSerializer(data=request.data)
         
@@ -38,12 +40,13 @@ class UserViewset(viewsets.GenericViewSet):
         'error':'check your fields', 'errors':user_serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
+    # List Detail a User
     def retrieve(self, request, pk=None):
         user = self.get_object(pk)
         user_serializer = self.serializer_class(user)
         return Response(user_serializer.data)
 
-
+    # Update a User
     def update(self, request, pk=None):
         user = self.get_object(pk)
         user_serializer = UserUpdateSerializer(user, data=request.data)
@@ -54,6 +57,7 @@ class UserViewset(viewsets.GenericViewSet):
         'error':'check your fields', 'errors':user_serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
+    # Delete a User (No Delete to DB is a logical change the status)
     def destroy(self, request, pk=None):
         user_destroy = self.serializer_class.Meta.model.objects.filter(id=pk).update(is_active=False)
         if user_destroy == 1:

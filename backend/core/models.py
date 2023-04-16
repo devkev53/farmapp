@@ -23,6 +23,7 @@ class BaseModel(models.Model):
     updated = models.DateField(
         _('Updated'), auto_now=True, blank=True, null=True)
     historical = HistoricalRecords(inherit=True)
+    is_active = models.BooleanField(_('Is Active'), default=True)
 
     class Meta:
         """Meta definition for BaseModel."""
