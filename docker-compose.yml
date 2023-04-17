@@ -2,8 +2,31 @@ version: '3.9'
 
 
 services:
+  rabbitmq:
+    container_name: 'rabbitmq'
+    image: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq/
+        - rabbitmq_log:/var/log/rabbitmq/
+  # db:
+  #   image: postgres
+  #   ports:
+  #     - '5432:5432'
+
+  #   environment:
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_DB=postgres
+
+  #   volumes:
+  #     - ./data/db:/var/lib/postgresql/data/
+
 
   frontend:
+    container_name: 'font-react'
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -18,11 +41,25 @@ services:
       - backend
 
   backend: 
+    container_name: 'backend-django'
     build: 
       context: ./backend
       dockerfile: Dockerfile
+    
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    
     ports:
       - '8000:8000'
 
     volumes:
       - ./backend:/app/backend
+
+volumes:
+    rabbitmq_data:
+    rabbitmq_log:
+
+    # depends_on:
+    #   - db

@@ -32,6 +32,7 @@ class UserAdmin(BaseUserAdmin):
   # date_hierarchy = ''
   ordering = ('id',)
   actions = ['send_emails_actions',]
+  list_per_page = 9
 
   def send_emails_actions(self, request, queryset, *args, **kwargs):
     # send_emails_users.delay()

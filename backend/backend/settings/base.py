@@ -41,6 +41,9 @@ THIRD_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'simple_history',
+    'django_celery_results',
+    'django_celery_beat',
+    # 'django_celery_results',
 ]
 
 
