@@ -22,9 +22,13 @@ from rest_framework_simplejwt.views import (
 )
 
 from core.api.views.auth_views import Login, Logout
+from core.views import test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', test, name='test'),
+
+
     path('api/', include('core.api.router')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

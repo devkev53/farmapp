@@ -43,7 +43,6 @@ THIRD_APPS = [
     'simple_history',
     'django_celery_results',
     'django_celery_beat',
-    # 'django_celery_results',
 ]
 
 
@@ -59,7 +58,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
-      # Cors Headers
+    # Cors Headers
     "corsheaders.middleware.CorsMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
