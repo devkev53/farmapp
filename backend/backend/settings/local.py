@@ -88,7 +88,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 # CELERY SETTINGS
-# CELERY_BROKER_URL = 'amqp://admin:abc123@localhost:5672//'
+# CELERY_BROKER_URL = 'amqp://guest:**@localhost:5672//'
 # CELERY_ACCEPT_CONTENT = ['aplication/json']
 # CELERY_RESULT_SERIALIZER = 'json'
 # CELERY_TASK_SERIALIZER = 'json'
@@ -97,4 +97,4 @@ CELERY_TASK_TRACK_STARTED = True
 # CELERY_RESULT_BACKEND = 'django-db'
 
 # CELERY SETTINGS
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseSheduler'
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseSheduler'

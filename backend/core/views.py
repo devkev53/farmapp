@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import string
 from core.models import User
 from django.utils.crypto import get_random_string
-from .task import say_hello
+from .tasks import say_hello, send_email_func
 
 
 # Create your views here.
@@ -22,3 +22,7 @@ def create_user_random(cantidad):
 def test(request):
     say_hello()
     return HttpResponse('Done Test')
+
+def send_mail_to_all(request):
+    send_email_func()
+    return HttpResponse('Sending emails')

@@ -22,11 +22,12 @@ from rest_framework_simplejwt.views import (
 )
 
 from core.api.views.auth_views import Login, Logout
-from core.views import test
+from core.views import test, send_mail_to_all
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', test, name='test'),
+    path('sendMail', send_mail_to_all, name='sendMail'),
 
 
     path('api/', include('core.api.router')),
