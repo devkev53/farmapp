@@ -5,8 +5,17 @@ import './styles/reset.css'
 import './styles/vars.css'
 import './styles/index.css'
 
+import { PrivatePublicInterceptor } from './interceptors/axios.interceptros'
+import { SnackbarProvider } from 'notistack'
+import { SnackbarUtilitiesConfigurator } from './utilities/snackbar-manager'
+
+PrivatePublicInterceptor()
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <SnackbarProvider>
+    <SnackbarUtilitiesConfigurator />
+      <App />
+  </SnackbarProvider>
+  // </React.StrictMode>,
 )

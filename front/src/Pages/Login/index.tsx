@@ -16,6 +16,7 @@ import { Login } from '../../components/UI/icons/LoginIcon';
 
 import CircleSpinner from '../../components/UI/spiners/CircleSpinner';
 import { USER_STATES } from '../../utils/user_states';
+import { testingService } from '../../services/testing.service';
 
 const index = () => {
   const {isLoading, callEndpoint} = useFetchAndLoad()
@@ -24,6 +25,17 @@ const index = () => {
   const navigate = useNavigate()
 
   const formRef = useRef<HTMLFormElement>(null)
+
+  // TESTING
+  // const [morty, setMorty] = useState({} as any)
+  // const fetchMorty = async() => {
+  //   const {data} = await callEndpoint(testingService())
+  //   console.log(data)
+  // }
+
+  // useEffect(()=>{
+  //   fetchMorty()
+  // },[])
   
   const handleSubmit:FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -37,7 +49,9 @@ const index = () => {
       setLoginData(result.data)
       setIsLogged(true)
       navigate("/")
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   useEffect(() => {
