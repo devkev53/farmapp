@@ -43,8 +43,11 @@ class Plantation(BaseModel):
   def calculate_all_used_water(self):
     all_used_water = 0
     grounds = Ground.objects.filter(plantation = self.id)
-    for ground in grounds:
-      all_used_water += ground.used_water
+    if grounds != None:
+      for ground in grounds:
+        print(ground.used_water)
+        if ground.used_water:
+          all_used_water += ground.used_water
     return all_used_water
   
   def estimated_date_harvest(self):

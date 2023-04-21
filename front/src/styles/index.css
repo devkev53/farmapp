@@ -12,6 +12,15 @@ body {
   width: 100%;
 }
 
+.table_container {
+  width: 100%;
+  max-width: 190rem;
+  margin: 0 auto;
+  /* background: #000; */
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 768px) {
   #root {
     display: flex;

@@ -16,6 +16,7 @@ export const PrivatePublicInterceptor = () => {
   
   axios.interceptors.request.use((request) => {
     if (request.url?.includes('assets')) return request
+    if (request.url?.includes('login')) return request
     const newRequest:InternalAxiosRequestConfig = updateHeader(request)
     // console.log("Startubg Request", newRequest)
     return newRequest
@@ -23,7 +24,7 @@ export const PrivatePublicInterceptor = () => {
 
   axios.interceptors.response.use(
     (response) => {
-      console.log("Response", response)
+      // console.log("Response", response)
       return response
     },
     (error) => {
