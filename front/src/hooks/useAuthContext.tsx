@@ -3,7 +3,7 @@ import { AuthContext } from "../context/authContext";
 import { USER_STATES } from "../utils/user_states";
 import { useNavigate } from "react-router-dom";
 import { authUserI } from "../models/authUser.models";
-import { clearUserLocalStorage, setUserLocalStorage } from "../utils/localStorage_user.utility";
+import { clearUserLocalStorage, setUserLocalStorage } from "../utilities/localStorage_user.utility";
 import { ValueContextType } from "../context/authContext";
 import { userInfoI } from "../models/authUser.models";
 

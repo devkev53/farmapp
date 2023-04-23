@@ -5,6 +5,11 @@ import { Paginacion } from './Paginacion'
 import CircleSpinner from '../UI/spiners/CircleSpinner'
 import { ArrowUp } from '../UI/icons/Arrow-up'
 
+import styles from './styles.module.css'
+import { ArrowDown } from '../UI/icons/Arrow-down'
+import { Link } from 'react-router-dom'
+import { EyeShow } from '../UI/icons/EyeShowIcon'
+
 type Props = {
   data: any[],
   fetchData?: (pageIndex:number) => Promise<any>
@@ -52,66 +57,96 @@ export const AsyncTable = ({
 
 
   return (
-    <div className="table_container">
-      {/* <pre>
-        <code>
-          {JSON.stringify({
-            pageIndex,
-            pageSize,
-            pageCount,
-            canNextPage,
-            canPreviousPage
-          }, null, 2)}
-        </code>
-      </pre> */}
-
+    <>
       <GlobalFlter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFiter={globalFiter}
         setGlobalFilter={setGlobalFilter}
       />
-      {isLoading 
-        ? <CircleSpinner/>
-        : <table className="" {...getTableBodyProps()}>
-          
+      <div className={styles.table_container}>
+        {/* <pre>
+          <code>
+            {JSON.stringify({
+              pageIndex,
+              pageSize,
+              pageCount,
+              canNextPage,
+              canPreviousPage
+            }, null, 2)}
+          </code>
+        </pre> */}
+
+        <table className={styles.table} {...getTableBodyProps()}>            
           {/* HEAD TABLE */}
-          <thead>
+          <thead className={styles.header}>
             {headerGroups.map((headerGroup) => (
               <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th key={column.id} {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ?<ArrowUp />
-                          :"⬇️"
-                        : ""
-                      }
-                    </span>
+                  <th scope='col' key={column.id} {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    <div>
+                      {column.render("Header")}
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ?<ArrowUp />
+                            :<ArrowDown />
+                          : ""
+                        }
+                      </span>
+                    </div>
                   </th>
                 ))}
+                <th className={styles.actions}>Acciones</th>
               </tr>
             ))}
           </thead>
 
-          {/* BODY TABLE */}
-          <tbody {...getTableBodyProps()}>
-            {page.map((row, i) => {
-              prepareRow(row);
-              return (
-                <tr key={row.id} {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  })}
+          {isLoading
+            ? (
+              <tbody>
+                <tr>
+                  <td colSpan={columns.length + 1}>
+                    <div className={styles.spiner_container}>
+                      <CircleSpinner/>
+                    </div>
+                  </td>
                 </tr>
-              )
-            })}
-          </tbody>
-          </table>
-      }
-        
-      {/* PAGINATION */}
+              </tbody>
+            )
+            :  <tbody {...getTableBodyProps()}>
+              {page.length < 1 && (
+                <tr className={styles.no_register}>
+                  <td colSpan={columns.length + 1}>
+                    <div>
+                      No se encontro ningun registro
+                    </div>
+                  </td>
+                </tr>
+              )}
+              {page.map((row, i) => {
+                prepareRow(row);
+                return (
+                  <tr key={row.id} {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return <td data-label={cell.column.Header} {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    })}
+                    <td className={styles.actions}>
+                      <Link className={styles.show} to={`/plantations-detail/${row.original.id}`}>
+                        <span>
+                          <EyeShow/>
+                          Ver
+                        </span>
+                      </Link>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          }
+
+              
+        </table>
+      </div>
       <Paginacion
         gotoPage={gotoPage}
         previousPage={previousPage}
@@ -124,40 +159,6 @@ export const AsyncTable = ({
         canPreviousPage={canPreviousPage}
         canNextPage={canNextPage}
       />
-      {/* <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>{'<'}</button>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>{'>'}</button>
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
-        <span>
-          page{" "}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{" "}
-        </span>
-        <span>
-          | Go to page:{" "}
-          <input 
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              gotoPage(page)
-            }}
-          />
-        </span>{" "}
-        <select
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value))
-          }} 
-        >{[10, 20, 30, 40, 50].map((pageSize) => (
-          <option key={pageSize} value={pageSize}>
-            show {pageSize}
-          </option>
-        ))}</select>
-      </div> */}
-
-    </div>
+    </>
   )
 }

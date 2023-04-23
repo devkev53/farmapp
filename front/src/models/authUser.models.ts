@@ -12,3 +12,8 @@ export interface authUserI {
   refreshToken: string;
   userInfo: userInfoI;
 }
+
+export interface TokensI {
+  token: string,
+  refreshToken: string
+}

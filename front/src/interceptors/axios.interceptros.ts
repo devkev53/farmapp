@@ -1,38 +1,57 @@
 import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios"
 import { getValidationError } from "../utilities"
 import { SnackbarUtilities } from "../utilities/snackbar-manager"
-import { getUser } from "../utils/localStorage_user.utility"
+import { clearUserLocalStorage, getAuthTokens, getUser, setUserLocalStorage, updateUserLocalStorage } from "../utilities/localStorage_user.utility"
+import jwt_decode from 'jwt-decode'
+import dayjs from 'dayjs'
+import { accessTokenValidate, refreshTokenValidate } from "../utilities/get-tokens-validation"
+import { axiosPrivateInstance, axiosPublicInstance, updateHeader } from "../utilities/axios-instances"
+import { refreshTokenService } from "../services/auth.service"
 
-export const PrivatePublicInterceptor = () => {
-  const updateHeader = (request:AxiosRequestConfig) => {
-    const {token} = getUser()
-    const newHeaders = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
-    }
-    request.headers = newHeaders
-    return request
-  }
+
+
+export const PrivateInterceptor = () => {
   
-  axios.interceptors.request.use((request) => {
+  axiosPrivateInstance.interceptors.request.use(async (request) => {
+    
     if (request.url?.includes('assets')) return request
     if (request.url?.includes('login')) return request
-    const newRequest:InternalAxiosRequestConfig = updateHeader(request)
-    // console.log("Startubg Request", newRequest)
-    return newRequest
+    request = updateHeader(request)
+    
+    const {token, refreshToken} = getAuthTokens()
+    
+    if (!accessTokenValidate(token)) return request 
+    if (refreshTokenValidate(refreshToken)) {
+      clearUserLocalStorage()
+    }    
+    const response = await refreshTokenService(refreshToken)
+    const {access, refresh} = response.data
+    const data = {token: access, refreshToken: refresh}
+    updateUserLocalStorage(data)
+
+    request.headers.Authorization = `Bearer ${response.data.access}`
+
+    return request
   })
 
-  axios.interceptors.response.use(
+  axiosPrivateInstance.interceptors.response.use(
     (response) => {
-      // console.log("Response", response)
       return response
     },
     (error) => {
-      // console.log(error)
       SnackbarUtilities.error(getValidationError(error.code))
-      console.error("error: ", getValidationError(error.code))
-      // Hace una promesa y mata a la peticion.
       return Promise.reject(error)
     }
     )
+}
+
+export const PublicInterceptor = () => {
+  axiosPublicInstance.interceptors.request.use(async(request) => {
+    return request
+  })
+  axiosPublicInstance.interceptors.response.use(
+    (response) => {return response}, 
+    (error) => { 
+      SnackbarUtilities.error(error.response.data.error)
+    })
 }

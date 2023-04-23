@@ -5,11 +5,13 @@ import './styles/reset.css'
 import './styles/vars.css'
 import './styles/index.css'
 
-import { PrivatePublicInterceptor } from './interceptors/axios.interceptros'
 import { SnackbarProvider } from 'notistack'
 import { SnackbarUtilitiesConfigurator } from './utilities/snackbar-manager'
+import { PrivateInterceptor, PublicInterceptor } from './interceptors'
 
-PrivatePublicInterceptor()
+PublicInterceptor()
+PrivateInterceptor()
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   // <React.StrictMode>

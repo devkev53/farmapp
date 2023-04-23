@@ -10,6 +10,16 @@ body {
 }
 .right {
   width: 100%;
+  overflow-y: hidden;
+}
+.right h2 {
+  color: rgb(var(--dark-blue));
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+}
+.list_plants {
+  width: 100%;
+  /* background: yellow; */
+  overflow-y: hidden;
 }
 
 .table_container {

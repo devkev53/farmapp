@@ -11,6 +11,7 @@
   height: 6rem;
 }
 main {
+  overflow-x: hidden;
   overflow-Y: scroll;
   height: calc(100vh - 6rem);
   padding: 2.6rem;

@@ -2,7 +2,7 @@ import { createContext, ReactElement, useEffect, useState } from "react";
 
 import { authUserI } from "../models/authUser.models";
 import { USER_STATES } from "../utils/user_states";
-import { getUser } from "../utils/localStorage_user.utility";
+import { getUser } from "../utilities/localStorage_user.utility";
 
 export type ValueContextType = {
   userInfo: authUserI | undefined | null;

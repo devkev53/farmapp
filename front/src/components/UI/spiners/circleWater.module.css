@@ -7,6 +7,7 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
+  border: .2rem solid rgba(51,51,51,.3);
 }
 .circle::before {
   content: '';
@@ -27,4 +28,53 @@
   transform-origin: left;
   background: linear-gradient(-130deg, rgba(var(--blue), 1), rgba(var(--soft-blue), 1));
   box-shadow: .5rem .5rem 1rem rgba(51,51,51,.3);
+  z-index: 2;
+  bottom: 125%;
+  opacity: 0;
+  animation: drop_animation 2s infinite;
+  z-index: 1;
+}
+
+.water, .water2 {
+  width: 110%;
+  height: 110%;
+  background-image: url('../../../assets/agua.svg');
+  background-size: cover;
+  /* opacity: .6; */
+  position: absolute;
+  transform: translateY(17.2rem);
+  /* top: 95%; */
+  z-index: 2;
+  animation: water_animation 10s infinite ease;
+  opacity: 0;
+}
+.water2 {
+  animation: water2_animation 10s infinite ease;
+  opacity: .6;
+  height: 125;
+  width: 125;
+}
+
+@keyframes drop_animation {
+  0% {transform: translateY(0) rotate(45deg); opacity: 1;}
+  70% {opacity: 1;}
+  80% {transform: translateY(30rem) rotate(45deg)}
+  90% {display: none; opacity: 0; }
+  95% {display: none; opacity: 0; transform: translateY(0) rotate(45deg);}
+  100% {display: none; opacity: 0;}
+}
+
+@keyframes water_animation {
+  20% {transform: translateY(15rem) translateX(.8rem);}
+  45% {transform: translateY(12rem);}
+  96% {transform: translateY(8rem) translateX(.8rem);  opacity: 1;}
+  98% {opacity: 0; display: none;}
+  99% {opacity: 0;}
+}
+@keyframes water2_animation {
+  20% {transform: translateY(15rem) translateX(3rem);}
+  45% {transform: translateY(12rem) translateX(2rem);}
+  96% {transform: translateY(8rem) translateX(3rem);  opacity: .6;}
+  98% {opacity: 0; display: none;}
+  99% {opacity: 0;}
 }

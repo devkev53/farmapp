@@ -107,6 +107,7 @@
     position: sticky;
     top: 0;
     max-width: 25rem;
+    min-width: 25rem;
     transition: .3s all ease;
     
   }
@@ -115,6 +116,7 @@
   }
   .sidebar.contract {
     width: 14rem;
+    min-width: 14rem;
   }
   .sidebarContainer {
     width: 100%;

@@ -28,32 +28,7 @@ const index = () => {
     <ul className={`${styles.menuList} ${isMenuExpand && styles.contract}`}>
 
       <MenuItem />
-      {/* <li className={`${styles.menuItem} ${styles.activeItem}`}>
-        <Link to="/dashboard">
-          <i>
-            <DashboardIcon />
-          </i>
-          <span>Dashboard</span>
-        </Link>
-      </li>
 
-      <li className={styles.menuItem}>
-        <Link to="/plantations">
-          <i>
-            <PlantIcon/>
-          </i>
-          <span>Mis Cultivos</span>
-        </Link>
-      </li>
-
-      <li className={styles.menuItem}>
-        <Link to="/">
-          <i>
-            <ReportsIcon />
-          </i>
-          <span>Reportes</span>
-        </Link>
-      </li> */}
 
       <li className={`${styles.menuItem} ${styles.logoutBtn}`}>
         <button onClick={handleLogout}>

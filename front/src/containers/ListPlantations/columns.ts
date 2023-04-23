@@ -4,15 +4,15 @@ export const listPlantsColumns = [
   //   accessor: "id",
   // },
   {
-    Header: "name",
+    Header: "Nombre",
     accessor: "name",
   },
   {
-    Header: "description",
+    Header: "Descripción",
     accessor: "description",
   },
   {
-    Header: "duration",
+    Header: "Cosesha Aproximada",
     accessor: "duration",
   },
 ]
