@@ -11,5 +11,6 @@
   padding: 1.6rem;
   outline: none;
   color: rgba(51,51,51, .8);
+  position: static;
   /* font-weight: 500; */
 }

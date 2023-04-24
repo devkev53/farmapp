@@ -61,6 +61,7 @@
   border: none;
   border-top: .2rem solid rgba(51,51,51,.1);
   justify-content: center;
+  z-index: 0;
   /* border-right: none; */
 }
 /* .table .actions::after{

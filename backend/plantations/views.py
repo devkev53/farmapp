@@ -14,3 +14,10 @@ def create_plantation_random(cantidad):
         duration = random.randint(50, 250)
         Plantation.objects.create(name=name, description=description, duration=duration)
     return '{} Plantation created successfull'.format(x)
+
+
+def delete_all_plantations():
+    plantations = Plantation.objects.all()
+    for plantation in plantations:
+        plantation.delete()
+    return '{} Plantation deleterd successfull'.format()

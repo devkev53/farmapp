@@ -31,6 +31,86 @@
 }
 
 
+
+/* INPUT STYLES */
+.input_group {
+  position: relative;
+  height: 6rem;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(var(--white), .85);
+  border-radius: .8rem;
+}
+
+.input_group input {
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  padding-bottom: 1rem;
+  /* height: 100%; */
+  display: block;
+  width: 100%;
+  border: none;
+  /* border-bottom: solid .2rem rgba(51,51,51,.3); */
+  /* background: rgba(var(--white), .85); */
+  border-radius: .8rem;
+}
+.input_group input:focus {
+  outline: none;
+}
+.input_group label {
+  color: rgba(51,51,51, .8);
+  font-size: 1.8rem;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 1.6rem;
+  top: 1.6rem;
+  transition:  .2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.input_group input:focus ~ label,
+.input_group input:valid ~ label {
+  /* top: -.05rem; */
+  top: .8rem;
+  font-size: 1.2rem;
+  color: rgba(var(--dark-blue));
+} 
+
+.bar {
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+
+.bar::before, 
+.bar::after {
+  content: '';
+  height: .2rem;
+  width: 0;
+  bottom: .1rem;
+  position: absolute;
+  background: rgba(var(--dark-blue));
+  transition: .2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar::before {
+  left: 50%;
+  border-bottom-left-radius: 1rem;
+}
+.bar::after {
+  right: 50%;
+  border-bottom-left-radius: 1rem;
+}
+.input_group input:focus ~ .bar::before,
+.input_group input:focus ~ .bar::after {
+  width: calc(50% - .1rem);
+} 
+
+
 @media (min-width: 768px) {
  .add_link {
   position: relative;
