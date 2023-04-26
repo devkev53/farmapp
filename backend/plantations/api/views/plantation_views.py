@@ -9,7 +9,7 @@ from plantations.api.serializers.plantation_serializers import PlantationSeriali
 
 class PlantationViewSet(CustomBaseViewSet):
     serializer_class = PlantationSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
     # def get_queryset(self, pk=None):

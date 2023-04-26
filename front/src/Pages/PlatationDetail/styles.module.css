@@ -1,13 +1,40 @@
 .title_container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 2.6rem;
   /* padding-bottom: 1.2rem; */
   /* border-bottom: .2rem solid rgba(var(--dark-blue), .5); */
 }
 .title_container h2 {
   text-transform: capitalize;
+}
+.deleteIcon {
+  padding: 1.2rem;
+  border-radius: 100%;
+  border-radius: 2.4rem;
+  background: rgb(var(--danger));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  width: 5rem;
+  transition: .3s all ease;
+  gap: .4rem;
+}
+.deleteIcon span {
+  color: rgba(var(--white), .87);
+  /* display: none; */
+  position: absolute;
+  transition: .3s all ease;
+  transform: translateX(5rem);
+}
+
+.deleteIcon svg {
+  fill: none;
+  stroke: rgba(var(--white), .87);
 }
 .extra_info {
   display: flex;
@@ -175,8 +202,16 @@
     width: 100%;
     position: relative;
   }
+  .deleteIcon:hover {
+    width: 10rem;
+  }
+  .deleteIcon:hover span {
+    position: relative;
+    transform: translateX(0);
+  }
+  
   .content_container {
-    max-width: calc(100% - (60rem + 2.6rem));
+    max-width: calc(50% - (60rem + 2.6rem));
     min-width: calc(50% - 1.3rem);
   }
 

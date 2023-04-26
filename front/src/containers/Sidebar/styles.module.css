@@ -83,8 +83,9 @@
 }
 .userInfo picture img {
   margin-top: -5rem;
-  height: 10rem;
+  min-height: 10rem;
   width: 10rem;
+  
   border-radius: 100%;
   border: .4rem solid rgba(var(--bg-color));
   background: rgba(var(--soft-blue));

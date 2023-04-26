@@ -20,6 +20,13 @@ class Plantation(BaseModel):
   used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
   is_active = models.BooleanField(_('Is Active'), default=True)
 
+  area = models.FloatField(_('area'), blank=True, null=True, default=0)
+  perimeter = models.FloatField(_('perimeter'), blank=True, null=True, default=0)
+  ability = models.FloatField(_('ability'), blank=True, null=True, default=0)
+  wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True, default=0)
+  used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
+  thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True)
+
   class Meta:
     """Meta definition for Plantation."""
 
@@ -56,46 +63,46 @@ class Plantation(BaseModel):
 
   
 
-class Ground(BaseModel):
-  """Model definition for Ground."""
+# class Ground(BaseModel):
+#   """Model definition for Ground."""
 
-  # TODO: Define fields here
-  plantation = models.ForeignKey(Plantation, on_delete=models.CASCADE, related_name=_('associated_ground'))
-  area = models.FloatField(_('area'), blank=True, null=True, default=0)
-  perimeter = models.FloatField(_('perimeter'), blank=True, null=True, default=0)
-  ability = models.FloatField(_('ability'), blank=True, null=True, default=0)
-  wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True, default=0)
-  used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
-  thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True)
+#   # TODO: Define fields here
+#   plantation = models.ForeignKey(Plantation, on_delete=models.CASCADE, related_name=_('associated_ground'))
+#   area = models.FloatField(_('area'), blank=True, null=True, default=0)
+#   perimeter = models.FloatField(_('perimeter'), blank=True, null=True, default=0)
+#   ability = models.FloatField(_('ability'), blank=True, null=True, default=0)
+#   wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True, default=0)
+#   used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
+#   thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True)
   
 
 
-  class Meta:
-    """Meta definition for Ground."""
+#   class Meta:
+#     """Meta definition for Ground."""
 
-    verbose_name = 'Ground'
-    verbose_name_plural = 'Grounds'
+#     verbose_name = 'Ground'
+#     verbose_name_plural = 'Grounds'
 
-  def __str__(self):
-    """Unicode representation of Ground."""
-    return '{}'.format(self.plantation)
+#   def __str__(self):
+#     """Unicode representation of Ground."""
+#     return '{}'.format(self.plantation)
 
-  # def save(self):
-  #   """Save method for Ground."""
-  #   pass
+#   # def save(self):
+#   #   """Save method for Ground."""
+#   #   pass
 
-  # def get_absolute_url(self):
-  #   """Return absolute url for Ground."""
-  #   return ('')
+#   # def get_absolute_url(self):
+#   #   """Return absolute url for Ground."""
+#   #   return ('')
 
-  # TODO: Define custom methods here
+#   # TODO: Define custom methods here
 
 
 class Irrigation(BaseModel):
   """Model definition for Irrigation."""
 
   # TODO: Define fields here
-  ground = models.ForeignKey(Ground, on_delete=models.CASCADE, related_name=_('irrigation'))
+  plantation = models.ForeignKey(Plantation, on_delete=models.CASCADE, related_name=_('irrigation'))
   description = models.TextField(_('Description'),blank=True, null=True)
   start_time = models.TimeField(_('Start Time'))
   end_time = models.TimeField(_('End Time'))
@@ -126,7 +133,7 @@ class State_Ground(models.Model):
   """Model definition for State_Ground."""
 
   # TODO: Define fields here
-  ground = models.ForeignKey(Ground, on_delete=models.CASCADE, related_name=_('ground_state'))
+  plantation = models.ForeignKey(Plantation, on_delete=models.CASCADE, related_name=_('ground_state'))
   air_humedity = models.FloatField(_('Air Humedity'))
   temperature_c = models.FloatField(_('Temperature celcius'))
   temperature_f = models.FloatField(_('Temperature Fahrenheit'))

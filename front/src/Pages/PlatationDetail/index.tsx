@@ -9,11 +9,17 @@ import { InfoIcon } from '../../components/UI/icons/InfoIcon'
 import { DropIcon } from '../../components/UI/icons/DropIcon'
 import { CpuIcon } from '../../components/UI/icons/CpuIcon'
 import { EditIcon } from '../../components/UI/icons/EditIcon'
+import { DeleteIcon } from '../../components/UI/icons/DeleteIcon'
+import { ModalContainer } from '../../containers/ModalContainer'
+import { useModal } from '../../hooks/useModal'
+import { ModalDeletePlantation } from '../../components/ModalDeletePlantation'
 
 const index = () => {
 
   const [plantation, setPlantation] = useState()
   const {isLoading, callEndpoint} = useFetchAndLoad()
+
+  const {isVisible, showModal, closeModal} = useModal()
   
   const params = useParams()
 
@@ -24,7 +30,7 @@ const index = () => {
     data.then(data => setPlantation(data.data))
   },[])
 
-  console.log(plantation)
+  // console.log(plantation)
 
 
 
@@ -32,6 +38,10 @@ const index = () => {
     <div className="styles dashboardContainer">
       <div className={styles.title_container}>
         <h2>{plantation?.name}</h2>
+        <button onClick={showModal} className={styles.deleteIcon}>
+          <DeleteIcon />
+          <span>Delete</span>
+        </button>
       </div>
 
       {/* EXTRA INFO */}
@@ -100,7 +110,8 @@ const index = () => {
         {/* RIEGO */}
         <div className={`${styles.content_container} ${styles.irrigation}`}>
           <div className={styles.title}>
-            <h3><DropIcon/> Riego</h3>
+            <h3>Riego</h3>
+            {/* <h3><DropIcon/> Riego</h3> */}
           </div>
           <div className={`${styles.content_info} ${styles.info_irrigation}`}>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, quisquam.</p>
@@ -158,6 +169,16 @@ const index = () => {
 
           </div>
         </div>        
+        
+        {isVisible && (
+          <ModalContainer>
+            <ModalDeletePlantation
+              id={plantation?.id}
+              name={plantation?.name}
+              closeFn={closeModal}
+            />
+          </ModalContainer>
+        )}
 
       </div>
     </div>

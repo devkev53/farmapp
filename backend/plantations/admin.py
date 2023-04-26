@@ -1,5 +1,5 @@
 from django.contrib import admin
-from plantations.models import Plantation, Ground, Irrigation
+from plantations.models import Plantation, Irrigation
 
 # Register your models here.
 
@@ -19,26 +19,26 @@ class PlantationAdmin(admin.ModelAdmin):
   # date_hierarchy = ''
   # ordering = ('',)
 
-@admin.register(Ground)
-class GroundAdmin(admin.ModelAdmin):
-  '''Admin View for Ground'''
+# @admin.register(Ground)
+# class GroundAdmin(admin.ModelAdmin):
+#   '''Admin View for Ground'''
 
-  list_display = ('id', 'plantation',)
-  # list_filter = ('',)
-  # inlines = [
-  #   Inline,
-  # # ]
-  # raw_id_fields = ('',)
-  readonly_fields = ('created_by','updated_by',)
-  search_fields = ('name',)
-  # date_hierarchy = ''
-  # ordering = ('',)
+#   list_display = ('id', 'plantation',)
+#   # list_filter = ('',)
+#   # inlines = [
+#   #   Inline,
+#   # # ]
+#   # raw_id_fields = ('',)
+#   readonly_fields = ('created_by','updated_by',)
+#   search_fields = ('name',)
+#   # date_hierarchy = ''
+#   # ordering = ('',)
 
 @admin.register(Irrigation)
 class IrrigationAdmin(admin.ModelAdmin):
   '''Admin View for Irrigation'''
 
-  list_display = ('id', 'ground', 'description', 'start_time', 'end_time',)
+  list_display = ('id', 'plantation', 'description', 'start_time', 'end_time',)
   # list_filter = ('',)
   # inlines = [
   #   Inline,

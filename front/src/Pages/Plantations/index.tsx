@@ -9,9 +9,9 @@ const index = () => {
     <div className="styles dashboardContainer">
       <div className={styles.title_container}>
         <h2>Mis Cultivos</h2>
-        <Link to="/add-plantation" className={styles.add_link}>
-          <p>Nuevo</p>
-          <span><AddIcon /></span>
+        <Link to="/add-plantation" className={`${styles.add_link} action_btn`}>
+          <AddIcon />
+          <span>Nuevo</span>
         </Link>
       </div>
       <ListPlantations />

@@ -31,8 +31,69 @@ body {
   align-items: center;
 }
 
+.action_btn {
+  /* background: teal; */
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: .3s all ease;
+}
+.action_btn span {
+  /* position: absolute; */
+  display: none;
+  opacity: 0;
+  font-weight: bold;
+  transition: .3s all ease;
+}
+.action_btn svg {
+  fill: none;
+  height: 3rem;
+  width: min-content;
+  transition: .3s all ease;
+}
+
+
 @media (min-width: 768px) {
   #root {
     display: flex;
   }
+
+  .action_btn {
+    /* justify-content: start; */
+    border-radius: 2.4rem;
+    /* width: 10rem; */
+    width: max-content;
+    padding: 0 1.6rem;
+  }
+  .action_btn::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: rgb(var(--dark-blue));
+    top: 50%;
+    transform: skewX(30deg) translate(-150%, -50%);
+    transition: all 0.5s;
+  }
+  .action_btn:hover {
+    background-color: rgb(var(--soft-blue));
+    color: #fff;
+    /* box-shadow: 0 2px 0 2px #0d3b66; */
+  }
+  .action_btn:hover:before {
+    transform: skewX(30deg) translate(150%, -50%);
+    transition-delay: 0.1s;
+  }
+  .action_btn span {
+    display: block;
+    /* position: relative; */
+    /* left: calc(1.6rem + 3rem); */
+    opacity: 1;
+  }
+
 }

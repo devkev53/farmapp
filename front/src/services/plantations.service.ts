@@ -9,7 +9,17 @@ export const getPlantations = () => {
   return {call: axiosPrivateInstance.get(plantations_url, {signal: controller.signal}), controller}
 }
 
-export const getIdPlantation = (id) => {
+export const getIdPlantation = (id:number) => {
   const controller = loadAbort()
   return {call: axiosPrivateInstance.get(`${plantations_url}${id}`, {signal: controller.signal}), controller}
+}
+
+export const addPlantation = (data:{}) => {
+  const controller = loadAbort()
+  return {call: axiosPrivateInstance.post(`${plantations_url}`, data, {signal: controller.signal}), controller}
+}
+
+export const deletePlantation = (id:number) => {
+  const controller = loadAbort()
+  return {call: axiosPrivateInstance.delete(`${plantations_url}${id}`, {signal: controller.signal}), controller}
 }
