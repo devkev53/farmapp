@@ -3,12 +3,19 @@ import styles from './styles.module.css'
 import { SaveIcon } from '../../components/UI/icons/SaveIcon'
 import { addPlantation } from '../../services/plantations.service'
 import { ArrowDownIcon } from '../../components/UI/icons/ArrowDownIcon'
+import { useNavigate } from 'react-router-dom'
+import CircleSpinner from '../../components/UI/spiners/CircleSpinner' 
+import { ModalContainer } from '../../containers/ModalContainer'
+import { PageLoading } from '../../components/UI/PageLoading'
+import { useFetchAndLoad } from '../../hooks/useFetchAndLoad'
 
 const index = () => {
 
   const [showGroundFields, setShowGroundFields] = useState(false)
 
   const formRef = useRef(null)
+  const navigate = useNavigate()
+  const {isLoading, callEndpoint} = useFetchAndLoad()
 
   const handleChangeTextArea = (e) => {
     let isEmpty = true
@@ -17,7 +24,7 @@ const index = () => {
   const handleCropCof = (e) => {
     let isEmpty = true
     const isValid = e.target.checkValidity();
-    console.log(isValid)
+    // console.log(isValid)
     if (e.target.value.length > 0) {
       e.target.classList.add(`${styles.content}`)
     }else{
@@ -26,18 +33,25 @@ const index = () => {
   }
 
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = (e:any) => {
     e.preventDefault()
     const data = new FormData(e.target)
-    const response = addPlantation(data)
-    response.call.then(resp => console.log(resp))
+    const response = callEndpoint(addPlantation(data))
+    response.then(resp => {
+      if (resp.status === 201) {
+        navigate(`/plantations-detail/${resp.data.id}`)
+      }
+    })
   }
 
   const handleShowGroundFields = () => {
     setShowGroundFields(!showGroundFields)
   }
 
-  return (
+  console.log(isLoading)
+
+  return (<>
+    { isLoading && <PageLoading/>}
     <div className="styles dashboardContainer">
       <div className={styles.title_container}>
         <h2>Nuevo Cultivo</h2>
@@ -46,6 +60,7 @@ const index = () => {
       <div className="fomr_container">
         <form onSubmit={handleSubmitForm} ref={formRef} className={styles.plantation_form}>
 
+          {/* Informacion del Cultivo */}
           <div>
 
             <div className={styles.title_section}>
@@ -57,12 +72,12 @@ const index = () => {
 
               <div className={styles.input_group}>
                 <div className="">
-                  <input name='name' type="text" required/>
+                  <input className='thscm' name='name' type="text" required/>
                   <span className={styles.highlight}></span>
                   <span className={styles.bar}></span>
                   <label>Nombre</label>
                 </div>
-                <span className={styles.helptext}>Hola mundo</span>
+                <span className={styles.helptext}></span>
               </div>
 
               <div className={styles.text_group}>
@@ -72,7 +87,7 @@ const index = () => {
                   <span className={styles.bar}></span>
                   <label>Descripcion</label>
                 </div>
-                <span className={styles.helptext}>Ciao Mondo</span>
+                <span className={styles.helptext}></span>
               </div>
 
               <div className={styles.input_group}>
@@ -93,11 +108,12 @@ const index = () => {
                   <span className={styles.bar}></span>
                   <label>Coeficiente de cultivo</label>
                 </div>
-                <span className={styles.helptext}>Hello world</span>
+                <span className={styles.helptext}>relación entre las necesidades hídricas del cultivo (ETc)</span>
               </div>
             </div>
           </div>
 
+          {/* Informacion de Hardawre */}
           <div>
             <div className="">
               <div className={styles.title_section}>
@@ -107,7 +123,7 @@ const index = () => {
             </div>
             <div className={styles.input_group}>
               <div>
-                <input name='name' type="text" required/>
+                <input name='thscm' type="text" required/>
                 <span className={styles.highlight}></span>
                 <span className={styles.bar}></span>
                 <label>THSCM</label>
@@ -116,7 +132,10 @@ const index = () => {
             </div>
           </div>
 
+          {/* Inforamacion de la Tierra */}
           <div>
+
+            {/* Titulo */}
             <div className={styles.title_section}>
               <h4>Informacion de la Tierra</h4>
               <button type='button' onClick={(handleShowGroundFields)} className={`${showGroundFields && styles.rotateIcon}`}>
@@ -124,53 +143,53 @@ const index = () => {
               </button>
             </div>
 
+            {/* Inputs */}
             <div className={`${styles.section_content} ${styles.section_ground} ${showGroundFields && styles.show_fields}`}>
               
+              {/* Area */}
               <div className={styles.input_group}>
                 <div className="">
-                  <input name='name' type="text" required/>
+                  <input name='area' type="text"/>
                   <span className={styles.highlight}></span>
                   <span className={styles.bar}></span>
                   <label>Área</label>
                 </div>
-                <span className={styles.helptext}>Módulo de control del sensor de temperatura y humedad</span>
+                <span className={styles.helptext}></span>
               </div>
 
+              {/* Perimetro */}
               <div className={styles.input_group}>
                 <div className="">
-                  <input name='name' type="text" required/>
+                  <input name='perimeter' type="text"/>
                   <span className={styles.highlight}></span>
                   <span className={styles.bar}></span>
                   <label>Perímetro</label>
                 </div>
-                <span className={styles.helptext}>Módulo de control del sensor de temperatura y humedad</span>
+                <span className={styles.helptext}></span>
               </div>
 
+              {/* Capacidad */}
               <div className={styles.input_group}>
                 <div className="">
-                  <input name='name' type="text" required/>
+                  <input name='ability' type="text"/>
                   <span className={styles.highlight}></span>
                   <span className={styles.bar}></span>
                   <label>Capacidad</label>
                 </div>
-                <span className={styles.helptext}>Módulo de control del sensor de temperatura y humedad</span>
+                <span className={styles.helptext}></span>
               </div>
 
+              {/* Marchitamiento */}
               <div className={styles.input_group}>
-                <input name='name' type="text" required/>
-                <span className={styles.highlight}></span>
-                <span className={styles.bar}></span>
-                <label>Punto de Marchitamiento</label>
-                <span className={styles.helptext}>Módulo de control del sensor de temperatura y humedad</span>
+                <div className="">
+                  <input name='wilting_point' type="text"/>
+                  <span className={styles.highlight}></span>
+                  <span className={styles.bar}></span>
+                  <label>Punto de Marchitamiento</label>
+                  <span className={styles.helptext}></span>
+                </div>
               </div>
 
-              <div className={styles.input_group}>
-                <input name='name' type="text" required/>
-                <span className={styles.highlight}></span>
-                <span className={styles.bar}></span>
-                <label>THSCM</label>
-                <span className={styles.helptext}>Módulo de control del sensor de temperatura y humedad</span>
-              </div>
             </div>
 
           </div>
@@ -185,7 +204,7 @@ const index = () => {
         </form>
       </div>
     </div>
-  )
+  </>)
 }
 
 export default index

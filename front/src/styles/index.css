@@ -58,6 +58,113 @@ body {
 }
 
 
+/* INPUT GROUP */
+.input_group {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  margin-bottom: 1.6rem;
+  /* margin-bottom: 1.6rem; */
+}
+
+.input_group div {
+  position: relative;
+  height: 5rem;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(var(--white), .85);
+  border-radius: .8rem;
+  /* margin-bottom: 2rem; */
+}
+
+.input_group div input{
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  padding-bottom: .6rem;
+  /* height: 100%; */
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: none;
+  /* border-bottom: solid .2rem rgba(51,51,51,.3); */
+  /* background: rgba(var(--white), .85); */
+  border-radius: .8rem;
+}
+.input_group div input:focus {
+  outline: none;
+}
+.input_group textarea:focus {
+  outline: none;
+}
+.input_group div label {
+  color: rgba(51,51,51, .8);
+  font-size: 1.8rem;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 1.6rem;
+  top: 1.6rem;
+  transition:  .2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.input_group div input:focus ~ label,
+.input_group div input:valid ~ label {
+  /* top: -.05rem; */
+  top: .4rem;
+  font-size: 1.2rem;
+  color: rgba(var(--dark-blue));
+} 
+
+
+.bar {
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+
+.bar::before, 
+.bar::after {
+  content: '';
+  height: .2rem;
+  width: 0;
+  bottom: 0;
+  position: absolute;
+  background: rgba(var(--blue));
+  transition: .2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar::before {
+  left: calc(50% - .2rem);
+  border-radius: 1rem;
+}
+.bar::after {
+  right: calc(50% - .2rem);
+  border-radius: 1rem;
+}
+.input_group div input:focus ~ .bar::before,
+.input_group div input:focus ~ .bar::after {
+  width: calc(50% - .1rem);
+} 
+.noRequired .content ~ .bar::before,
+.noRequired .content ~ .bar::after {
+  width: calc(50% - .1rem);
+}
+.helptext {
+  /* position: absolute; */
+  /* margin-left: 1.6rem; */
+  /* bottom: -1.8rem; */
+  padding-left: 1.6rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(var(--blue));
+}
+
+
+
 @media (min-width: 768px) {
   #root {
     display: flex;

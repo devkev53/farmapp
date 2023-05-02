@@ -8,7 +8,29 @@ from plantations.models import Plantation, Irrigation
 class PlantationAdmin(admin.ModelAdmin):
   '''Admin View for Plantation'''
 
-  list_display = ('name', 'created', 'calculate_all_used_water', 'estimated_date_harvest', 'is_active')
+  fieldsets = [
+    (
+      "Información del Cultivo",
+      {
+        "fields": ["name", "description", "duration", "function_Kc",]
+      },
+    ),
+    (
+      "Información del Hardware",
+      {
+        "fields": ["thscm",]
+      },
+    ),
+    (
+      "Información de la Tierra",
+      {
+        "classes": ["collapse",],
+        "fields": ["area", "perimeter", "ability", "wilting_point",]
+      },
+    ),
+
+  ]
+  list_display = ('name', 'created', 'estimated_date_harvest', 'is_active')
   # list_filter = ('',)
   # inlines = [
   #   Inline,

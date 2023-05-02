@@ -1,3 +1,12 @@
+.thscm {
+  display: flex;
+  gap: .6rem;
+}
+.thscm .id_thscm {
+  color: rgba(var(--orange));
+  font-weight: bold;
+  text-transform: uppercase;
+}
 .title_container {
   display: flex;
   justify-content: space-between;
@@ -184,6 +193,7 @@
 
 .irrigation .title {
   width: 100%;
+  /* padding: .8rem; */
 }
 .irrigation .title h3 {
   display: flex;
@@ -195,6 +205,94 @@
   fill: transparent;
 }
 
+/* IRRIGATION */
+.title_irrigation_time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(var(--dark-blue));
+  padding-bottom: .8rem;
+  border-bottom: .1rem solid rgba(var(--blue));
+  margin-bottom: .8rem;
+}
+.title_irrigation_time div {
+  display: flex;
+  align-items: center;
+}
+.title_irrigation_time div svg {
+  fill: none;
+  width: min-content;
+  stroke-width: .15rem;
+  height: 4.5rem;
+}
+.content_irrigation_time {
+  border-bottom: .1rem solid rgba(var(--soft-blue));
+  padding-bottom: .8rem;
+}
+.content_irrigation_time ul {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.content_irrigation_time ul li {
+  display: flex;
+}
+.content_irrigation_time ul li p {
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+  width: 100%;
+}
+.content_irrigation_time ul li svg {
+  width: min-content;
+  height: 3.6rem;
+  fill: rgba(var(--soft-blue));
+  stroke: rgba(var(--blue));
+}
+.content_irrigation_time ul li .options_btn {
+  display: flex;
+  grid-gap: .6rem;
+  margin-left: auto;
+}
+.content_irrigation_time ul li .btn_edit,
+.content_irrigation_time ul li .btn_delete {
+  background: rgb(var(--danger));
+  border-radius: 100%;
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s all ease;
+}
+.content_irrigation_time ul li .btn_edit {
+  background: rgba(var(--gold-yellow));
+}
+.content_irrigation_time ul li .btn_delete:hover {
+  background: rgba(150,0,0, .9);
+}
+.content_irrigation_time ul li .btn_edit:hover {
+  background: rgba(var(--orange), .9);
+}
+
+.content_irrigation_time ul li .btn_edit svg,
+.content_irrigation_time ul li .btn_delete svg {
+  fill: none;
+  stroke: rgba(var(--white), .87);
+  height: 70%;
+  transition: .3s all ease;
+}
+
+
+
+/* GROUND */
+.loading_ground_container {
+  min-height: 20rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 @media (min-width: 920px) {
@@ -236,6 +334,7 @@
     /* background: yellow; */
     /* min-width: 100%; */
   }
+  
 
 }
 

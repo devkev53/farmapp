@@ -1,11 +1,19 @@
-
+/* .loading {
+  position: fixed;
+  background: rgba(51,51,51, .1);
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+} */
 
 .plantation_form {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 }
-
+.title_container {
+  margin-bottom: 2.6rem;
+}
 .title_section {
   display: flex;
   width: 100%;
@@ -32,7 +40,7 @@
 
 /* INPUT STYLES */
 .input_group {
-  margin-bottom: 1.6rem;
+  /* margin-bottom: 1.6rem; */
 }
 .input_group div {
   position: relative;
@@ -130,12 +138,12 @@
 }
 
 
-.text_group {
+.text_group div {
   background: rgba(var(--white), .85);
   border-radius: .8rem;
   position: relative;
   height: auto;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 .text_group textarea {
   /* width: 100%; */

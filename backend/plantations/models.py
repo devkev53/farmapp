@@ -20,11 +20,10 @@ class Plantation(BaseModel):
   used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
   is_active = models.BooleanField(_('Is Active'), default=True)
 
-  area = models.FloatField(_('area'), blank=True, null=True, default=0)
-  perimeter = models.FloatField(_('perimeter'), blank=True, null=True, default=0)
-  ability = models.FloatField(_('ability'), blank=True, null=True, default=0)
-  wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True, default=0)
-  used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
+  area = models.FloatField(_('area'), blank=True, null=True)
+  perimeter = models.FloatField(_('perimeter'), blank=True, null=True)
+  ability = models.FloatField(_('ability'), blank=True, null=True)
+  wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True)
   thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True)
 
   class Meta:
@@ -37,9 +36,10 @@ class Plantation(BaseModel):
     """Unicode representation of Plantation."""
     return '{}'.format(self.name)
 
-  # def save(self):
-  #   """Save method for Plantation."""
-  #   pass
+  def save(self, *args, **kwargs):
+    """Save method for BaseModel."""
+    self.thscm = self.thscm.upper()
+    super(Plantation, self).save()
 
   # def get_absolute_url(self):
   #   """Return absolute url for Plantation."""
@@ -47,15 +47,15 @@ class Plantation(BaseModel):
 
   # TODO: Define custom methods here
 
-  def calculate_all_used_water(self):
-    all_used_water = 0
-    grounds = Ground.objects.filter(plantation = self.id)
-    if grounds != None:
-      for ground in grounds:
-        print(ground.used_water)
-        if ground.used_water:
-          all_used_water += ground.used_water
-    return all_used_water
+  # def calculate_all_used_water(self):
+  #   all_used_water = 0
+  #   grounds = Ground.objects.filter(plantation = self.id)
+  #   if grounds != None:
+  #     for ground in grounds:
+  #       print(ground.used_water)
+  #       if ground.used_water:
+  #         all_used_water += ground.used_water
+  #   return all_used_water
   
   def estimated_date_harvest(self):
     date = self.created + timedelta(self.duration)
@@ -115,7 +115,7 @@ class Irrigation(BaseModel):
 
   def __str__(self):
     """Unicode representation of Irrigation."""
-    return '{}'.format(self.ground)
+    return '{}'.format(self.plantation)
 
   # def save(self):
   #   """Save method for Irrigation."""

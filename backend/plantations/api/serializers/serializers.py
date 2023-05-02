@@ -8,5 +8,5 @@ class IrrigationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Irrigation
         fields = (
-            'id', 'ground', 'start_time', 'end_time',
+            'id', 'plantation', 'start_time', 'end_time',
             )
