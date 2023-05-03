@@ -1,22 +1,48 @@
+import { useParams } from "react-router-dom";
 import { ModalContainer } from "../../containers/ModalContainer";
 import { DropIcon } from "../UI/icons/DropIcon";
 import './styles.css'
 
-export const AddIrrigartionModal = ({close}:{close:()=>void}) => {
+export const AddIrrigartionModal = (
+  {close, addFn}:
+  {close:()=>void, addFn:(data)=>void}
+) => {
+
+  const params = useParams()
+
+  const handleSubmit = () => {
+    const form = document.querySelector('.addIrrigation')
+    const data = new FormData(form)
+    data.append("plantation", params.id?.toString())
+    const start = data.get('start_time')
+    const end = data.get('end_time')
+    if (start === '' || end === '') {
+      return alert('Verifique los campos')
+    }
+    if (end <= start) {
+      return alert('El inicio debe ser menor al final del riego')
+    }
+    addFn(data)
+  }
+
+  const handlePressEnter = (e:any) => {
+    e.keyCode === 13 && handleSubmit(e)
+  }
+
   return (
     <ModalContainer>
-      <div className="container">
+      <div onKeyDown={handlePressEnter} className="container animate__animated animate__bounceIn">
         <div className="title">
           <DropIcon />
           <h3>Agregar nuevo tiempo de riego</h3>
         </div>
         <div className="body">
-          <form action="">
+          <form onSubmit={addFn} className="addIrrigation" action="">
             
             {/* Inicio */}
             <div className={`input_group`}>
               <div>
-                <input name='thscm' type="text" required />
+                <input name='start_time' type="time" required autoFocus />
                 <span className={`highlight`}></span>
                 <span className={`bar`}></span>
                 <label>Hora de Inicio</label>
@@ -27,7 +53,7 @@ export const AddIrrigartionModal = ({close}:{close:()=>void}) => {
             {/* Fin */}
             <div className={`input_group`}>
               <div>
-                <input name='thscm' type="text" required />
+                <input name='end_time' type="time" required />
                 <span className={`highlight`}></span>
                 <span className={`bar`}></span>
                 <label>Hora de Fin</label>
@@ -38,7 +64,7 @@ export const AddIrrigartionModal = ({close}:{close:()=>void}) => {
           </form>
         </div>
         <div className="options">
-          <button className="confirm">Guardar</button>
+          <button className="confirm" onClick={handleSubmit}>Guardar</button>
           <button className="cancel" onClick={close}>Cancelar</button>
         </div>
       </div>

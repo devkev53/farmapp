@@ -1,15 +1,26 @@
 from django.shortcuts import get_object_or_404
 
+from rest_framework.decorators import permission_classes
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from core.api.views.api_views import PermisionPolicyMixin
 
-from users.api.serializers.user_serializers import UserSerializer, UserUpdateSerializer, UserListSerializer
 
-class UserViewset(viewsets.GenericViewSet):
+from users.api.serializers.user_serializers import UserSerializer, UserUpdateSerializer, UserListSerializer, CreateUserSerializer
+
+# class UserViewset(viewsets.GenericViewSet):
+class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
     serializer_class = UserListSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
+    permission_classes_per_method = {
+        "list": [IsAuthenticated,],
+        "retrieve": [IsAuthenticated,],
+        "update": [IsAuthenticated,],
+        "destroy": [IsAuthenticated,],
+        "create": []
+    }
 
     def get_queryset(self, pk=None):
         ''' Obtain the queryset an validate with PK '''
@@ -30,7 +41,7 @@ class UserViewset(viewsets.GenericViewSet):
 
     # Create a new User
     def create(self, request):
-        user_serializer = UserSerializer(data=request.data)
+        user_serializer = CreateUserSerializer(data=request.data)
         
         if user_serializer.is_valid():
             user_serializer.save()

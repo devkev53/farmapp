@@ -19,6 +19,8 @@ class UserAdmin(BaseUserAdmin):
 
     (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser')}),
 
+    (_('Profile Info'), {'fields': ('phone','address', 'birthday', 'image')}),
+
     (_('Important Dates'), {'fields': ('last_login',)}),
   )
   list_display_links = ('id', 'preview_img', 'username',)
@@ -28,7 +30,7 @@ class UserAdmin(BaseUserAdmin):
   # ]
   # raw_id_fields = ('',)
   # readonly_fields = ('',)
-  # search_fields = ('',)
+  search_fields = ('username','name', 'last_name', 'email')
   # date_hierarchy = ''
   ordering = ('id',)
   actions = ['send_emails_actions',]

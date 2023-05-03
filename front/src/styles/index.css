@@ -91,6 +91,10 @@ body {
   /* background: rgba(var(--white), .85); */
   border-radius: .8rem;
 }
+.input_group div input.error {
+  color: rgba(var(--danger));
+}
+
 .input_group div input:focus {
   outline: none;
 }
@@ -111,6 +115,8 @@ body {
 }
 
 .input_group div input:focus ~ label,
+.input_group div input[type=date] ~ label,
+.input_group div input[type=time] ~ label,
 .input_group div input:valid ~ label {
   /* top: -.05rem; */
   top: .4rem;
@@ -137,6 +143,10 @@ body {
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
 }
+.input_group div input.error ~ .bar::before,
+.input_group div input.error ~ .bar::after {
+  background: rgba(var(--danger));
+}
 
 .bar::before {
   left: calc(50% - .2rem);
@@ -147,6 +157,12 @@ body {
   border-radius: 1rem;
 }
 .input_group div input:focus ~ .bar::before,
+.input_group div input:valid ~ .bar::before,
+.input_group div input[type=date] ~ .bar::before,
+.input_group div input[type=time] ~ .bar::before,
+.input_group div input[type=date] ~ .bar::after,
+.input_group div input[type=time] ~ .bar::after,
+.input_group div input:valid ~ .bar::after,
 .input_group div input:focus ~ .bar::after {
   width: calc(50% - .1rem);
 } 

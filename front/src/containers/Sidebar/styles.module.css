@@ -132,6 +132,12 @@
     display: none;
   }
 
+  .contract .userInfo picture p {
+    font-size: 1.8rem;
+    display: none;
+    /* font-weight: bold; */
+  }
+
 
   .expandBtn {
     height: 4.5rem;

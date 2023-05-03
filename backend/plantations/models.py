@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from core.models import BaseModel
+from django.core.exceptions import ValidationError
 
 from datetime import datetime, timedelta
 
@@ -117,9 +118,15 @@ class Irrigation(BaseModel):
     """Unicode representation of Irrigation."""
     return '{}'.format(self.plantation)
 
-  # def save(self):
-  #   """Save method for Irrigation."""
-  #   pass
+  def clean(self):
+    instances = Irrigation.objects.filter(plantation=self.plantation, start_time=self.start_time, is_active=True)
+    if len(instances) > 0:
+      raise ValidationError('Ya existe una programación con este horario de inicio')
+
+  def save(self):
+    """Save method for Irrigation."""
+    self.clean()
+    super(Irrigation, self).save()
 
   # def get_absolute_url(self):
   #   """Return absolute url for Irrigation."""

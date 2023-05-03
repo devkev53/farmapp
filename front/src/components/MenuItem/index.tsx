@@ -10,6 +10,8 @@ import { ReportsIcon } from "../UI/icons/ReportsIcon";
 
 import { pathList } from "../../utils/path-list.utility";
 import styles from  './styles.module.css'
+import { UserCirle } from "../UI/icons/UserCirleIcon";
+import { UserCheckIcon } from "../UI/icons/UserCheckIcon";
 
 const index = () => {
   const [isMenuExpand, setIsMenuExpand] = useState()
@@ -22,6 +24,8 @@ const index = () => {
       return <PlantIcon />
     } else if (path === '/reports') {
       return <ReportsIcon />
+    } else if (path === '/profile') {
+      return <UserCheckIcon />
     }
   }
 
@@ -47,7 +51,7 @@ const index = () => {
         `}
       >
         <Link to={path.path}>
-          <i>
+          <i className={`${path.path === '/profile' && styles.userIcon}`}>
             {returnIcon(path.path)}
           </i>
           <span>{path.name}</span>

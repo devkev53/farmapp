@@ -23,11 +23,11 @@ import { WatchIcon } from '../../components/UI/icons/WatchIcon'
 import { AddIcon } from '../../components/UI/icons/addIcon'
 import { IrrigationDetails } from '../../containers/IrrigationDetails'
 import { AddIrrigartionModal } from '../../components/AddIrrigartionModal'
+import { irrigationI } from '../../models/irrigation.models'
 
 const index = () => {
 
   const [plantation, setPlantation] = useState()
-  const [irrigationList, setIrrigationList] = useState([])
   const [edit, setEdit] = useState(false)
   const [editLoading, setEditLoading] = useState(false)
   const {isLoading, callEndpoint} = useFetchAndLoad()
@@ -42,7 +42,9 @@ const index = () => {
     const data = getData()
     data.then(data => {
       setPlantation(data.data)
-      setIrrigationList(data.data.irrigation)
+      // const irrigations:[] = data.data.irrigation
+      // const activeIrrigations = irrigations.filter(irr => irr.is_active === true)
+      // setIrrigationList(activeIrrigations)
     })
   },[])
 
@@ -131,9 +133,7 @@ const index = () => {
           </div>
 
           {/* RIEGO */}
-          <IrrigationDetails
-            irrigations={irrigationList}
-          />
+          <IrrigationDetails/>
 
           {/* TIERRA */}
           {edit 

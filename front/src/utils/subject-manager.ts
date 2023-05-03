@@ -7,7 +7,7 @@ export class SubjectManager {
     return this.subject$.asObservable()
   }
 
-  setSubject(value:any) {
+  setSubject(value:number | boolean) {
     this.subject$.next(value)
   }
 }

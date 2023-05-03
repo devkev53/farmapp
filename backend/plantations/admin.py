@@ -60,7 +60,7 @@ class PlantationAdmin(admin.ModelAdmin):
 class IrrigationAdmin(admin.ModelAdmin):
   '''Admin View for Irrigation'''
 
-  list_display = ('id', 'plantation', 'description', 'start_time', 'end_time',)
+  list_display = ('id', 'plantation', 'description', 'start_time', 'end_time', 'is_active',)
   # list_filter = ('',)
   # inlines = [
   #   Inline,

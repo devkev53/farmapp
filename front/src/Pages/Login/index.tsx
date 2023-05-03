@@ -95,10 +95,15 @@ const index = () => {
             }
           </button>
           <Link to='/'>
-            <p>
+            <span>
               Recuperar Contraseña!
-            </p>
+            </span>
           </Link>
+          <a className={styles.create_user_btn} href='/create-user'>
+            <span>
+              Crear Usuario
+            </span>
+          </a>
         </form>
       </div>
     </div>

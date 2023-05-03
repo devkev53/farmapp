@@ -52,6 +52,7 @@ export const PublicInterceptor = () => {
   axiosPublicInstance.interceptors.response.use(
     (response) => {return response}, 
     (error) => { 
+      console.log(error)
       SnackbarUtilities.error(error.response.data.error)
     })
 }

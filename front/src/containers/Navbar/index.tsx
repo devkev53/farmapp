@@ -30,15 +30,15 @@ const index = () => {
             <line x1="4" y1="18" x2="20" y2="18" />
           </svg>
         </button>
-        <div onClick={() => setIsShowUserOptions(!isShowUserOptions)} className={styles.userInfo}>
+        <Link to="/profile" onClick={() => setIsShowUserOptions(!isShowUserOptions)} className={styles.userInfo}>
           <picture>
             {user !== null && user?.image === null
               ? (<img src="https://robohash.org/pickles123" alt={user?.username} />)
               : (<img src={user?.image} alt={user?.username} />)
             }
-            <p>{user !== null && user?.username}</p>
           </picture>
-        </div>
+          <p>{user !== null && user?.username}</p>
+        </Link>
         {/* <div className={`${styles.userOptions} ${isShowUserOptions && styles.showOptions}  animate__animated animate__fadeInDown`}>
           <button>
             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user-circle" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">

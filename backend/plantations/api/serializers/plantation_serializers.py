@@ -1,6 +1,6 @@
 from django.utils.translation import gettext as _
 from rest_framework import serializers
-from plantations.models import Plantation
+from plantations.models import Plantation, Irrigation
 from users.api.serializers.user_serializers import CustomUserSerialzer
 from plantations.api.serializers.serializers import IrrigationSerializer
 

@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: column;
   gap: 2.6rem;
+  margin: 0 auto;
 }
 .container h3 {
   color: white;

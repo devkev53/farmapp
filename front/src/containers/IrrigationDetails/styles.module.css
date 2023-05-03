@@ -77,12 +77,14 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 35rem;
 }
 .content_irrigation_time ul li svg {
   width: min-content;
   height: 3.6rem;
   fill: rgba(var(--soft-blue));
   stroke: rgba(var(--blue));
+  pointer-events: none;
 }
 .content_irrigation_time ul li .options_btn {
   display: flex;
@@ -122,5 +124,14 @@
   .content_container {
     max-width: calc(50% - (60rem + 2.6rem));
     min-width: calc(50% - 1.3rem);
+  }
+  .content_container.irrigation {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    /* width: calc(30% - 2.6rem); */
+    /* max-width: 30rem; */
   }
 }

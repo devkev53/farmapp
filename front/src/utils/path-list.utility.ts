@@ -13,5 +13,10 @@ export const pathList = [
     name: 'Reportes',
     path: '/reports',
     active: false
+  },
+  {
+    name: 'Perfil',
+    path: '/profile',
+    active: false
   }
 ]
