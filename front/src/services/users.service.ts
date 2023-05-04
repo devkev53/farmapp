@@ -19,6 +19,11 @@ export const addUser = (data:{}) => {
   return {call: axiosPublicInstance.post(`${users_url}`, data, {signal: controller.signal}), controller}
 }
 
+export const getByIdUser = (id:number) => {
+  const controller = loadAbort()
+  return {call: axiosPrivateInstance.get(`${users_url}${id}`, {signal: controller.signal}), controller}
+}
+
 export const deletePlantation = (id:number) => {
   const controller = loadAbort()
   return {call: axiosPrivateInstance.delete(`${users_url}${id}`, {signal: controller.signal}), controller}

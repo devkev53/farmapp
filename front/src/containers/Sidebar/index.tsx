@@ -57,10 +57,14 @@ const index = () => {
         </div>
         <div className={styles.userInfo}>
           <picture>
-            {user !== null && user?.image === null
+            {user !== null && user?.image === null 
+              ? <img src={user?.url_img} alt={user?.username} />
+              : <img src={`http://localhost:800/${user?.url_img}`} alt={user?.username} />
+            }
+            {/* {user !== null && user?.image === null
               ? (<img src="https://robohash.org/pickles123" alt="avatar" />)
               : (<img src={user?.image} alt={user?.username} />)
-            }
+            } */}
             <p>{user !== null && `${user?.name} ${user?.last_name}`}</p>
             <small>{user !== null && user?.username}</small>
           </picture>

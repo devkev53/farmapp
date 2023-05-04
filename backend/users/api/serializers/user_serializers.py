@@ -6,9 +6,17 @@ from rest_framework import serializers
 
 
 class CustomUserSerialzer(serializers.ModelSerializer):
+    url_img = serializers.SerializerMethodField()
+    
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'name', 'last_name', 'image')
+        fields = (
+            'id', 'username', 'email', 'name', 'last_name',
+            'image', 'url_img', 'phone', 'address', 'birthday'
+        )
+    
+    def url_img(self, obj):
+        return obj.url_img
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -28,10 +36,17 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'name', 'last_name', 'phone', 'address', 'image')
 
 class UserListSerializer(serializers.ModelSerializer):
-
+    url_img = serializers.SerializerMethodField()
+    
     class Meta:
         model = User
-        fields = ('username', 'email', 'name', 'last_name', 'phone', 'address', 'image')
+        fields = (
+            'id', 'username', 'email', 'name', 'last_name',
+            'image', 'url_img', 'phone', 'address', 'birthday'
+        )
+    
+    def url_img(self, obj):
+        return obj.url_img
 
     # def create(self, validate_data):
     #   """ Create a new User"""
@@ -46,3 +61,4 @@ class CreateUserSerializer(serializers.ModelSerializer):
     def create(self, validate_data):
       """ Create a new User"""
       return get_user_model().objects.create_user(**validate_data)
+      

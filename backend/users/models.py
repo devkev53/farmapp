@@ -45,6 +45,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
   # TODO: Define custom methods here
 
+  def url_img(self):
+    if not self.image:
+      return 'https://api.multiavatar.com/%s.svg' % self.username
+    else:
+      return ''
+
   def preview_img(self):
     if not self.image:
       data = 'https://api.multiavatar.com/%s.svg' % self.username
