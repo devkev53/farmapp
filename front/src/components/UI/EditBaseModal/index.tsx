@@ -29,6 +29,7 @@ export const EditBaseModal = (
     }
     updateFn(id, data)
   }
+  
   const handlePressEnter = (e:any) => {
     e.keyCode === 13 && handleSubmitEdit(e)
   }

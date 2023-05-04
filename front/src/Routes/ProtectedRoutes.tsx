@@ -11,7 +11,7 @@ const ProtectedRoutes = () => {
   
   useEffect(() => {
     userInfo === USER_STATES.NOT_LOGGED && navigate('/login')
-  }, [userInfo])
+  }, [])
 
   return (
     <Layout>

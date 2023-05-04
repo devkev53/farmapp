@@ -1,3 +1,4 @@
+import { useAuthContext } from "../hooks/useAuthContext"
 import { TokensI, authUserI, userInfoI } from "../models/authUser.models"
 import { USER_STATES } from "../utils/user_states"
 
@@ -29,5 +30,10 @@ export const updateUserLocalStorage = (tokens:any) => {
   const {user} = getUser()
   const data = {user, token: tokens.token, refreshToken: tokens.refreshToken}
   window.localStorage.setItem("back_auth_info", JSON.stringify(data))
-  
 } 
+
+export const updateChangeUserProfileLocalStorage = (user:any) => {
+ const tokens = getAuthTokens()
+ const data = {user, token: tokens.token, refreshToken: tokens.refreshToken}
+ return data
+}

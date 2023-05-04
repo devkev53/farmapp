@@ -28,8 +28,17 @@
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1.2rem;
   border-bottom: .1rem solid rgba(51,51,51,.2);
+}
+.edit_body form {
+  visibility: hidden;
+  display: none;
+}
+.edit_body input[type=file] {
+  /* visibility: hidden; */
 }
 .edit_body form input {
   background: rgba(51,51,51,.02);
@@ -68,4 +77,42 @@
 .edit_options .edit_cancel:hover {
   background: rgba(257, 76, 76);
 }
+
+.picture_container {
+  max-width: 40rem;
+  max-height: 40rem;
+  position: relative;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(var(--bg-color));
+}
+.hover_img {
+  background: rgba(51,51,51, .8);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  backdrop-filter: blur(.5rem);
+  transition: .3s all ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hover_img svg {
+  fill: none;
+  stroke: rgba(var(--white));
+  height: 6rem;
+}
+.picture_container img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.picture_container:hover .hover_img {
+  opacity: 1;
+}
+
 

@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     if not self.image:
       return 'https://api.multiavatar.com/%s.svg' % self.username
     else:
-      return ''
+      return self.image.url
 
   def preview_img(self):
     if not self.image:

@@ -11,7 +11,7 @@ from users.models import User
 class UserAdmin(BaseUserAdmin):
   '''Admin View for User'''
 
-  list_display = ('id', 'preview_img', 'username', 'email', 'name', 'last_name', 'is_active', 'is_staff')
+  list_display = ('id', 'preview_img', 'username', 'email', 'name', 'last_name', 'is_active', 'is_staff',  'url_img',)
   fieldsets = (
     (None, {'fields': ('email', 'username', 'password')}),
 

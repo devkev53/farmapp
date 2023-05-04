@@ -29,7 +29,12 @@ export const deletePlantation = (id:number) => {
   return {call: axiosPrivateInstance.delete(`${users_url}${id}`, {signal: controller.signal}), controller}
 }
 
-export const updateGroundOrThscm = (id:number, data:{}) => {
+export const updateImgUser = (id:number, data:{}) => {
+  const controller = loadAbort()
+  return {call: axiosPrivateInstance.put(`${users_url}${id}/assets/profile/`, data, {signal: controller.signal}), controller}
+}
+
+export const updateUser = (id:number, data:{}) => {
   const controller = loadAbort()
   return {call: axiosPrivateInstance.put(`${users_url}${id}/`, data, {signal: controller.signal}), controller}
 }

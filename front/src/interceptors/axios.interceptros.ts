@@ -13,12 +13,21 @@ import { refreshTokenService } from "../services/auth.service"
 export const PrivateInterceptor = () => {
   
   axiosPrivateInstance.interceptors.request.use(async (request) => {
+    const {token, refreshToken} = getAuthTokens()
     
-    if (request.url?.includes('assets')) return request
+    const updateTypeAssetsHeader = (request:AxiosRequestConfig) => {
+      const newHeaders = {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "multipart/form-data"
+      }
+      request.headers = newHeaders
+      return request
+    }
+
+    if (request.url?.includes('assets')) return updateTypeAssetsHeader(request)
     if (request.url?.includes('login')) return request
     request = updateHeader(request)
     
-    const {token, refreshToken} = getAuthTokens()
     
     if (!accessTokenValidate(token)) return request 
     if (refreshTokenValidate(refreshToken)) {
@@ -39,6 +48,7 @@ export const PrivateInterceptor = () => {
       return response
     },
     (error) => {
+      console.log(error)
       SnackbarUtilities.error(getValidationError(error.code))
       return Promise.reject(error)
     }

@@ -1,23 +1,71 @@
+import { PageLoading } from "../../components/UI/PageLoading";
+import { EditIcon } from "../../components/UI/icons/EditIcon";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFetchAndLoad } from "../../hooks/useFetchAndLoad";
+import styles from './styles.module.css'
 
 const index = () => {
+
+  const {isLoading, callEndpoint} = useFetchAndLoad()
+ 
   return (
-    <div className="styles dashboardContainer">
-      <h2>Dashboard desde Docker XD</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+    <>
+      {isLoading && <PageLoading />}
+      <div className={styles.dashboard_content}>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+        <div className={styles.title_container}>
+          <h2>Dashboard</h2>
+          {/* <button onClick={()=>{}} className={styles.editIcon}>
+            <EditIcon />
+            <span>Editar</span>
+          </button> */}
+        </div>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+        <div className={styles.cards_spaces}>
+          <div className={styles.card}>
+            <div className="styles name">
+              Cebolla
+            </div>
+            <div className="styles card_content">
+              <div className={styles.circular_progress}>
+                <div className={styles.inside}></div>
+                <div className={styles.outside}></div>
+                <h3 className={styles.number}>15%</h3>
+                <div className={styles.circle}>
+                  <div className={styles.dot}>
+                    <span></span>
+                  </div>
+                <div className={`${styles.bar} ${styles.left}`}>
+                  <div className={styles.progress}></div>
+                </div>
+                <div className={`${styles.bar} ${styles.right}`}>
+                  <div className={styles.progress}></div>
+                </div>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+                </div>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+              </div>
+              <div className="styles more_info">
+                <div><span>Listos de Agua:</span></div>
+                <div>
+                  <span>Programacion de riego</span>
+                  <div className="">
+                    <ul>
+                      <li><span>10:00</span> - <span>10:30</span></li>
+                      <li><span>10:00</span> - <span>10:30</span></li>
+                      <li><span>10:00</span> - <span>10:30</span></li>
+                      <li><span>10:00</span> - <span>10:30</span></li>
+                      <li><span>10:00</span> - <span>10:30</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
-
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
-    </div>
+      </div>
+    </>
     
   );
 }

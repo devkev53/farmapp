@@ -33,7 +33,10 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'name', 'last_name', 'phone', 'address', 'image')
+        fields = (
+            'id', 'username', 'email', 'name', 'last_name',
+            'image', 'url_img', 'phone', 'address', 'birthday'
+        )
 
 class UserListSerializer(serializers.ModelSerializer):
     url_img = serializers.SerializerMethodField()
@@ -61,4 +64,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
     def create(self, validate_data):
       """ Create a new User"""
       return get_user_model().objects.create_user(**validate_data)
-      
+
+class ChangeImageUserSerialzier(serializers.Serializer):
+    image = serializers.ImageField()

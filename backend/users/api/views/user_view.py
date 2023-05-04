@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import action, permission_classes
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -19,7 +19,8 @@ class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
         "retrieve": [IsAuthenticated,],
         "update": [IsAuthenticated,],
         "destroy": [IsAuthenticated,],
-        "create": []
+        "create": [],
+        "change_img": [IsAuthenticated,]
     }
 
     def get_queryset(self, pk=None):
@@ -63,7 +64,7 @@ class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
         user_serializer = UserUpdateSerializer(user, data=request.data)
         if user_serializer.is_valid():
             user_serializer.save()
-            return Response({'message':'user updated successful'})
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
         return Response({
         'error':'check your fields', 'errors':user_serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
@@ -74,3 +75,15 @@ class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
         if user_destroy == 1:
             return Response({'message':'user deactivate successful'})
         return Response({'error':'user not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    @action(detail=True, methods=['put'], url_path='assets/profile')
+    def change_img(self, request, pk=None):
+        user = self.get_object(pk)
+        user_serializer = UserUpdateSerializer(user, data=request.data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        return Response({
+        'error':'check your fields', 'errors':user_serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
+

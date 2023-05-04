@@ -143,6 +143,7 @@
   }
   .userInfo picture img {
     height: 100%;
+    width: 5rem;
     object-fit: cover;
     transition: .3s all ease;
   }

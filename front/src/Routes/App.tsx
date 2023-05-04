@@ -13,6 +13,7 @@ import Error404 from '../Pages/Error404'
 import AddPlantation from '../Pages/AddPlantation'
 import DetailPlantation from '../Pages/PlatationDetail'
 import UserDetail from '../Pages/UserDetail'
+import Reports from '../Pages/Reports'
 
 import ProtectedRoutes from "./ProtectedRoutes"
 
@@ -28,6 +29,7 @@ function App() {
 
           <Route element={<ProtectedRoutes/>}>
             <Route path="/" element={<Dashboard/>}/>
+            <Route path="/reports" element={<Reports/>}/>
             <Route path="/profile" element={<UserDetail/>}/>
             <Route path="/plantations" element={<Plantations/>}/>
             <Route path="/plantations-detail/:id" element={<DetailPlantation/>}/>
