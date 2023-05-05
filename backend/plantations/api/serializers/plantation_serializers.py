@@ -9,6 +9,7 @@ from plantations.api.serializers.serializers import IrrigationSerializer
 class PlantationSerializer(serializers.ModelSerializer):
     created_by = CustomUserSerialzer(read_only=True)
     irrigation = IrrigationSerializer(many=True, read_only=True)
+    estimated_date_harvest = serializers.SerializerMethodField()
 
     class Meta:
         model = Plantation
@@ -17,8 +18,11 @@ class PlantationSerializer(serializers.ModelSerializer):
             'function_Kc', 'is_active',
             'created', 'created_by',
             'area', 'perimeter', 'ability',
-            'wilting_point', 'thscm', 'irrigation',
+            'wilting_point', 'thscm', 'irrigation', 'estimated_date_harvest'
         )
+    
+    def estimated_date_harvest(self, obj):
+        return obj.estimated_date_harvest
 
 class CreatePlantationSerializer(serializers.ModelSerializer):
     created_by = CustomUserSerialzer(read_only=True)

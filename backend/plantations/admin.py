@@ -30,7 +30,7 @@ class PlantationAdmin(admin.ModelAdmin):
     ),
 
   ]
-  list_display = ('name', 'created', 'estimated_date_harvest', 'is_active')
+  list_display = ('id', 'name', 'created', 'estimated_date_harvest', 'is_active')
   # list_filter = ('',)
   # inlines = [
   #   Inline,

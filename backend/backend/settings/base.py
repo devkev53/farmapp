@@ -32,6 +32,7 @@ LOCAL_APPS = [
     'core',
     'users',
     'plantations',
+    'backend',
 ]
 
 THIRD_APPS = [

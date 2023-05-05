@@ -24,6 +24,8 @@ from rest_framework_simplejwt.views import (
 from core.api.views.auth_views import Login, Logout
 from core.views import test, send_mail_to_all
 
+from plantations.views import plantation_pdf
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', test, name='test'),
@@ -35,6 +37,9 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
+    
+    path('plantation_pdf/<int:pk>/', plantation_pdf, name='plantation_pdf'),
+    
 ]
 
 # Import for control debug nad view static and media files

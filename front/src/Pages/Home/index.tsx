@@ -1,5 +1,6 @@
 import { PageLoading } from "../../components/UI/PageLoading";
 import { EditIcon } from "../../components/UI/icons/EditIcon";
+import { PlantIcon } from "../../components/UI/icons/PlantIcon";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useFetchAndLoad } from "../../hooks/useFetchAndLoad";
 import styles from './styles.module.css'
@@ -22,31 +23,42 @@ const index = () => {
         </div>
 
         <div className={styles.cards_spaces}>
-          <div className={styles.card}>
-            <div className="styles name">
+
+
+          <div className={styles.card_dash}>
+            <picture>
+              <PlantIcon />
+            </picture>
+            <div className={styles.title_name}>
               Cebolla
             </div>
-            <div className="styles card_content">
-              <div className={styles.circular_progress}>
-                <div className={styles.inside}></div>
-                <div className={styles.outside}></div>
-                <h3 className={styles.number}>15%</h3>
-                <div className={styles.circle}>
-                  <div className={styles.dot}>
-                    <span></span>
+            <div className={styles.card_content}>
+              
+              <div className={styles.cosecha}>
+                <p>Creado: 04-05-2023</p>
+                <div className={styles.skill}>
+                  <div className={styles.outer}>
+                    <div className={styles.inner}>
+                      <div className={styles.number_porcent}>
+                        70%
+                      </div>
+                    </div>
                   </div>
-                <div className={`${styles.bar} ${styles.left}`}>
-                  <div className={styles.progress}></div>
-                </div>
-                <div className={`${styles.bar} ${styles.right}`}>
-                  <div className={styles.progress}></div>
-                </div>
+
+                  <svg xmlns="" version="1.1" width="120px" height="120px">
+                    <defs>
+                      <linearGradient id="GradientColor">
+                        <stop offset="0%" stopColor="#e91e63" />
+                        <stop offset="100%" stopColor="#673ab7" />
+                      </linearGradient>
+                    </defs>
+                    <circle cx="60" cy="60" r="52" strokeLinecap="round" />
+                  </svg>
 
                 </div>
-
               </div>
+
               <div className="styles more_info">
-                <div><span>Listos de Agua:</span></div>
                 <div>
                   <span>Programacion de riego</span>
                   <div className="">
@@ -60,8 +72,10 @@ const index = () => {
                   </div>
                 </div>
               </div>
+            
             </div>
           </div>
+
         </div>
 
       </div>

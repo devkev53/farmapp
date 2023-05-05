@@ -56,6 +56,16 @@ const index = () => {
     }, 1000);
   }
 
+  
+  const daysToHarvest = () => {
+    const today = Date.now()
+    console.log(today)
+    plantation?.estimated_date_harvest
+    console.log(plantation?.estimated_date_harvest)
+  }
+
+  daysToHarvest()
+
   return (
     <>
       {editLoading && <PageLoading />}
