@@ -1,13 +1,29 @@
+import { useEffect, useState } from "react";
 import { PageLoading } from "../../components/UI/PageLoading";
 import { EditIcon } from "../../components/UI/icons/EditIcon";
 import { PlantIcon } from "../../components/UI/icons/PlantIcon";
+import { DashboardCard } from "../../containers/DashboardCard";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useFetchAndLoad } from "../../hooks/useFetchAndLoad";
 import styles from './styles.module.css'
+import { getPlantations } from "../../services/plantations.service";
 
 const index = () => {
 
+  const [plantations, setPlantatios] = useState([])
   const {isLoading, callEndpoint} = useFetchAndLoad()
+
+  const geLastPlantations = async() => {
+    const response = await callEndpoint(getPlantations())
+    console.log(response)
+    setPlantatios(response.data.slice(0,2))
+  }
+
+  useEffect(()=>{
+    geLastPlantations()
+  },[])
+
+  console.log(plantations)
  
   return (
     <>
@@ -24,57 +40,20 @@ const index = () => {
 
         <div className={styles.cards_spaces}>
 
+          {plantations.length  > 0 ?
+            plantations?.map(plant => (
 
-          <div className={styles.card_dash}>
-            <picture>
-              <PlantIcon />
-            </picture>
-            <div className={styles.title_name}>
-              Cebolla
-            </div>
-            <div className={styles.card_content}>
-              
-              <div className={styles.cosecha}>
-                <p>Creado: 04-05-2023</p>
-                <div className={styles.skill}>
-                  <div className={styles.outer}>
-                    <div className={styles.inner}>
-                      <div className={styles.number_porcent}>
-                        70%
-                      </div>
-                    </div>
-                  </div>
-
-                  <svg xmlns="" version="1.1" width="120px" height="120px">
-                    <defs>
-                      <linearGradient id="GradientColor">
-                        <stop offset="0%" stopColor="#e91e63" />
-                        <stop offset="100%" stopColor="#673ab7" />
-                      </linearGradient>
-                    </defs>
-                    <circle cx="60" cy="60" r="52" strokeLinecap="round" />
-                  </svg>
-
-                </div>
-              </div>
-
-              <div className="styles more_info">
-                <div>
-                  <span>Programacion de riego</span>
-                  <div className="">
-                    <ul>
-                      <li><span>10:00</span> - <span>10:30</span></li>
-                      <li><span>10:00</span> - <span>10:30</span></li>
-                      <li><span>10:00</span> - <span>10:30</span></li>
-                      <li><span>10:00</span> - <span>10:30</span></li>
-                      <li><span>10:00</span> - <span>10:30</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            
-            </div>
-          </div>
+              <DashboardCard 
+                key={plant.id} 
+                name={plant.name}
+                created={plant?.created}
+                days={plant?.estimated_days_for_harvest.days}
+                porcent={plant?.estimated_days_for_harvest.porcent}
+                irrigations={plant?.irrigation}
+                water={plant?.used_water}  />
+            ))
+          : (<h2>No existen Registros</h2>)
+          }
 
         </div>
 

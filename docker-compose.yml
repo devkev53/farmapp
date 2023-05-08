@@ -2,15 +2,15 @@ version: '3.9'
 
 
 services:
-  rabbitmq:
-    container_name: 'rabbitmq'
-    image: rabbitmq
-    ports:
-      - '5672:5672'
-      - '15672:15672'
-    volumes:
-        - rabbitmq_data:/var/lib/rabbitmq/
-        - rabbitmq_log:/var/log/rabbitmq/
+  # rabbitmq:
+  #   container_name: 'rabbitmq'
+  #   image: rabbitmq
+  #   ports:
+  #     - '5672:5672'
+  #     - '15672:15672'
+  #   volumes:
+  #       - rabbitmq_data:/var/lib/rabbitmq/
+  #       - rabbitmq_log:/var/log/rabbitmq/
   # db:
   #   image: postgres
   #   ports:
@@ -25,8 +25,8 @@ services:
   #     - ./data/db:/var/lib/postgresql/data/
 
 
-  frontend:
-    container_name: 'font-react'
+  app:
+    container_name: 'front'
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -37,11 +37,18 @@ services:
     volumes:
       - ./front:/app/front
 
-    depends_on:
-      - backend
+    networks:
+      red_web:
+        ipv4_address: 192.168.10.10
+      
+      red_interna:
+        ipv4_address: 192.168.20.10
+
+    # depends_on:
+    #   - backend
 
   backend: 
-    container_name: 'backend-django'
+    container_name: 'back'
     build: 
       context: ./backend
       dockerfile: Dockerfile
@@ -60,6 +67,16 @@ services:
 volumes:
     rabbitmq_data:
     rabbitmq_log:
+
+networks:
+  red_web:
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+  red_interna:
+    ipam:
+      config:
+        - subnet: 192.168.20.0/24
 
     # depends_on:
     #   - db

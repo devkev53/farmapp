@@ -1,5 +1,5 @@
 from django.contrib import admin
-from plantations.models import Plantation, Irrigation
+from plantations.models import Plantation, Irrigation, State_Irrigation, State_Ground
 
 # Register your models here.
 
@@ -30,7 +30,7 @@ class PlantationAdmin(admin.ModelAdmin):
     ),
 
   ]
-  list_display = ('id', 'name', 'created', 'estimated_date_harvest', 'is_active')
+  list_display = ('id', 'name', 'created', 'duration', 'estimated_days_for_harvest' , 'estimated_date_for_harvest', 'is_active')
   # list_filter = ('',)
   # inlines = [
   #   Inline,
@@ -70,3 +70,37 @@ class IrrigationAdmin(admin.ModelAdmin):
   search_fields = ('name',)
   # date_hierarchy = ''
   # ordering = ('',)
+
+
+@admin.register(State_Irrigation)
+class State_IrrigationAdmin(admin.ModelAdmin):
+  '''Admin View for State_Irrigation'''
+
+  list_display = ('pk', 'plantation', 'water_quantity', 'duration')
+  # list_filter = ('',)
+  # inlines = [
+  #   Inline,
+  # ]
+  # raw_id_fields = ('',)
+  # readonly_fields = ('',)
+  # search_fields = ('',)
+  # date_hierarchy = ''
+  # ordering = ('',)
+
+  @admin.register(State_Ground)
+  class State_GroundAdmin(admin.ModelAdmin):
+    '''Admin View for State_Ground'''
+  
+    list_display = (
+      'pk', 'plantation', 'air_humedity',
+      'temperature_c', 'temperature_f', 'ground_humedity'
+    )
+    # list_filter = ('',)
+    # inlines = [
+    #   Inline,
+    # ]
+    # raw_id_fields = ('',)
+    # readonly_fields = ('',)
+    # search_fields = ('',)
+    # date_hierarchy = ''
+    # ordering = ('',)

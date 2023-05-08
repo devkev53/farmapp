@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './styles.module.css'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useFetchAndLoad } from '../../hooks/useFetchAndLoad'
 import { getIdPlantation } from '../../services/plantations.service'
 import { PlantIcon } from '../../components/UI/icons/PlantIcon'
@@ -14,16 +14,8 @@ import { ModalContainer } from '../../containers/ModalContainer'
 import { useModal } from '../../hooks/useModal'
 import { ModalDeletePlantation } from '../../components/ModalDeletePlantation'
 import { PageLoading } from '../../components/UI/PageLoading'
-import { ModalEditGround } from '../../components/ModalEditGround'
 import { EditGround } from '../../components/EditGround'
-import { ArrowBack } from '../../components/UI/icons/ArrowBack'
-import CircleSpinner from '../../components/UI/spiners/CircleSpinner'
-import { SaveIcon } from '../../components/UI/icons/SaveIcon'
-import { WatchIcon } from '../../components/UI/icons/WatchIcon'
-import { AddIcon } from '../../components/UI/icons/addIcon'
 import { IrrigationDetails } from '../../containers/IrrigationDetails'
-import { AddIrrigartionModal } from '../../components/AddIrrigartionModal'
-import { irrigationI } from '../../models/irrigation.models'
 
 const index = () => {
 
@@ -35,17 +27,19 @@ const index = () => {
   const {isVisible, showModal, closeModal} = useModal()
   
   const params = useParams()
+  const navigate = useNavigate()
 
-  const getData = async () => await callEndpoint(getIdPlantation(params.id))
+  const getData = async () => {
+    try {
+      const response = await callEndpoint(getIdPlantation(params.id))
+      setPlantation(response.data)
+    } catch (error) {
+      navigate('/404')
+    }
+  }
   
   useEffect(() => {
     const data = getData()
-    data.then(data => {
-      setPlantation(data.data)
-      // const irrigations:[] = data.data.irrigation
-      // const activeIrrigations = irrigations.filter(irr => irr.is_active === true)
-      // setIrrigationList(activeIrrigations)
-    })
   },[])
 
   const handleLoadingEdit = () => {
@@ -59,9 +53,9 @@ const index = () => {
   
   const daysToHarvest = () => {
     const today = Date.now()
-    console.log(today)
+    // console.log(today)
     plantation?.estimated_date_harvest
-    console.log(plantation?.estimated_date_harvest)
+    // console.log(plantation?.estimated_date_harvest)
   }
 
   daysToHarvest()

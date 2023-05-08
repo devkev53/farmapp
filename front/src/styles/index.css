@@ -184,6 +184,8 @@ body {
 @media (min-width: 768px) {
   #root {
     display: flex;
+    /* max-width: 128rem;
+    margin: 0 auto; */
   }
 
   .action_btn {

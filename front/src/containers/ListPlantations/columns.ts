@@ -13,6 +13,6 @@ export const listPlantsColumns = [
   },
   {
     Header: "Cosesha Aproximada",
-    accessor: "duration",
+    accessor: "estimated_date_for_harvest",
   },
 ]

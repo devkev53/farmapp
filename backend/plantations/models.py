@@ -58,9 +58,18 @@ class Plantation(BaseModel):
   #         all_used_water += ground.used_water
   #   return all_used_water
   
-  def estimated_date_harvest(self):
+  def estimated_date_for_harvest(self):
     date = self.created + timedelta(self.duration)
     return date
+  
+  def estimated_days_for_harvest(self):
+    harvest = self.estimated_date_for_harvest()
+    today = datetime.today().date()
+    days = harvest - today
+    porcent = 100 - ((100 * days.days) / self.duration)
+    porcent = float(round(porcent)) 
+    data = {"days": days.days, "porcent": porcent}
+    return data
 
   
 
@@ -118,15 +127,20 @@ class Irrigation(BaseModel):
     """Unicode representation of Irrigation."""
     return '{}'.format(self.plantation)
 
-  def clean(self):
-    instances = Irrigation.objects.filter(plantation=self.plantation, start_time=self.start_time, is_active=True)
-    if len(instances) > 0:
-      raise ValidationError('Ya existe una programación con este horario de inicio')
+  # def clean(self):
+  #   instances = Irrigation.objects.filter(plantation=self.plantation)
+  #   for instance in instances:
+  #     if (self.start_time >= instance.start_time and self.start_time <= instance.end_time):
+  #       raise ValidationError('Ya existe una programación con este horario de inicio')
+    
+  # #   instances = Irrigation.objects.filter(plantation=self.plantation, start_time=self.start_time, is_active=True)
+  # #   if len(instances) > 0:
+  # #     raise ValidationError('Ya existe una programación con este horario de inicio')
 
-  def save(self):
-    """Save method for Irrigation."""
-    self.clean()
-    super(Irrigation, self).save()
+  # def save(self):
+  #   """Save method for Irrigation."""
+  #   self.clean()
+  #   super(Irrigation, self).save()
 
   # def get_absolute_url(self):
   #   """Return absolute url for Irrigation."""
@@ -169,3 +183,25 @@ class State_Ground(models.Model):
   # TODO: Define custom methods here
 
 
+
+class State_Irrigation(models.Model):
+  """Model definition for State_Irrigation."""
+  start_time = models.TimeField(_('Start Time'))
+  end_time = models.TimeField(_('End Time'))
+  plantation = models.ForeignKey(Plantation, on_delete=models.CASCADE)
+  water_quantity = models.DecimalField(decimal_places=2, max_digits=10)
+  duration = models.DecimalField(decimal_places=2, max_digits=10)
+
+  # TODO: Define fields here
+
+  class Meta:
+    """Meta definition for State_Irrigation."""
+
+    verbose_name = 'State_Irrigation'
+    verbose_name_plural = 'State_Irrigations'
+
+  def __str__(self):
+    """Unicode representation of State_Irrigation."""
+    return "%s" % (self.plantation)
+
+  # TODO: Define custom methods here

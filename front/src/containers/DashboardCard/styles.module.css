@@ -1,0 +1,148 @@
+.card_dash {
+  background: rgba(var(--white), .87);
+  /* padding: 2rem; */
+  border-radius: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  max-width: 45rem;
+}
+.card_dash picture {
+  position: absolute;
+  height: min-content;
+  /* top: 0; */
+  left: clamp(-3.5rem, 2.5vw, -6rem);
+  opacity: .3;
+  bottom: clamp(-3.5rem, 2.5vw, -6rem);
+}
+.card_dash picture svg {
+  height: min-content;
+  /* width: 100%; */
+  fill: none;
+  bottom: 0;
+  stroke: rgba(var(--success), .2);
+  /* width: min-content; */
+  transform: rotate(25deg);
+}
+.title_name {
+  font-weight: bold;
+  display: flex;
+  width: 100%;
+  font-size: clamp(2.4rem, 5vw, 3rem);
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  color: rgba(var(--dark-blue));
+  border-bottom: .1rem solid rgba(51,51,51,.5);
+  /* margin-bottom: 1.6rem; */
+}
+.title_name svg {
+  width: min-content;
+  fill: none;
+  stroke-width: .2rem;
+}
+
+
+
+.card_content {
+  /* padding: 2rem; */
+  display: grid;
+  gap: 1.6rem;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: center;
+  /* grid-template-columns: 1fr 1fr; */
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+}
+
+.card_content .cosecha {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.cosecha p {
+}
+
+
+
+
+
+
+/* POGRES CIRCLE BAR II */
+.skill {
+  width: 10rem;
+  height: 10rem;
+  /* background: cornflowerblue; */
+  position: relative;
+}
+.outer {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  /* border: .1rem solid red; */
+  box-shadow: .6rem .6rem 1rem -.1rem rgba(0,0,0,.15),
+              -.6rem -.6rem 1rem -.1rem rgba(0,0,0,.15);
+  padding: 1.4rem;
+}
+.inner {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,.2),
+              inset -4px -4px 6px -1px rgba(255,255,255, .7),
+              -0.5px -0.5px 0px rgba(255,255,255,1),
+              0.5px 0.5px 0px rgba(0,0,0,.15),
+              0px 12px 10px -10px rgba(0,0,0,.05);
+}
+.number_porcent {
+  font-weight: bold;
+  color: rgba(51,51,51, .8);
+  font-size: clamp(2.2rem, 2.5vw, 2.4rem);
+}
+
+.skill svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.skill circle {
+  fill: none;
+  /* stroke: url(#GradientColor); */
+  stroke-width: 1.4rem;
+  stroke-dasharray: 270;
+  transition: .2s all ease;
+  /* stroke-dashoffset: 350; */
+  animation: anim 2s linear forwards;
+}
+
+
+/* @keyframes anim {
+  100% {
+    stroke-dashoffset: 180;
+  }
+} */
+
+@media (min-width: 768px) {
+  .card_dash picture {
+    position: absolute;
+    width: 60%;
+    top: unset;
+    bottom: -2.5rem;
+    left: clamp(-3.5rem, 2.5vw, -6rem);
+    opacity: .3;
+  }
+
+  .card_content {
+    grid-auto-flow: column;
+  }
+  .card_content .cosecha {
+    border-right: .2rem solid rgba(51,51,51,.1);
+  }
+}

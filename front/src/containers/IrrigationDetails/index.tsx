@@ -46,12 +46,15 @@ export const IrrigationDetails = () => {
   },[loadingChanges])
 
 
-  const submitAddIrrigation = (data:any) => {
+  const submitAddIrrigation = async (data:any) => {
     setLoadingChanges(true)
-    const response = callEndpoint(addIrrigation(data))
-    response.then(resp => {
+    try {
+      const response = await callEndpoint(addIrrigation(data))
+      response.status === 201 && setLoadingChanges(false)
+    } catch (error) {
+      console.log(error)
       setLoadingChanges(false)
-    })
+    }
     addClose()
   }
 

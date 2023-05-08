@@ -1,6 +1,6 @@
-# from django.utils.translation import gettext as _
-# from rest_framework import serializers
-# from plantations.models import Ground
+from django.utils.translation import gettext as _
+from rest_framework import serializers
+from plantations.models import State_Ground
 
 # from plantations.api.serializers.serializers import IrrigationSerializer
 
@@ -14,3 +14,10 @@
 #             'ability', 'wilting_point', 'thscm',
 #             'irrigation'
 #             )
+
+
+class StateGroundSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = State_Ground
+        fields = '__all__'

@@ -26,7 +26,7 @@ export const ListPlantations = () => {
     data.then(data => setPlantations(data.data))
   },[])
 
-  // console.log(plantations)
+  console.log(plantations)
 
   return (
     <div className="list_plants">

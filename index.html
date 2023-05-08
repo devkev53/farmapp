@@ -4,9 +4,33 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>MY THSCM</title>
 </head>
 <body>
-  
+  <h1>Botones</h1>
+  <input type="button" onclick="botonEncender()" value="Encendido">
+  <input type="button" onclick="botonApagar()" value="Apagado">
+  <script>
+    const botonEncender = () => {
+      console.log("Encender")
+      consultarGET("encender")
+    }
+    const botonApagar = () => {
+      console.log("Apagar")
+      consultarGET("apagar")
+    }
+
+    const consultarGET = (consulta) => {
+      const Http = new XMLHttpRequest()
+      console.log(`Consulta ${consulta}`)
+      Http.open("GET", consulta)
+      Http.send()
+
+      Http.onreadystatechange = (e) => {
+        console.log(Http.status)
+        console.log(Http.response)
+      }
+    }
+  </script>
 </body>
 </html>
