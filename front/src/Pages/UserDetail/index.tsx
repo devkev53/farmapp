@@ -18,6 +18,7 @@ import { PhoneIcon } from '../../components/UI/icons/PhoneIcon';
 import { CakeIcon } from '../../components/UI/icons/CakeIcon';
 import { AddressBookIcon } from '../../components/UI/icons/AddressBookIcon';
 import { KeyIcon } from '../../components/UI/icons/keyIcon';
+import { ChangePasswordModal } from '../../components/ChangePasswordModal';
 
 const index = () => {
 
@@ -29,6 +30,7 @@ const index = () => {
 
   const {isVisible:editVisible, showModal:showEdit, closeModal:closeEdit} = useModal()
   const {isVisible:imgModalVisible, showModal:showImgModal, closeModal:closeimgModal} = useModal()
+  const {isVisible:passModalVisible, showModal:showPassModal, closeModal:closePassModal} = useModal()
 
   const getData = async() => {
     const response = await callEndpoint(getByIdUser(user.id))
@@ -52,6 +54,9 @@ const index = () => {
       }
       {editVisible &&
         <EditUserModal close={closeEdit} data={userData}/>
+      }
+      {passModalVisible &&
+        <ChangePasswordModal title="Cambiar Contraseña" close={closePassModal} />
       }
 
       {isLoading && <PageLoading />}
@@ -101,7 +106,7 @@ const index = () => {
         </div>
 
         <div className={styles.change_password}>
-          <button> <KeyIcon/> Cambiar Contraseña</button>
+          <button onClick={showPassModal}> <KeyIcon/> Cambiar Contraseña</button>
         </div>
         
       </div>

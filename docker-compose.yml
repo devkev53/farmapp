@@ -2,15 +2,21 @@ version: '3.9'
 
 
 services:
-  # rabbitmq:
-  #   container_name: 'rabbitmq'
-  #   image: rabbitmq
-  #   ports:
-  #     - '5672:5672'
-  #     - '15672:15672'
-  #   volumes:
-  #       - rabbitmq_data:/var/lib/rabbitmq/
-  #       - rabbitmq_log:/var/log/rabbitmq/
+  rabbitmq:
+    container_name: 'rabbitmq'
+    image: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq/
+        - rabbitmq_log:/var/log/rabbitmq/
+    networks:
+      red_web:
+        ipv4_address: 192.168.10.30
+      
+      red_interna:
+        ipv4_address: 192.168.20.30
   # db:
   #   image: postgres
   #   ports:
@@ -26,7 +32,7 @@ services:
 
 
   app:
-    container_name: 'front'
+    container_name: 'web'
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -48,7 +54,7 @@ services:
     #   - backend
 
   backend: 
-    container_name: 'back'
+    container_name: 'api'
     build: 
       context: ./backend
       dockerfile: Dockerfile
@@ -63,6 +69,13 @@ services:
 
     volumes:
       - ./backend:/app/backend
+
+    networks:
+      red_web:
+        ipv4_address: 192.168.10.20
+      
+      red_interna:
+        ipv4_address: 192.168.20.20
 
 volumes:
     rabbitmq_data:

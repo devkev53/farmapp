@@ -31,19 +31,25 @@ app.config_from_object(settings, namespace='CELERY')
 
 # }
 
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    # Call delete plantation every 30 seconds
-    sender.add_periodic_task(30.0, delete_last_plantation, name='delete plantation')
-    
-
 # app.autodiscover_tasks()
 
-@app.task(bind=True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
+@app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    # Call delete plantation every 10 seconds
+    sender.add_periodic_task(05.0, say_this_is_a_shit.s())
+    
+
+
+# @app.task(bind=True)
+# def debug_task(self):
+#     print(f'Request: {self.request!r}')
 
 @app.task(bind=True)
 def say_this_is_a_shit(self):
-    print("This is a shit.....!")
-    return "Done"
+    from plantations.tasks import print_message
+    return print_message()
+
+# @app.task(bind=True)
+# def show_plantation_task(self):
+#     print("This is a shit.....!")
+#     return "Done"

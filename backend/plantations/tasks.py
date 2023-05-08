@@ -1,12 +1,10 @@
 from celery import shared_task
+from backend.celery import app as celery_app
 from plantations.models import Plantation
 
-
-@shared_task()
-def delete_last_plantation(self):
-    name = ''
-    plantation = Plantation.objects.last()
-    name = plantation.name
-    plantation.delete()
-    print ('Plantation with name: {} has be deleted successfull..!'.format(name))
-    return "Done"
+@shared_task(bind=True)
+def print_message(self):
+    num = Plantation.objects.count()
+    
+    print(num)
+    return num

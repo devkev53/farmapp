@@ -71,41 +71,13 @@ class Plantation(BaseModel):
     data = {"days": days.days, "porcent": porcent}
     return data
 
-  
-
-# class Ground(BaseModel):
-#   """Model definition for Ground."""
-
-#   # TODO: Define fields here
-#   plantation = models.ForeignKey(Plantation, on_delete=models.CASCADE, related_name=_('associated_ground'))
-#   area = models.FloatField(_('area'), blank=True, null=True, default=0)
-#   perimeter = models.FloatField(_('perimeter'), blank=True, null=True, default=0)
-#   ability = models.FloatField(_('ability'), blank=True, null=True, default=0)
-#   wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True, default=0)
-#   used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
-#   thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True)
-  
-
-
-#   class Meta:
-#     """Meta definition for Ground."""
-
-#     verbose_name = 'Ground'
-#     verbose_name_plural = 'Grounds'
-
-#   def __str__(self):
-#     """Unicode representation of Ground."""
-#     return '{}'.format(self.plantation)
-
-#   # def save(self):
-#   #   """Save method for Ground."""
-#   #   pass
-
-#   # def get_absolute_url(self):
-#   #   """Return absolute url for Ground."""
-#   #   return ('')
-
-#   # TODO: Define custom methods here
+  def activate_irrigation(self):
+    activate = False
+    irrigations = Irrigation.objects.filter(plantation=self.pk)
+    for irrigation in irrigations:
+      if (irrigation.state_start_irrigation()):
+        activate = True
+    return activate
 
 
 class Irrigation(BaseModel):
@@ -127,24 +99,12 @@ class Irrigation(BaseModel):
     """Unicode representation of Irrigation."""
     return '{}'.format(self.plantation)
 
-  # def clean(self):
-  #   instances = Irrigation.objects.filter(plantation=self.plantation)
-  #   for instance in instances:
-  #     if (self.start_time >= instance.start_time and self.start_time <= instance.end_time):
-  #       raise ValidationError('Ya existe una programación con este horario de inicio')
-    
-  # #   instances = Irrigation.objects.filter(plantation=self.plantation, start_time=self.start_time, is_active=True)
-  # #   if len(instances) > 0:
-  # #     raise ValidationError('Ya existe una programación con este horario de inicio')
-
-  # def save(self):
-  #   """Save method for Irrigation."""
-  #   self.clean()
-  #   super(Irrigation, self).save()
-
-  # def get_absolute_url(self):
-  #   """Return absolute url for Irrigation."""
-  #   return ('')
+  def state_start_irrigation(self):
+    state = False
+    now = datetime.now().time()
+    if now >= self.start_time and now <= self.end_time:
+      state = True
+    return state
 
   # TODO: Define custom methods here
 

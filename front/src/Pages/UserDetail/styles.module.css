@@ -45,6 +45,8 @@
   display: flex;
   gap: 2.6rem;
   flex-wrap: wrap;
+  max-width: 128rem;
+  /* margin: 0 auto; */
   /* grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr)) */
 }
 
@@ -157,10 +159,13 @@
   background: rgba(var(--dark-blue));
   color: rgba(var(--white), .87);
   justify-content: center;
+  transition: .3s all ease;
+  gap: .6rem;
 }
 .change_password button svg {
   height: 3rem;
   fill: none;
+  transition: .3s all ease;
   width: min-content;
 }
 
@@ -176,12 +181,28 @@
     font-weight: bold;
     transform: translateX(0);
   }
-
+  .content_page {
+    width: 100%;
+    max-width: 128rem;
+    display: grid;
+    grid-template-columns: 18rem repeat(auto-fit, minmax(min(35rem, 100%), 1fr));
+    margin: 0 auto;
+  }
   .info_container {
-    width: min(40rem, 100%);;
+    width: 100%;
+    min-width: 35rem;
   }
   /* .user_info {
     width: min-content;
   }
   .user_profile {} */
+
+  .change_password button:hover {
+    /* background: rgba(var(--soft-blue)); */
+  }
+
+  .change_password button:hover svg {
+    transform: rotate(47deg);
+  }
+
 }

@@ -43,3 +43,8 @@ def delete_last_user(self):
         print('User with username: {} has be delete successfull..!'.format(username))
     return "Done"
     
+@shared_task(bind=True)
+def print_message(self):
+    num = Plantation.objects.count()
+    print(num)
+    return "Done"

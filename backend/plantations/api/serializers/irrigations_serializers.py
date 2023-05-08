@@ -31,3 +31,14 @@ class StateIrrigationSerializer(serializers.ModelSerializer):
     class Meta:
         model = State_Irrigation
         fields = '__all__'
+
+
+class StartIrrigationSerializer(serializers.ModelSerializer):
+    state_start_irrigation = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Irrigation
+        fields = ('state_start_irrigation',)
+    
+    def state_start_irrigation(self, obj):
+        return obj.state_start_irrigation

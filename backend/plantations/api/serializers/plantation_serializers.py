@@ -42,3 +42,16 @@ class CreatePlantationSerializer(serializers.ModelSerializer):
             'area', 'perimeter', 'ability',
             'wilting_point', 'thscm',
         )
+
+
+class ActivateIrrigationSerialzier(serializers.ModelSerializer):
+    activate_irrigation = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Plantation
+        fields = (
+            'activate_irrigation',
+        )
+    
+    def activate_irrigation(self, obj):
+        return obj.activate_irrigation

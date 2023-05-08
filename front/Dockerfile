@@ -10,4 +10,6 @@ RUN pnpm install
 
 COPY . /app/front/
 
+EXPOSE 5173
+
 CMD ["pnpm", "run", "dev"]

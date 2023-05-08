@@ -41,26 +41,12 @@ class PlantationAdmin(admin.ModelAdmin):
   # date_hierarchy = ''
   # ordering = ('',)
 
-# @admin.register(Ground)
-# class GroundAdmin(admin.ModelAdmin):
-#   '''Admin View for Ground'''
-
-#   list_display = ('id', 'plantation',)
-#   # list_filter = ('',)
-#   # inlines = [
-#   #   Inline,
-#   # # ]
-#   # raw_id_fields = ('',)
-#   readonly_fields = ('created_by','updated_by',)
-#   search_fields = ('name',)
-#   # date_hierarchy = ''
-#   # ordering = ('',)
 
 @admin.register(Irrigation)
 class IrrigationAdmin(admin.ModelAdmin):
   '''Admin View for Irrigation'''
 
-  list_display = ('id', 'plantation', 'description', 'start_time', 'end_time', 'is_active',)
+  list_display = ('id', 'plantation', 'description', 'start_time', 'end_time', 'is_active', 'state_start_irrigation' )
   # list_filter = ('',)
   # inlines = [
   #   Inline,

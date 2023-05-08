@@ -25,6 +25,7 @@ from core.api.views.auth_views import Login, Logout
 from core.views import test, send_mail_to_all
 
 from plantations.views import plantation_pdf
+from plantations.api.views.plantation_views import IsActiveIrrigation
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('logout/', Logout.as_view(), name='logout'),
     
     path('plantation_pdf/<int:pk>/', plantation_pdf, name='plantation_pdf'),
+    path('api/<slug:slug>/activate-irrigation/', IsActiveIrrigation.as_view(), name='active_irrigation')
     
 ]
 

@@ -63,6 +63,6 @@ export const PublicInterceptor = () => {
     (response) => {return response}, 
     (error) => { 
       console.log(error)
-      SnackbarUtilities.error(error.response.data.error)
+      // SnackbarUtilities.error(error.response.data.error)
     })
 }

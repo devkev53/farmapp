@@ -1,12 +1,13 @@
 from core.api.views.api_views import CustomBaseViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import action
 
 
 
 from rest_framework.permissions import IsAuthenticated
 from plantations.api.serializers.plantation_serializers import CreatePlantationSerializer
-from plantations.api.serializers.irrigations_serializers import IrrigationSerializer, StateIrrigationSerializer
+from plantations.api.serializers.irrigations_serializers import IrrigationSerializer, StateIrrigationSerializer, StartIrrigationSerializer
 
 class IrrigationViewSet(CustomBaseViewSet):
     serializer_class = IrrigationSerializer
@@ -30,7 +31,6 @@ class IrrigationViewSet(CustomBaseViewSet):
         return Response({
         'error':'check your fields', 'errors':instance_serialier.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-
 
 class StateIrrigationViewSet(CustomBaseViewSet):
     serializer_class = StateIrrigationSerializer
