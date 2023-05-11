@@ -15,7 +15,6 @@ const index = () => {
 
   const geLastPlantations = async() => {
     const response = await callEndpoint(getPlantations())
-    console.log(response)
     setPlantatios(response.data.slice(0,2))
   }
 
@@ -23,7 +22,6 @@ const index = () => {
     geLastPlantations()
   },[])
 
-  console.log(plantations)
  
   return (
     <>
@@ -45,6 +43,7 @@ const index = () => {
 
               <DashboardCard 
                 key={plant.id} 
+                id={plant.id} 
                 name={plant.name}
                 created={plant?.created}
                 days={plant?.estimated_days_for_harvest.days}

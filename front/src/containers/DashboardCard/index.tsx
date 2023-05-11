@@ -21,8 +21,6 @@ export const DashboardCard = (
 
   useEffect(()=>{
     const porcentStroke = 270 - (270 * (porcent/100))
-    console.log("Porcent DB", (porcent))
-    console.log("Calculate Stroke", porcentStroke)
     porcentRef.current.style.strokeDashoffset = porcentStroke
   },[])
 
