@@ -16,6 +16,7 @@ import { ModalDeletePlantation } from '../../components/ModalDeletePlantation'
 import { PageLoading } from '../../components/UI/PageLoading'
 import { EditGround } from '../../components/EditGround'
 import { IrrigationDetails } from '../../containers/IrrigationDetails'
+import { ModalTimeCountActive } from '../../components/ModalTimeCountActive'
 
 const index = () => {
 
@@ -25,6 +26,7 @@ const index = () => {
   const {isLoading, callEndpoint} = useFetchAndLoad()
 
   const {isVisible, showModal, closeModal} = useModal()
+  const {isVisible:onIrrVisible, showModal:onIrrShow, closeModal:onIrrClose} = useModal()
   
   const params = useParams()
   const navigate = useNavigate()
@@ -62,6 +64,7 @@ const index = () => {
 
   return (
     <>
+      {onIrrVisible && <ModalTimeCountActive close={onIrrClose} />}
       {editLoading && <PageLoading />}
       {isLoading && <PageLoading />}
       <div className="styles dashboardContainer">
@@ -87,7 +90,9 @@ const index = () => {
 
           {/* BOTTON DE RIEGO MANUAL */}
           <div className="styles group">
-            <button className={styles.irrigation_btn}>
+            <button
+              onClick={onIrrShow}
+              className={styles.irrigation_btn}>
               <span>
                 <DropIcon />
                 Activar Riego
