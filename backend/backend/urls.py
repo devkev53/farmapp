@@ -26,6 +26,7 @@ from core.views import test, send_mail_to_all
 
 from plantations.views import plantation_pdf
 from plantations.api.views.plantation_views import IsActiveIrrigation
+from plantations.api.views.ground_views import StateGroundAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,7 +41,8 @@ urlpatterns = [
     path('logout/', Logout.as_view(), name='logout'),
     
     path('plantation_pdf/<int:pk>/', plantation_pdf, name='plantation_pdf'),
-    path('api/<slug:slug>/activate-irrigation/', IsActiveIrrigation.as_view(), name='active_irrigation')
+    path('api/<slug:slug>/activate-irrigation/', IsActiveIrrigation.as_view(), name='active_irrigation'),
+    path('api/<slug:slug>/ground_state/', StateGroundAPIView.as_view(), name='state_ground'),
     
 ]
 
