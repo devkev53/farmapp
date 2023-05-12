@@ -2,8 +2,8 @@ import axios from 'axios'
 import { loadAbort } from '../utils/load-abort-axios.utility'
 import { axiosPrivateInstance } from '../utilities/axios-instances'
 
-const irrigations_url = `${import.meta.env.VITE_BACKEND_URL}api/irrigations/`
-const manual_url = `${import.meta.env.VITE_BACKEND_URL}api/`
+const irrigations_url = `${import.meta.env.VITE_DOCKER_BACKEND_URL}api/irrigations/`
+const manual_url = `${import.meta.env.VITE_DOCKER_BACKEND_URL}api/`
 
 export const getIrrigations = () => {
   const controller = loadAbort()
