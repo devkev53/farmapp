@@ -4,8 +4,16 @@ import { PageLoading } from "../UI/PageLoading";
 import { DropIcon } from "../UI/icons/DropIcon";
 
 import styles from './styles.module.css'
+import { useFetchAndLoad } from "../../hooks/useFetchAndLoad";
+import { getActivateManualIrrigation, getDeactivateManualIrrigation } from "../../services/irrigations.service";
 
-export const ModalTimeCountActive = ({close}:{close:()=>void}) => {
+export const ModalTimeCountActive = (
+  {plantatio_id, close}:{
+    plantatio_id: number,
+    close:()=>void
+  }
+) => {
+
   const [time, setTime] = useState({ms:0, s:0, m:0, h:0})
   const [interv, setInterv] = useState<any>()
   const [status, setStatus] = useState(0)
@@ -13,6 +21,8 @@ export const ModalTimeCountActive = ({close}:{close:()=>void}) => {
   // started = 1
   
   let updatedMs = time.ms, updatedS = time.s, updatedM = time.m, updatedH = time.h
+
+  const {callEndpoint} = useFetchAndLoad()
 
   const start = () => {
     run()
@@ -48,10 +58,30 @@ export const ModalTimeCountActive = ({close}:{close:()=>void}) => {
 
   useEffect(() => {
     start()
+    getOnIrrigation()
   },[])
+
+  const getOffIrrigation = async() => {
+    try {
+      const response = await callEndpoint(getDeactivateManualIrrigation(plantatio_id))
+      console.log(response.data)
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  const getOnIrrigation = async() => {
+    try {
+      const response = await callEndpoint(getActivateManualIrrigation(plantatio_id))
+      console.log(response.data)
+    } catch (error) {
+      alert(error)
+    }
+  }
   
   const handleStop = () => {
     stop()
+    getOffIrrigation()
     setStatus(2)
     setTimeout(() => {
       setStatus(0)
@@ -82,6 +112,5 @@ export const ModalTimeCountActive = ({close}:{close:()=>void}) => {
         </div>
       </div>
     </ModalContainer>
-    
   );
 }

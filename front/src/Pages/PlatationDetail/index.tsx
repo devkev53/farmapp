@@ -17,6 +17,7 @@ import { PageLoading } from '../../components/UI/PageLoading'
 import { EditGround } from '../../components/EditGround'
 import { IrrigationDetails } from '../../containers/IrrigationDetails'
 import { ModalTimeCountActive } from '../../components/ModalTimeCountActive'
+import { getActivateManualIrrigation } from '../../services/irrigations.service'
 
 const index = () => {
 
@@ -64,7 +65,7 @@ const index = () => {
 
   return (
     <>
-      {onIrrVisible && <ModalTimeCountActive close={onIrrClose} />}
+      {onIrrVisible && <ModalTimeCountActive plantatio_id={plantation?.id} close={onIrrClose} />}
       {editLoading && <PageLoading />}
       {isLoading && <PageLoading />}
       <div className="styles dashboardContainer">

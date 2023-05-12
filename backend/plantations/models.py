@@ -88,6 +88,7 @@ class Irrigation(BaseModel):
   description = models.TextField(_('Description'),blank=True, null=True)
   start_time = models.TimeField(_('Start Time'))
   end_time = models.TimeField(_('End Time'))
+  on_irrigation = models.BooleanField('On Irrigation', default=False)
 
   class Meta:
     """Meta definition for Irrigation."""
@@ -101,13 +102,14 @@ class Irrigation(BaseModel):
 
   def state_start_irrigation(self):
     state = False
+    if self.on_irrigation:
+      return True
     now = datetime.now().time()
     if now >= self.start_time and now <= self.end_time:
       state = True
     return state
 
   # TODO: Define custom methods here
-
 
 
 class State_Ground(models.Model):
@@ -129,7 +131,7 @@ class State_Ground(models.Model):
 
   def __str__(self):
     """Unicode representation of State_Ground."""
-    return '{}'.format(self.ground)
+    return '{}'.format(self.plantation)
 
 
   # def save(self):

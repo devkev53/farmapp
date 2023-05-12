@@ -1,8 +1,12 @@
+from django.shortcuts import get_object_or_404
+
 from core.api.views.api_views import CustomBaseViewSet
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
+from rest_framework import generics
 
+from plantations.models import Irrigation, Plantation
 
 
 from rest_framework.permissions import IsAuthenticated
@@ -42,3 +46,64 @@ class StateIrrigationViewSet(CustomBaseViewSet):
       if self.queryset is None:
           return self.serializer_class().Meta.model.objects.all()
       return self.queryset
+
+
+class ManualActiveIrrgation(viewsets.ModelViewSet):
+    serializer_class = StateIrrigationSerializer
+
+    @action(detail=True, methods=['get'], url_path='active_irrigation')
+    def active(self, request, pk=None):
+        plantation = Plantation.objects.filter(pk=pk).get()
+        first_irrigation = Irrigation.objects.filter(plantation__pk=plantation.pk).first()
+        first_irrigation.on_irrigation = True
+        first_irrigation.save()
+        return Response({
+            'success': 'irrigation is on'
+        }, status=status.HTTP_200_OK)
+
+
+    @action(detail=True, methods=['get'], url_path='deactive_irrigation')
+    def deactive(self, request, pk=None):
+        plantation = Plantation.objects.filter(pk=pk).get()
+        first_irrigation = Irrigation.objects.filter(plantation__pk=plantation.pk).first()
+        first_irrigation.on_irrigation = False
+        first_irrigation.save()
+        return Response({
+            'success': 'irrigation is off'
+        }, status=status.HTTP_200_OK)
+
+
+
+
+class ActivateManualIrrigation(generics.GenericAPIView):
+    # serializer_class = StateIrrigationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, pk):
+        return get_object_or_404(Irrigation, pk=pk)
+
+    def get(self, request, pk=None, *args, **kwargs):
+            plantation = self.get_object(pk)
+            first_irrigation = Irrigation.objects.filter(plantation__pk=plantation.pk).first()
+            first_irrigation.on_irrigation = True
+            first_irrigation.save()
+            return Response({
+                'success': 'irrigation is on'
+            }, status=status.HTTP_200_OK)
+
+
+class DeactivateManualIrrigation(generics.GenericAPIView):
+    # serializer_class = StateIrrigationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk=None):
+        try:
+            first_irrigation = Irrigation.objects.filter(plantation__pk=pk).first()
+            first_irrigation.on_irrigation = False
+            first_irrigation.save()
+            return Response({
+                'success': 'irrigation is off'
+            }, status=status.HTTP_200_OK)
+        except:
+            return Response({
+            'error':'This plantation not exists..!'}, status=status.HTTP_400_BAD_REQUEST)
