@@ -9,7 +9,7 @@ export const ModalDeletePlantation = (
   {id, name, closeFn}:{
     id:number,
     name:string,
-    closeFn:() => {}
+    closeFn:VoidFunction
   }) => {
 
     const {isLoading, callEndpoint} = useFetchAndLoad()

@@ -1,19 +1,24 @@
+import { AxiosInterceptorManager, InternalAxiosRequestConfig } from "axios";
+
 export interface userInfoI {
   id: number;
   username: string;
   email: string;
   name: string;
   last_name: string;
-  image: string  
+  image: string;
+  url_img: string
 }
 
 export interface authUserI {
   token: string;
   refreshToken: string;
-  userInfo: userInfoI;
+  user: userInfoI;
 }
 
 export interface TokensI {
   token: string,
   refreshToken: string
 }
+
+export type UserStatesTypes = authUserI | undefined | null

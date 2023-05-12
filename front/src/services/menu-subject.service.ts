@@ -1,4 +1,4 @@
-import { SubjectManager } from "../utils/subject-manager";
+import { SubjectManager } from "../utilities/subject-manager";
 
 export const menuSubject = new SubjectManager()
 export const menuContract = new SubjectManager()

@@ -1,8 +1,9 @@
 import { createContext, ReactElement, useEffect, useState } from "react";
 
-import { authUserI } from "../models/authUser.models";
-import { USER_STATES } from "../utils/user_states";
+import { authUserI, UserStatesTypes } from "../models/authUser.models";
+import { USER_STATES } from "../utilities/user_states";
 import { getUser } from "../utilities/localStorage_user.utility";
+import { userInfoI } from "../models/authUser.models";
 
 export type ValueContextType = {
   userInfo: authUserI | undefined | null;
@@ -11,11 +12,23 @@ export type ValueContextType = {
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+type AuthContextType = {
+  userInfo: UserStatesTypes,
+  setUserInfo: React.Dispatch<React.SetStateAction<UserStatesTypes>>,
+  isLogged: boolean
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export const AuthContext = createContext({})
+
+export const AuthContext = createContext<AuthContextType>({
+  userInfo: null,
+  setUserInfo: () => {},
+  isLogged: false,
+  setIsLogged: () => {},
+})
 
 export const AuthContextProvider = ({children}:{children:ReactElement}) => {
-  const [userInfo, setUserInfo] = useState<authUserI | undefined | null>(USER_STATES.NOT_KNOWN)
+  const [userInfo, setUserInfo] = useState<UserStatesTypes>(USER_STATES.NOT_KNOWN)
   const [isLogged, setIsLogged] = useState(false)
 
   useEffect(() => {

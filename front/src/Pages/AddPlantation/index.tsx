@@ -17,11 +17,12 @@ const index = () => {
   const navigate = useNavigate()
   const {isLoading, callEndpoint} = useFetchAndLoad()
 
-  const handleChangeTextArea = (e) => {
+  const handleChangeTextArea:React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     let isEmpty = true
     e.target.value.length > 0 ? e.target.classList.add(`${styles.content}`) : e.target.classList.remove(`${styles.content}`)
   }
-  const handleCropCof = (e) => {
+
+  const handleCropCof:React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let isEmpty = true
     const isValid = e.target.checkValidity();
     // console.log(isValid)
@@ -33,9 +34,9 @@ const index = () => {
   }
 
 
-  const handleSubmitForm = (e:any) => {
+  const handleSubmitForm:React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    const data = new FormData(e.target)
+    const data = new FormData(e.currentTarget)
     const response = callEndpoint(addPlantation(data))
     response.then(resp => {
       if (resp.status === 201) {

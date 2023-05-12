@@ -8,7 +8,7 @@ class IrrigationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Irrigation
         fields = (
-            'id', 'plantation', 'start_time', 'end_time', 'is_active'
+            'id', 'plantation', 'start_time', 'end_time', 'is_active', 'on_irrigation'
         )
 
     def validate_start_time(self, value):

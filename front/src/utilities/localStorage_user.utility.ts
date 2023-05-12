@@ -1,11 +1,10 @@
-import { useAuthContext } from "../hooks/useAuthContext"
-import { TokensI, authUserI, userInfoI } from "../models/authUser.models"
-import { USER_STATES } from "../utils/user_states"
+import { UserStatesTypes, authUserI} from "../models/authUser.models"
+import { USER_STATES } from "../utilities/user_states"
 
 export const getUser = () => {
-  const result = JSON.parse(
-    window.localStorage.getItem("back_auth_info")
-  ) || USER_STATES.NOT_LOGGED
+  const localData = window.localStorage.getItem("back_auth_info") || USER_STATES.NOT_LOGGED
+  let result: UserStatesTypes = null
+  localData !== null && (result = JSON.parse(localData))
   return result
 }
 
@@ -18,7 +17,7 @@ export const clearUserLocalStorage = () => {
 
 export const getAuthTokens = () => {
   const authInfo = getUser()
-  if (authInfo) {
+  if (authInfo !== null && authInfo !== undefined) {
     const {token, refreshToken} = authInfo
     return {token, refreshToken}
   } else {
@@ -27,9 +26,12 @@ export const getAuthTokens = () => {
 }
 
 export const updateUserLocalStorage = (tokens:any) => {
-  const {user} = getUser()
-  const data = {user, token: tokens.token, refreshToken: tokens.refreshToken}
-  window.localStorage.setItem("back_auth_info", JSON.stringify(data))
+  const authInfo = getUser()
+  if (authInfo !== null && authInfo !== undefined ) {
+    const {user} = authInfo
+    const data = {user, token: tokens.token, refreshToken: tokens.refreshToken}
+    window.localStorage.setItem("back_auth_info", JSON.stringify(data))
+  }
 } 
 
 export const updateChangeUserProfileLocalStorage = (user:any) => {

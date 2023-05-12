@@ -12,7 +12,7 @@ import { refreshTokenService } from "../services/auth.service"
 
 export const PrivateInterceptor = () => {
   
-  axiosPrivateInstance.interceptors.request.use(async (request) => {
+  axiosPrivateInstance.interceptors.request.use(async (request:any) => {
     const {token, refreshToken} = getAuthTokens()
     
     const updateTypeAssetsHeader = (request:AxiosRequestConfig) => {

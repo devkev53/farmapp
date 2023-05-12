@@ -18,10 +18,11 @@ import { EditGround } from '../../components/EditGround'
 import { IrrigationDetails } from '../../containers/IrrigationDetails'
 import { ModalTimeCountActive } from '../../components/ModalTimeCountActive'
 import { getActivateManualIrrigation } from '../../services/irrigations.service'
+import { plantationI } from '../../models/plantations.models'
 
 const index = () => {
 
-  const [plantation, setPlantation] = useState()
+  const [plantation, setPlantation] = useState<plantationI>()
   const [edit, setEdit] = useState(false)
   const [editLoading, setEditLoading] = useState(false)
   const {isLoading, callEndpoint} = useFetchAndLoad()
@@ -34,8 +35,9 @@ const index = () => {
 
   const getData = async () => {
     try {
-      const response = await callEndpoint(getIdPlantation(params.id))
-      setPlantation(response.data)
+      let response
+      params.id && (response = await callEndpoint(getIdPlantation(params.id)))
+      setPlantation(response?.data)
     } catch (error) {
       navigate('/404')
     }
@@ -57,15 +59,17 @@ const index = () => {
   const daysToHarvest = () => {
     const today = Date.now()
     // console.log(today)
-    plantation?.estimated_date_harvest
+    plantation && plantation?.estimated_date_for_harvest
     // console.log(plantation?.estimated_date_harvest)
   }
 
   daysToHarvest()
 
+  console.log(plantation)
+
   return (
     <>
-      {onIrrVisible && <ModalTimeCountActive plantatio_id={plantation?.id} close={onIrrClose} />}
+      {plantation && onIrrVisible && <ModalTimeCountActive plantatio_id={plantation.id} close={onIrrClose} />}
       {editLoading && <PageLoading />}
       {isLoading && <PageLoading />}
       <div className="styles dashboardContainer">
@@ -146,15 +150,15 @@ const index = () => {
           <IrrigationDetails/>
 
           {/* TIERRA */}
-          {edit 
+          {plantation && edit 
             ? (
               <EditGround
                 id={plantation?.id}
-                thscm={plantation?.thscm}
                 area={plantation?.area}
                 perimeter={plantation?.perimeter}
                 ability={plantation?.ability}
                 wilting_point={plantation?.wilting_point}
+                thscm={plantation?.thscm}
                 handleEdit={handleLoadingEdit}
               />
             )
@@ -215,7 +219,7 @@ const index = () => {
            }
           
           
-          {isVisible && (
+          {plantation && isVisible && (
             <ModalContainer>
               <ModalDeletePlantation
                 id={plantation?.id}

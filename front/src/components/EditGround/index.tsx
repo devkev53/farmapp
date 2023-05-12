@@ -8,15 +8,14 @@ import { updateGroundOrThscm } from '../../services/plantations.service'
 import { useNavigate } from 'react-router-dom'
 
 export const EditGround = (
-  {id, area, perimeter, ability, wilting_point, thscm, edit, handleEdit}:{
+  {id, area, perimeter, ability, wilting_point, thscm, handleEdit}:{
     id: number
     area:number,
     perimeter:number,
     ability:number,
     wilting_point:number,
     thscm: string
-    edit:boolean
-    handleEdit: () => {}
+    handleEdit: VoidFunction
   }
   ) => {
 

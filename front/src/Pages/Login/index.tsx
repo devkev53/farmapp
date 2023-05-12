@@ -15,7 +15,7 @@ import { EyeHide } from '../../components/UI/icons/EyeHideIcon';
 import { Login } from '../../components/UI/icons/LoginIcon';
 
 import CircleSpinner from '../../components/UI/spiners/CircleSpinner';
-import { USER_STATES } from '../../utils/user_states';
+import { USER_STATES } from '../../utilities/user_states';
 import { testingService } from '../../services/testing.service';
 
 const index = () => {

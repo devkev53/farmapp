@@ -1,3 +1,3 @@
-import { SubjectManager } from "../utils/subject-manager";
+import { SubjectManager } from "../utilities/subject-manager";
 
 export const getModalId = new SubjectManager()

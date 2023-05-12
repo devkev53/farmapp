@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { loadAbort } from '../utils/load-abort-axios.utility'
+import { loadAbort } from '../utilities/load-abort-axios.utility'
 import { axiosPrivateInstance, axiosPublicInstance } from '../utilities/axios-instances'
 
 const baseURL = import.meta.env.VITE_DOCKER_BACKEND_URL

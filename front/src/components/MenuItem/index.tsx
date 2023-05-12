@@ -8,7 +8,7 @@ import { DashboardIcon } from "../UI/icons/DashboardIcon";
 import { PlantIcon } from "../UI/icons/PlantIcon";
 import { ReportsIcon } from "../UI/icons/ReportsIcon";
 
-import { pathList } from "../../utils/path-list.utility";
+import { pathList } from "../../utilities/path-list.utility";
 import styles from  './styles.module.css'
 import { UserCirle } from "../UI/icons/UserCirleIcon";
 import { UserCheckIcon } from "../UI/icons/UserCheckIcon";

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { loadAbort } from '../utils/load-abort-axios.utility'
+import { loadAbort } from '../utilities/load-abort-axios.utility'
 
 
 export const testingService = () => {

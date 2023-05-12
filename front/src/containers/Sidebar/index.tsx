@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { menuContract, menuSubject } from '../../services/menu-subject.service'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import { UserStatesTypes } from '../../models'
 
 const index = () => {
   const [isMenuExpand, setIsMenuExpand] = useState(true)
-  const [isShowMenu, setIsShowMenu] = useState(false)
+  const [isShowMenu, setIsShowMenu] = useState<any>(false)
+  const [userData, setUserData] = useState<UserStatesTypes>(null)
   const {user} = useAuthContext()
 
   useEffect(() => {
-    menuSubject.getSubject().subscribe((value) => { 
+    menuSubject.getSubject().subscribe((value) => {
       setIsShowMenu(value)
     })
   },[])
@@ -26,6 +28,10 @@ const index = () => {
     setIsShowMenu(false)
     menuSubject.setSubject(false)
   }
+
+  useEffect(() => {
+    
+  },[])
 
   return (
     <aside className={`${styles.sidebar} ${ isShowMenu && styles.showMenu} ${ !isMenuExpand && styles.contract}`}>
