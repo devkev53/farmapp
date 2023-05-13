@@ -148,11 +148,11 @@ class State_Ground(models.Model):
 
 class State_Irrigation(models.Model):
   """Model definition for State_Irrigation."""
-  start_time = models.TimeField(_('Start Time'))
-  end_time = models.TimeField(_('End Time'))
+  start_time = models.TimeField(_('Start Time'), auto_now_add=True)
+  end_time = models.TimeField(_('End Time'), blank=True, null=True)
   plantation = models.ForeignKey(Plantation, on_delete=models.CASCADE)
-  water_quantity = models.DecimalField(decimal_places=2, max_digits=10)
-  duration = models.DecimalField(decimal_places=2, max_digits=10)
+  water_quantity = models.DecimalField(decimal_places=2, max_digits=25)
+  duration = models.DecimalField(decimal_places=2, max_digits=10, blank=True, null=True)
 
   # TODO: Define fields here
 

@@ -1,5 +1,6 @@
 #include <DHT.h>
 #include <DHT_U.h>
+#include <time.h>
 
 #include <DNSServer.h>
 
@@ -25,17 +26,24 @@ DHT HT(dht_pin, Type);
 float humidity;
 float tempC;
 float tempF;
-int on_selenoide = 0;
+int is_on_selenoide = 0;
+volatile double waterFlow;
+unsigned long on_time_selenoide = 0;
+unsigned long off_time_selenoide = 0;
+unsigned long start_millis = 0;
 
 
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+  start_millis=millis();
   pinMode(BUILTIN_LED, OUTPUT);
   pinMode(22, OUTPUT);
   // pinMode(pin_ground, INPUT);
   HT.begin();
+  waterFlow = 0;
+  attachInterrupt(35, pulse, RISING);
 
   
   WiFiManager wm;
@@ -99,13 +107,24 @@ String checkOpenValvule() {
         DeserializationError error = deserializeJson(doc, payload);
         if (error) { return payload; }
         bool stat = doc["active"];
-        Serial.println("###########################");
+        Serial.print("Stat: ");
         Serial.println(stat);
-        activate_selenoide(stat);
+        Serial.print("is on selenoide: ");
+        Serial.println(is_on_selenoide);
+
+        if (stat) {
+          activate_selenoide();
+        } else {
+          if ( is_on_selenoide == 1) {
+            deactivate_selenoide();
+          }
+        }
 
       } else {
         Serial.print("Error code: ");
         Serial.println(httpResponseCode);
+        String payload = http.getString();
+        Serial.println(payload);
       }
 
       http.end();
@@ -128,7 +147,7 @@ String writeGroundState() {
 
   String payload = "{}";
 
-  if (time - last_change > 1800000) {
+  if (time - last_change > 600000) {
     last_change = time;
 
     if (state_request == 1) {
@@ -146,7 +165,7 @@ String writeGroundState() {
 
       set_sensor_data();
 
-
+      
       doc["air_humedity"] = humidity;
       doc["temperature_c"] = tempC;
       doc["temperature_f"] = tempF;
@@ -211,6 +230,11 @@ void set_sensor_data() {
   humidity = HT.readHumidity();
   tempC = HT.readTemperature();
   tempF = HT.readTemperature(true);
+
+  Serial.print("La humedad es: ");
+  Serial.print(humidity);
+
+
 }
 
 void read_ground() {
@@ -254,10 +278,59 @@ void read_ground() {
 
 }
 
-int activate_selenoide(bool stat) {
-  if (stat == 0) {
+void activate_selenoide() {
+  on_time_selenoide = millis();
+  is_on_selenoide = 1;
+  digitalWrite(22, HIGH);
+  pulse();
+}
+
+void deactivate_selenoide() {
+  if(is_on_selenoide == 1) {
+    off_time_selenoide = millis();
+    is_on_selenoide = 0;
     digitalWrite(22, LOW);
-  } else {
-    digitalWrite(22, HIGH);
+    Serial.print("Start Irrigation timestamp: ");
+    Serial.println(on_time_selenoide);
+    Serial.print("End Irrigation timestamp: ");
+    Serial.println(off_time_selenoide);
+    post_irrigation_data();
+    waterFlow = 0;
   }
+}
+
+void pulse() {
+  waterFlow += 1.0 / 450.0;
+  Serial.print("El flujo de agua es: ");
+  Serial.println(waterFlow);
+}
+
+void post_irrigation_data() {
+  String payload = "{}";
+  WiFiClient client;
+  HTTPClient http_irrigation_post;
+
+  String irrigationPostPath = serverName + thscm_name + "/add_data_irrigation/";
+  // Your Domain name with URL path or IP address with path
+  http_irrigation_post.begin(client, irrigationPostPath);
+  http_irrigation_post.addHeader("Content-Type", "application/json");
+
+  StaticJsonDocument<200> data;
+
+  data["water_quantity"] = humidity;
+  data["duration"] = off_time_selenoide - on_time_selenoide;
+
+  String requestBody;
+  serializeJson(data, requestBody);
+
+  int httpResponseCode = http_irrigation_post.POST(requestBody);
+  if (httpResponseCode > 0 ) {
+    Serial.print("Datos de riego enviados a DB: ");
+    Serial.print("HTTP Response code: ");
+    Serial.println(httpResponseCode);
+  } else {
+    Serial.print("Error code: ");
+    Serial.println(httpResponseCode);
+  }
+  http_irrigation_post.end();
 }

@@ -36,7 +36,7 @@ class IrrigationViewSet(CustomBaseViewSet):
         'error':'check your fields', 'errors':instance_serialier.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
-class StateIrrigationViewSet(CustomBaseViewSet):
+class StateIrrigationViewSet(viewsets.ModelViewSet):
     serializer_class = StateIrrigationSerializer
 
     # Define a custom queryset
@@ -45,7 +45,35 @@ class StateIrrigationViewSet(CustomBaseViewSet):
       print(self.queryset)
       if self.queryset is None:
           return self.serializer_class().Meta.model.objects.all()
+      return self.queryset 
+
+class AddStateIrrigationAPIView(generics.GenericAPIView):
+    serializer_class = StateIrrigationSerializer
+
+    def get_queryset(self, pk=None):
+      ''' Obtain the queryset an validate with PK '''
+      print(self.queryset)
+      if self.queryset is None:
+          return self.serializer_class().Meta.model.objects.all()
       return self.queryset
+
+    def post(self, request, slug=None, *args, **kwargs):
+        print('Request: ', request.data)
+        try:
+            plantation = Plantation.objects.filter(thscm=slug, is_active=True).get()
+            new_data = request.data.copy()
+            new_data['plantation'] = plantation.pk
+            data_irrigation_serialzier = self.serializer_class(data=new_data)
+            if data_irrigation_serialzier.is_valid():
+                data_irrigation_serialzier.save()
+                return Response(data_irrigation_serialzier.data, status=status.HTTP_201_CREATED)
+            return Response(data_irrigation_serialzier.errors, status=status.HTTP_400_BAD_REQUEST)
+        except: 
+            return Response({
+            'error':'This THSCM no exists..!'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+     
 
 
 class ManualActiveIrrgation(viewsets.ModelViewSet):
@@ -74,25 +102,6 @@ class ManualActiveIrrgation(viewsets.ModelViewSet):
 
 
 
-
-class ActivateManualIrrigation(generics.GenericAPIView):
-    # serializer_class = StateIrrigationSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_object(self, pk):
-        return get_object_or_404(Irrigation, pk=pk)
-
-    def get(self, request, pk=None, *args, **kwargs):
-            plantation = self.get_object(pk)
-            first_irrigation = Irrigation.objects.filter(plantation__pk=plantation.pk).first()
-            first_irrigation.on_irrigation = True
-            first_irrigation.save()
-            return Response({
-                'success': 'irrigation is on'
-            }, status=status.HTTP_200_OK)
-
-
-class DeactivateManualIrrigation(generics.GenericAPIView):
     # serializer_class = StateIrrigationSerializer
     permission_classes = [IsAuthenticated]
 
