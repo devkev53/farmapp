@@ -17,14 +17,14 @@ export const EditBaseModal = (
 ) => {
 
   const handleSubmitEdit = (e:any) => {
-    const form = document.querySelector('.edit_irrigation')
+    const form:HTMLFormElement = document.querySelector('.edit_irrigation')!
     const data = new FormData(form)
     const start = data.get('start_time')
     const end = data.get('end_time')
     if (start === '' || end === '') {
       return alert('Verifique los campos')
     }
-    if (end <= start) {
+    if (end! <= start!) {
       return alert('El inicio debe ser menor al final del riego')
     }
     updateFn(id, data)

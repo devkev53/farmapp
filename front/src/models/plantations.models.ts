@@ -41,6 +41,6 @@ export interface plantationI {
   name: string,
   perimeter: number,
   thscm:string,
-  used_wahter: number,
+  used_water: number,
   wilting_point: number
 }

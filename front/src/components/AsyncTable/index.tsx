@@ -9,6 +9,7 @@ import styles from './styles.module.css'
 import { ArrowDown } from '../UI/icons/Arrow-down'
 import { Link } from 'react-router-dom'
 import { EyeShow } from '../UI/icons/EyeShowIcon'
+import { PrinterIcon } from '../UI/icons/PrinterIcon'
 
 type Props = {
   data: any[],
@@ -19,15 +20,13 @@ type Props = {
   isLoading?: boolean
 }
 
-export const AsyncTable = ({
-  data, fetchData, columns, pageCount: controlledPageCount, isLoading
-}: Props) => {
+export const AsyncTable = (
+  {data, fetchData, columns, pageCount: controlledPageCount, isLoading}:Props) => {
+
   const tableInstance = useTable(
     { columns,
       data,
       initialState: {pageIndex: 0},
-      // manualPagination: false,
-      // pageCount: controlledPageCount
     },
     useFilters,
     useGlobalFilter,
@@ -64,24 +63,14 @@ export const AsyncTable = ({
         setGlobalFilter={setGlobalFilter}
       />
       <div className={styles.table_container}>
-        {/* <pre>
-          <code>
-            {JSON.stringify({
-              pageIndex,
-              pageSize,
-              pageCount,
-              canNextPage,
-              canPreviousPage
-            }, null, 2)}
-          </code>
-        </pre> */}
+
 
         <table className={styles.table} {...getTableBodyProps()}>            
           {/* HEAD TABLE */}
           <thead className={styles.header}>
-            {headerGroups.map((headerGroup) => (
+            {headerGroups.map((headerGroup:any) => (
               <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
+                {headerGroup.headers.map((column:any) => (
                   <th scope='col' key={column.id} {...column.getHeaderProps(column.getSortByToggleProps())}>
                     <div>
                       {column.render("Header")}
@@ -123,20 +112,30 @@ export const AsyncTable = ({
                   </td>
                 </tr>
               )}
-              {page.map((row, i) => {
+              {page.map((row:any, i:number) => {
                 prepareRow(row);
                 return (
                   <tr key={row.id} {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
+                    {row.cells.map((cell:any) => {
                       return <td data-label={cell.column.Header} {...cell.getCellProps()}>{cell.render("Cell")}</td>
                     })}
                     <td className={styles.actions}>
-                      <Link className={styles.show} to={`/plantations-detail/${row.original.id}`}>
+                      <Link className={`${styles.table_button}`} to={`/plantations-detail/${row.original.id}`}>
                         <span>
                           <EyeShow/>
-                          Ver
+                          <p>
+                            Ver
+                          </p>
                         </span>
                       </Link>
+                      <a className={`${styles.table_button} ${styles.report}`} target='_blank' href={`${import.meta.env.VITE_DOCKER_BACKEND_URL}api/plantation_pdf/${row.original.id}`}>
+                        <span>
+                          <PrinterIcon/>
+                          <p>
+                            Report
+                          </p>
+                        </span>
+                      </a>
                     </td>
                   </tr>
                 )

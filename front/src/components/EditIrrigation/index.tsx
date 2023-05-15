@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { useFetchAndLoad } from "../../hooks/useFetchAndLoad"
 import { getByIdIrrigation } from "../../services/irrigations.service"
+import { irrigationI } from "../../models/plantations.models"
 
 
-export const EditIrrigation = ({id, data}:{id:number, data:(id:number) => []}) => {
+export const EditIrrigation = ({id}:{id:number}) => {
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
 
@@ -16,7 +17,7 @@ export const EditIrrigation = ({id, data}:{id:number, data:(id:number) => []}) =
     data.then(data => {
       setStartTime(data.data.start_time)
       setEndTime(data.data.end_time)
-      console.log(data.data)
+      // console.log(data.data)
     })
   },[])
 

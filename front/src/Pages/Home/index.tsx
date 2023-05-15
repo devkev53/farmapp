@@ -7,10 +7,11 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useFetchAndLoad } from "../../hooks/useFetchAndLoad";
 import styles from './styles.module.css'
 import { getPlantations } from "../../services/plantations.service";
+import { plantationI } from "../../models/plantations.models";
 
 const index = () => {
 
-  const [plantations, setPlantatios] = useState([])
+  const [plantations, setPlantatios] = useState<Array<plantationI>>([])
   const {isLoading, callEndpoint} = useFetchAndLoad()
 
   const geLastPlantations = async() => {

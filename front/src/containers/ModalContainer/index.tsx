@@ -2,7 +2,7 @@ import { createPortal } from "react-dom"
 import styles from './styles.module.css'
 
 export const ModalContainer = ({children}:{children:React.ReactNode}) => {
-  const portal:HTMLElement = window.document.querySelector("#portal")
+  const portal:HTMLElement = window.document.querySelector("#portal")!
   
   return (
     createPortal(

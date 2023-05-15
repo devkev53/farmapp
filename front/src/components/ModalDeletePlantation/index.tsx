@@ -17,7 +17,7 @@ export const ModalDeletePlantation = (
     const navigate = useNavigate()
 
     const handleDelete = async() => {
-      const response = await callEndpoint(deletePlantation(id))
+      const response = await callEndpoint(deletePlantation(id.toString()))
       console.log(response)
 
       navigate("/plantations")

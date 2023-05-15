@@ -115,8 +115,7 @@
   min-height: 22rem;
   object-fit: cover;
 }
-
-.picture_container:hover .hover_img {
+.picture_container:active .hover_img {
   opacity: 1;
 }
 
@@ -124,6 +123,9 @@
   .picture_container {
     max-width: 35rem;
     max-height: 35rem;
+  }
+  .picture_container:hover .hover_img {
+    opacity: 1;
   }
 }
 

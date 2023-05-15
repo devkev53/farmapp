@@ -19,10 +19,11 @@ import { CakeIcon } from '../../components/UI/icons/CakeIcon';
 import { AddressBookIcon } from '../../components/UI/icons/AddressBookIcon';
 import { KeyIcon } from '../../components/UI/icons/keyIcon';
 import { ChangePasswordModal } from '../../components/ChangePasswordModal';
+import { userInfoI } from '../../models';
 
 const index = () => {
 
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState<userInfoI>()
   const imgRef = useRef(null)
 
   const {user} = useAuthContext()
@@ -33,9 +34,10 @@ const index = () => {
   const {isVisible:passModalVisible, showModal:showPassModal, closeModal:closePassModal} = useModal()
 
   const getData = async() => {
-    const response = await callEndpoint(getByIdUser(user.id))
+    let response
+    user && user.id && (response = await callEndpoint(getByIdUser(user.id)))
     // console.log(response.data)
-    setUserData(response.data)
+    setUserData(response?.data)
   }
 
   useEffect(()=>{
@@ -89,7 +91,7 @@ const index = () => {
               <p> <UserCheckIcon /> {userData?.username}</p>
               <p> <CardIdIcon /> 
                 {
-                  !userData?.name & !userData?.last_name 
+                  !userData?.name && !userData?.last_name 
                     ?  'No Registrado'
                     : `${userData?.name} ${userData?.last_name}`
                 }

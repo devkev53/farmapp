@@ -10,6 +10,7 @@ import { refreshTokenService } from "../services/auth.service"
 
 
 
+
 export const PrivateInterceptor = () => {
   
   axiosPrivateInstance.interceptors.request.use(async (request:any) => {
@@ -23,6 +24,7 @@ export const PrivateInterceptor = () => {
       request.headers = newHeaders
       return request
     }
+    
 
     if (request.url?.includes('assets')) return updateTypeAssetsHeader(request)
     if (request.url?.includes('login')) return request

@@ -7,7 +7,10 @@ export interface userInfoI {
   name: string;
   last_name: string;
   image: string;
-  url_img: string
+  url_img: string;
+  phone: string,
+  address: string,
+  birthday: string
 }
 
 export interface authUserI {

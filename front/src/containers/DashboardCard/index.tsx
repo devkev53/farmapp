@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { PlantIcon } from '../../components/UI/icons/PlantIcon';
 import styles from './styles.module.css'
 import { Link } from 'react-router-dom';
+import { irrigationI } from '../../models/plantations.models';
 
 
 export const DashboardCard = (
@@ -10,18 +11,18 @@ export const DashboardCard = (
     id:number,
     name:string,
     created:string,
-    days:string,
+    days:string | number,
     porcent:number,
-    irrigations:[],
-    water:string
+    irrigations:irrigationI[],
+    water:string | number
   }
 ) => {
 
-  const porcentRef = useRef(null)
+  const porcentRef = useRef<SVGCircleElement>(null)
 
   useEffect(()=>{
     const porcentStroke = 270 - (270 * (porcent/100))
-    porcentRef.current.style.strokeDashoffset = porcentStroke
+    porcentRef.current!.style.strokeDashoffset = porcentStroke.toString()
   },[])
 
   return (

@@ -84,8 +84,14 @@
 }
 .table td.actions {
   border-top: .2rem solid rgba(51,51,51,.1);
+  display: flex;
+  gap: .6rem;
   /* border-left: .2rem solid rgba(var(--soft-blue), .1); */
 }
+.table td.actions p {
+  display: none;
+}
+
 /* .table .actions::after{
     content: "";
     position: absolute;
@@ -103,8 +109,8 @@
   background: rgba(var(--white));
 }
 
-.show {
-  width: 100%;
+.table_button {
+  /* width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,24 +118,41 @@
   transition: .8s ease all;
   max-width: 12rem;
   border-radius: 1.2rem;
+  padding: .6rem 1.2rem;
 }
-.show:hover {
+.table_button:hover {
   background: rgba(var(--blue));
 }
-.show span {
+.table_button span {
   display: flex;
   justify-content: center;
   align-content: center;
   font-weight: bold;
   color: rgba(var(--white));
-  padding: .8rem;
-  gap: .6rem;
-  width: 100%;
+  /* padding: .4rem; */
+  gap: .4rem;
+  /* width: 100%; */
 }
-.show span svg {
+.table_button span svg {
   fill: none;
   stroke: rgba(var(--white));
   height: 2rem;
   stroke-width: .2rem;
   width: min-content;
+}
+.report {
+  background: rgba(var(--gold-yellow));
+}
+.report span, .report span svg {
+  color: rgba(51,51,51);
+  stroke: rgba(51,51,51);
+}
+.report:hover {
+  background: rgba(var(--orange));
+}
+
+@media (min-width: 768px) {
+  .table td.actions p {
+    display: flex;
+  }
 }

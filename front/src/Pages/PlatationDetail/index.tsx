@@ -65,7 +65,7 @@ const index = () => {
 
   daysToHarvest()
 
-  console.log(plantation)
+  // console.log(plantation)
 
   return (
     <>

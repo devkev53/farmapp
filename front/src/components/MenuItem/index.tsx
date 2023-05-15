@@ -14,7 +14,7 @@ import { UserCirle } from "../UI/icons/UserCirleIcon";
 import { UserCheckIcon } from "../UI/icons/UserCheckIcon";
 
 const index = () => {
-  const [isMenuExpand, setIsMenuExpand] = useState()
+  const [isMenuExpand, setIsMenuExpand] = useState<Boolean | unknown>()
   const location = useLocation()
 
   const returnIcon = (path:string) => {
@@ -40,24 +40,27 @@ const index = () => {
   }
 
   return (
-    pathList.map(path => (
-      <li 
-        onClick={handleclickMenuItem}
-        key={path.path} 
-        className={`
-          ${styles.menuItem}
-          ${isMenuExpand && styles.contract}
-          ${path.path === location.pathname && styles.activeItem}
-        `}
-      >
-        <Link to={path.path}>
-          <i className={`${path.path === '/profile' && styles.userIcon}`}>
-            {returnIcon(path.path)}
-          </i>
-          <span>{path.name}</span>
-        </Link>
-      </li>
-    ))
+    <>
+    {  pathList.map(path => (
+        <li 
+          onClick={handleclickMenuItem}
+          key={path.path} 
+          className={`
+            ${styles.menuItem}
+            ${isMenuExpand && styles.contract}
+            ${path.path === location.pathname && styles.activeItem}
+          `}
+        >
+          <Link to={path.path}>
+            <i className={`${path.path === '/profile' && styles.userIcon}`}>
+              {returnIcon(path.path)}
+            </i>
+            <span>{path.name}</span>
+          </Link>
+        </li>
+      ))}
+    </>
+
   );
 }
 

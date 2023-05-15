@@ -68,7 +68,7 @@ const index = () =>{
 
   const handleSubmit = () => {
     setLoading(true)
-    const form:HTMLFormElement = formRef.current
+    const form:HTMLFormElement = formRef.current!
     const data = new FormData(form)
     const response = callEndpoint(addUser(data))
     response.then(resp => {
@@ -123,7 +123,7 @@ const index = () =>{
               <div className="">
                 <input name='password' type={`${ showPass1 ? 'text' : 'password'}`} onChange={changePass} value={password} required/>
                 {password.length > 0 &&
-                  <i onClick={showPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}} type='button'>
+                  <i onClick={showPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}}>
                     {showPass1 
                       ? <EyeHide/>
                       : <EyeShow/>
@@ -141,7 +141,7 @@ const index = () =>{
               <div className="">
                 <input name='password2' type={`${ showPass2 ? 'text' : 'password'}`} onChange={changePass2} value={password2} required/>
                 {password2.length > 0 &&
-                  <i onClick={showConfirmPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}} type='button'>
+                  <i onClick={showConfirmPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}}>
                     {showPass2 
                       ? <EyeHide/>
                       : <EyeShow/>
@@ -161,7 +161,7 @@ const index = () =>{
             
             <div className={styles.section_title}>
               <h4>Información de Perfil</h4>
-              <i onClick={handleShowProfileInputs} className={`${styles.showBtn} ${showProfileInputs && styles.showInputs}`} type='button'>
+              <i onClick={handleShowProfileInputs} className={`${styles.showBtn} ${showProfileInputs && styles.showInputs}`}>
                 <ArrowDownIcon/>
               </i>
             </div>
@@ -217,16 +217,6 @@ const index = () =>{
                 </div>
                 <span className="helptext"></span>
               </div>
-
-              {/* <div className="input_group">
-                <div className="">
-                  <input className='' name='image' type="file"/>
-                  <span className="highlight"></span>
-                  <span className="bar"></span>
-                  <label>Avatar</label>
-                </div>
-                <span className="helptext"></span>
-              </div> */}
 
             </div>
           

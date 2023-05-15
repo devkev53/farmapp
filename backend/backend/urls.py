@@ -41,7 +41,7 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     
-    path('plantation_pdf/<int:pk>/', plantation_pdf, name='plantation_pdf'),
+    path('api/plantation_pdf/<int:pk>/', plantation_pdf, name='plantation_pdf'),
     path('api/<slug:slug>/activate-irrigation/', IsActiveIrrigation.as_view(), name='active_irrigation'),
     
     path('api/<slug:slug>/ground_state/', StateGroundAPIView.as_view(), name='state_ground'),

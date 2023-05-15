@@ -12,21 +12,23 @@ export const ChangeImgModal = (
   {
     data:any
     title:string,
-    lastImg:string
+    lastImg:string | undefined
     close:()=>void
   }) => {
 
   const [img, setImg] = useState(lastImg)
+  const [isChangeImg, setIsChangeImg] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const refInputImg = useRef(null)
-  const formRef = useRef(null)
+  const refInputImg = useRef<HTMLInputElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
   const {isLoading, callEndpoint} = useFetchAndLoad()
   const {setLoginData} = useAuthContext()
 
 
   useEffect(()=>{
-    refInputImg !== null && refInputImg.current.click()
+    refInputImg  !== null && refInputImg.current?.click()
+    // refInputImg !== null && refInputImg.current.click()
   },[])
 
   const updateImg = async(id:number, data:{}) => {
@@ -48,16 +50,16 @@ export const ChangeImgModal = (
     }
   }
 
-  const handelInputChange = (e) => {
-    const imgPreview = window.document.querySelector('.preview_img')
+  const handelInputChange:React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const imgPreview = window.document.querySelector('.preview_img')!
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader()
       reader.onload = (e) => {
-        imgPreview.src = e.target?.result
+        imgPreview.setAttribute('src', `${e.target?.result}`)
       }
       reader.readAsDataURL(e.target.files[0])
+      setIsChangeImg(true)
     }
-
   }
 
   const handlePressEnter = (e:any) => {
@@ -66,12 +68,8 @@ export const ChangeImgModal = (
 
   const handleSubmitEdit = (e:any) => {
     const form = formRef.current
-    const dataForm = new FormData(form)
-    if (dataForm.get('image').name !== '') {
-      updateImg(data?.id, dataForm)
-    } else {
-      close()
-    }
+    const dataForm = new FormData(form!)
+    isChangeImg ? updateImg(data?.id, dataForm) : close()
   }
 
   // console.log(data)
@@ -89,10 +87,10 @@ export const ChangeImgModal = (
             <form ref={formRef} action="">
               <input type="text" name="username" value={data?.username} readOnly/>
               <input type="email" name="email" value={data?.email} readOnly/>
-              <input name="image" onChange={handelInputChange} ref={refInputImg} type="file" />
+              <input name="image" onChange={handelInputChange} ref={refInputImg} type="file" required/>
             </form>
             <picture className={styles.picture_container}>
-              <div className={styles.hover_img} onClick={()=>{refInputImg.current.click()}}>
+              <div className={styles.hover_img} onClick={()=>{refInputImg.current!.click()}}>
                 <CamAddIcon />
               </div>
               {data?.image === null

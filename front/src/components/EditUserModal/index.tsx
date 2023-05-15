@@ -26,7 +26,7 @@ export const EditUserModal = ({data, close}:{data:any, close:()=>void}) => {
     console.log(date.toLocaleString())
   },[])
 
-  const formRef = useRef(null)
+  const formRef = useRef<HTMLFormElement>(null)
   const {callEndpoint} = useFetchAndLoad()
   const {setLoginData} = useAuthContext()
 
@@ -48,7 +48,7 @@ export const EditUserModal = ({data, close}:{data:any, close:()=>void}) => {
   }
 
   const handleSubmitEdit = () => {
-    const dataForm = new FormData(formRef.current)
+    const dataForm = new FormData(formRef.current!)
     dataForm.append('username', data?.username)
     dataForm.append('email', data?.email)
     if (dataForm.get('birthday') === null || dataForm.get('birthday') === '') {
@@ -57,7 +57,7 @@ export const EditUserModal = ({data, close}:{data:any, close:()=>void}) => {
     updateData(dataForm)
   }
   const handlePressEnter = (e:any) => {
-    e.keyCode === 13 && handleSubmitEdit(e)
+    e.keyCode === 13 && handleSubmitEdit()
   }
   return (
     <>

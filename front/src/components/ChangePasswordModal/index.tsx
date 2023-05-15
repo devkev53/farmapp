@@ -54,7 +54,7 @@ export const ChangePasswordModal = (
                 <div className="">
                   <input name="password" type={`${ showPass1 ? 'text' : 'password'}`} required value={password} onChange={onChangePass1} />
                   {password.length > 0 &&
-                    <i onClick={showPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}} type='button'>
+                    <i onClick={showPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}}>
                       {showPass1 
                         ? <EyeHide/>
                         : <EyeShow/>
@@ -74,7 +74,7 @@ export const ChangePasswordModal = (
                 <div className="">
                   <input name="password2" type={`${ showPass2 ? 'text' : 'password'}`} required value={password2} onChange={onChangePass2} />
                   {password2.length > 0 &&
-                    <i onClick={showConfirmPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}} type='button'>
+                    <i onClick={showConfirmPass} className={styles.showPass} onFocus={(e) => {e.target.blur()}}>
                       {showPass2 
                         ? <EyeHide/>
                         : <EyeShow/>

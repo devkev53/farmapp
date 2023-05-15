@@ -9,6 +9,18 @@ export const Paginacion = ({
   gotoPage, previousPage, nextPage, pageIndex,
   pageOptions, pageSize, setPageSize, pageCount,
   canPreviousPage, canNextPage
+}:{
+  gotoPage:any,
+  previousPage:any,
+  nextPage:any,
+  pageIndex:any,
+  pageOptions:any,
+  pageSize:any,
+  setPageSize:any,
+  pageCount:any,
+  canPreviousPage:any,
+  canNextPage:any
+
 }) => {
   return (
     <div className={styles.container}>

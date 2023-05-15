@@ -7,13 +7,11 @@ import { EditIcon } from '../../components/UI/icons/EditIcon';
 import { WatchIcon } from '../../components/UI/icons/WatchIcon';
 import { AddIcon } from '../../components/UI/icons/addIcon';
 import { useModal } from '../../hooks/useModal';
-import { ModalContainer } from '../ModalContainer';
 import { EditBaseModal } from '../../components/UI/EditBaseModal';
 import styles from './styles.module.css'
 import { useParams } from 'react-router-dom';
 import { useFetchAndLoad } from '../../hooks/useFetchAndLoad';
 import { addIrrigation, deleteIrrigation, updateIrrigation } from '../../services/irrigations.service';
-import { getModalId } from '../../services/modal-id.service';
 import { irrigationI } from '../../models/irrigation.models';
 import { getIdPlantation } from '../../services/plantations.service';
 import CircleSpinner from '../../components/UI/spiners/CircleSpinner';
@@ -34,12 +32,16 @@ export const IrrigationDetails = () => {
   const params = useParams()
 
 
-  const getData = async () => await callEndpoint(getIdPlantation(params.id))
+  const getData = async () => {
+    let response 
+    params.id && (response = await callEndpoint(getIdPlantation(params.id)))
+    return response
+  }
   
   useEffect(() => {
     const data = getData()
     data.then(data => {
-      const irrigations:[] = data.data.irrigation
+      const irrigations:irrigationI[] = data?.data.irrigation
       const activeIrrigations = irrigations.filter(irr => irr.is_active === true)
       setIrrigationList(activeIrrigations)
     })
@@ -68,13 +70,13 @@ export const IrrigationDetails = () => {
   }
 
   const handleDeleteShow = (e:any) => {
-    const irrigationId:number = e.target.id
+    const irrigationId:number = e.target.getAttribute("target-id-data")
     setModalId(irrigationId)
     deleteShow()
   }
 
   const handleEditShow = (e:any) => {
-    const irrigationId:number = e.target.id
+    const irrigationId:number = e.target.getAttribute("target-id-data")
     setModalId(irrigationId)
     editShow()
   }
@@ -91,10 +93,6 @@ export const IrrigationDetails = () => {
     })
   }
 
-  const getIrrigation = (id) => {
-    return irrigationList.find(irrigation => irrigation.id = id)
-  } 
-
 
   return (
     <>
@@ -104,7 +102,7 @@ export const IrrigationDetails = () => {
           updateFn={submitUpdateIrrigation}
           title='Editar Programación de Riego' 
           close={editClose}>
-            <EditIrrigation id={modalId} data={getIrrigation} />
+            <EditIrrigation id={modalId} />
         </EditBaseModal> 
       }
 
@@ -148,7 +146,7 @@ export const IrrigationDetails = () => {
                 ) 
                 :(
                   <ul>
-                    {irrigationList <= 0 
+                    {irrigationList.length <= 0 
                       ? (<div style={{width:"100%", display:"flex", justifyContent:"center"}}><h4>No se han registrado riegos</h4></div>) 
                       : irrigationList.map(irrigation => (
                         <li key={irrigation?.id} className="irrigation">
@@ -159,18 +157,21 @@ export const IrrigationDetails = () => {
                               <span className='end'>{irrigation?.end_time}</span>
                             
                             <div className={styles.options_btn}>
+
                               <button 
-                                id={irrigation?.id} 
+                                target-id-data={irrigation?.id} 
                                 className={styles.btn_edit} 
                                 onClick={handleEditShow}>
                                   <EditIcon/>
-                                </button>
+                              </button>
+
                               <button 
-                                id={irrigation?.id} 
+                                target-id-data={irrigation?.id} 
                                 className={styles.btn_delete} 
                                 onClick={handleDeleteShow}>
                                   <DeleteIcon/>
-                                </button>
+                              </button>
+
                             </div>
                           </div>
                         </li>
