@@ -78,6 +78,14 @@ class Plantation(BaseModel):
       if (irrigation.state_start_irrigation()):
         activate = True
     return activate
+  
+  def total_water(self):
+    water_quiantity = 0
+    irrigtaions_states = State_Irrigation.objects.filter(plantation=self.pk)
+    for irrigation in irrigtaions_states:
+      water_quiantity = water_quiantity + irrigation.water_quantity
+    
+    return water_quiantity
 
 
 class Irrigation(BaseModel):

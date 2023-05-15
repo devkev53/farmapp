@@ -24,8 +24,6 @@ class PermisionPolicyMixin:
 
 
 class CustomBaseViewSet(viewsets.ModelViewSet):
-    # serializer_class = PlantationSerializer
-    # permission_classes = (IsAuthenticated,)
 
     # Define a custom queryset
     def get_queryset(self, pk=None):
