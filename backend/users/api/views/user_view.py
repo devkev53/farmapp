@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from core.api.views.api_views import PermisionPolicyMixin
 
 
-from users.api.serializers.user_serializers import UserSerializer, UserUpdateSerializer, UserListSerializer, CreateUserSerializer
+from users.api.serializers.user_serializers import UserSerializer, UserUpdateSerializer, UserListSerializer, CreateUserSerializer, PasswordSerializer
 
 # class UserViewset(viewsets.GenericViewSet):
 class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
@@ -20,7 +20,8 @@ class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
         "update": [IsAuthenticated,],
         "destroy": [IsAuthenticated,],
         "create": [],
-        "change_img": [IsAuthenticated,]
+        "change_img": [IsAuthenticated,],
+        "set_password": [IsAuthenticated,]
     }
 
     def get_queryset(self, pk=None):
@@ -87,3 +88,14 @@ class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
             'error':'check your fields', 'errors':user_serializer.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=True, methods=['post'], url_path='change_password')
+    def set_password(self, request, pk=None, *args, **kwargs):
+        user = self.get_object(pk)
+        password_serializer = PasswordSerializer(data = request.data)
+        if password_serializer.is_valid():
+            user.set_password(password_serializer.validated_data['password'])
+            user.save()
+            return Response({'message': 'Password updated successfull'}, status=status.HTTP_200_OK)
+        return Response({
+            'error':'check your fields', 'errors':password_serializer.errors
+            },status=status.HTTP_400_BAD_REQUEST)

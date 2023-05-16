@@ -1,12 +1,15 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { ModalContainer } from "../../containers/ModalContainer"
 import { KeyIcon } from "../UI/icons/keyIcon"
 import styles from './styles.module.css'
 import { EyeHide } from "../UI/icons/EyeHideIcon"
 import { EyeShow } from "../UI/icons/EyeShowIcon"
+import { useFetchAndLoad } from "../../hooks/useFetchAndLoad"
+import { changePassword } from "../../services/users.service"
 
 export const ChangePasswordModal = (
-  {title, close}:{
+  {id, title, close}:{
+    id: number
     title:string,
     close:()=>void
   }
@@ -17,6 +20,11 @@ export const ChangePasswordModal = (
   const [showPass1, setShowPass1] = useState(false)
   const [showPass2, setShowPass2] = useState(false)
   const [passOk, setPassOk] = useState(false)
+
+  const {isLoading, callEndpoint} = useFetchAndLoad()
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const setChangePassword = async(id:number, data:{}) => callEndpoint(changePassword(id, data))
 
   const onChangePass1 = (e:any) => {
     setPassword(e.target.value)
@@ -35,7 +43,11 @@ export const ChangePasswordModal = (
     e.keyCode === 13 && handleSubmitPass(e)
   }
 
-  const handleSubmitPass = (e:any) => {}
+  const handleSubmitPass = async (e:any) => {
+    const data = new FormData(formRef.current!)
+    const response = await setChangePassword(id, data)
+    close()
+  }
 
   return (
     <ModalContainer>
@@ -47,7 +59,7 @@ export const ChangePasswordModal = (
 
         <div className={styles.edit_body}>
           
-          <form className={styles.form_container} action="">
+          <form className={styles.form_container} ref={formRef} action="">
 
             <div className="">
               <div className="input_group">

@@ -67,3 +67,12 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
 class ChangeImageUserSerialzier(serializers.Serializer):
     image = serializers.ImageField()
+
+class PasswordSerializer(serializers.Serializer):
+    password = serializers.CharField(max_length=128, min_length=6, write_only=True)
+    password2 = serializers.CharField(max_length=128, min_length=6, write_only=True)
+
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError("The passwor is diferrent")
+        return data

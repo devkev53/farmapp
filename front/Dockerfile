@@ -12,6 +12,6 @@ COPY . /app/front/
 
 EXPOSE 5173
 
-CMD ["pnpm", "run", "preview"]
-# CMD ["pnpm", "run", "dev"]
+# CMD ["pnpm", "run", "preview"]
+CMD ["pnpm", "run", "dev"]
 # CMD ["pnpm", "run", "build"]

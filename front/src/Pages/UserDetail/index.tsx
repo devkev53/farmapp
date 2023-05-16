@@ -58,7 +58,7 @@ const index = () => {
         <EditUserModal close={closeEdit} data={userData}/>
       }
       {passModalVisible &&
-        <ChangePasswordModal title="Cambiar Contraseña" close={closePassModal} />
+        <ChangePasswordModal id={userData?.id!} title="Cambiar Contraseña" close={closePassModal} />
       }
 
       {isLoading && <PageLoading />}

@@ -39,3 +39,8 @@ export const updateUser = (id:number, data:{}) => {
   const controller = loadAbort()
   return {call: axiosPrivateInstance.put(`${users_url}${id}/`, data, {signal: controller.signal}), controller}
 }
+
+export const changePassword = (id:number, data:{}) => {
+  const controller = loadAbort()
+  return {call: axiosPrivateInstance.post(`${users_url}${id}/change_password/`, data, {signal: controller.signal}), controller}
+}
