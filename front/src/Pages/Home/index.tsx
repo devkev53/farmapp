@@ -50,7 +50,7 @@ const index = () => {
                 days={plant?.estimated_days_for_harvest.days}
                 porcent={plant?.estimated_days_for_harvest.porcent}
                 irrigations={plant?.irrigation}
-                water={plant?.used_water}  />
+                water={plant?.total_water}  />
             ))
           : (<h2>No existen Registros</h2>)
           }

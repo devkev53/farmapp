@@ -42,5 +42,6 @@ export interface plantationI {
   perimeter: number,
   thscm:string,
   used_water: number,
-  wilting_point: number
+  wilting_point: number,
+  total_water: number
 }

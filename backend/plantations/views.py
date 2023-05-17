@@ -1,7 +1,7 @@
 import string
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
-from plantations.models import Plantation
+from plantations.models import Plantation, Irrigation
 from django.utils.crypto import get_random_string
 from django.template.loader import render_to_string
 from django.views.generic import View
@@ -33,8 +33,10 @@ def plantation_pdf(request, pk):
     print(pk)
     try:
         plantation = Plantation.objects.get(id=pk)
+        irrigations = Irrigation.objects.filter(plantation=plantation)
         context = {
-            "plantation": plantation
+            "plantation": plantation,
+            "irrigations": irrigations
         }
         html = render_to_string("plantations/plantation_info-pdf.html", context)
 

@@ -85,7 +85,8 @@ class Plantation(BaseModel):
     for irrigation in irrigtaions_states:
       water_quiantity = water_quiantity + irrigation.water_quantity
     
-    return water_quiantity
+    water_quiantity = round(water_quiantity, 2)
+    return f'{water_quiantity:,}'.replace(',','.')
 
 
 class Irrigation(BaseModel):

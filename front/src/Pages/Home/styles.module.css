@@ -25,6 +25,7 @@
 
 
 @media (min-width: 768px) {
+ 
   .editIcon:hover {
     width: 10rem;
   }

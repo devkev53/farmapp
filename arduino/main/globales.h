@@ -1,0 +1,4 @@
+#define Type DHT11
+
+
+

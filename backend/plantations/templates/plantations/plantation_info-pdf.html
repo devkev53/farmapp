@@ -19,7 +19,7 @@
     margin: 0;
     display: flex;
     width: 100%;
-    border-bottom: 4px solid rgb(33,158,188);
+    border-bottom: 4px solid #219ebc;
   }
   .title {
     padding: 12px;
@@ -103,6 +103,64 @@
     font-weight: bold;
   }
 
+  .row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .row div:first-child {
+    margin-right: 6px;
+  }
+  .row div:last-child {
+    margin-left: 6px;
+  }
+  .content_card {
+    display: grid;
+    width: 100%;
+    align-items: flex-start;
+    background: #8ecae621;
+    border-radius: 12px;
+    position: relative;
+    padding: 12px;
+  }
+  .title_card {
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid rgb(2, 48, 71);
+    margin-bottom: 6px;
+  }
+  .title_card svg {
+    height: 32px;
+  }
+  .riegos_list {
+    width: 100%;
+    list-style: none;
+  }
+  .riegos_list li {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgb(250, 250, 250);
+  }
+
+  .cantidad {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(2, 48, 71);
+    position: relative;
+  }
+  .cantidad span {
+    font-size: 56px;
+  }
+
+
 
 </style>
 <body>
@@ -117,7 +175,7 @@
       {{plantation.created_by}}</p>
   </div>
 
-  <div class="first_row">
+  <div class="first_row row">
 
       <div class="details">
     
@@ -150,7 +208,13 @@
     
           <div class="content">
             <p>Descripción</p>
-            <p>{{plantation.description}}</p>
+            <p>
+              {% if plantation.description %}
+                {{plantation.description}}
+              {% else %}
+                No se ha ingreado descripción
+              {% endif %}
+            </p>
           </div>
         </div>
     
@@ -195,13 +259,80 @@
           </div>
         </div>
         
-        <p><span>Perimetro:</span></p>
-        <p><span>Área:</span></p>
-        <p><span>Capcidad:</span></p>
-        <p><span>Punto de Marchitamiento:</span></p>
+        <p>
+          <span>Perimetro: </span>
+          {% if plantation.perimeter %}
+            {{plantation.perimeter}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
+        <p><span>Área:</span>
+          {% if plantation.area %}
+            {{plantation.area}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
+        <p><span>Capcidad:</span>
+          {% if plantation.ability %}
+            {{plantation.ability}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
+        <p><span>Punto de Marchitamiento:</span>
+          {% if plantation.wailting_point %}
+            {{plantation.wailting_point}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
       </div>
 
   </div>
 
+  <div class="second_row row">
+    
+    <div class="riegos content_card">
+      <p class="title_card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+          <path d="M12 10l0 3l2 0" />
+          <path d="M7 4l-2.75 2" />
+          <path d="M17 4l2.75 2" />
+        </svg>
+        Riegos Programados
+      </p>
+
+      <ul class="riegos_list">
+        {% for irrigation in irrigations %}
+          <li>
+            <span>Inicio: {{irrigation.start_time}}</span>
+            <span> - </span>
+            <span>Fin: {{irrigation.end_time}}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="consumo content_card">
+      <p class="title_card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-droplet" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M7.502 19.423c2.602 2.105 6.395 2.105 8.996 0c2.602 -2.105 3.262 -5.708 1.566 -8.546l-4.89 -7.26c-.42 -.625 -1.287 -.803 -1.936 -.397a1.376 1.376 0 0 0 -.41 .397l-4.893 7.26c-1.695 2.838 -1.035 6.441 1.567 8.546z" />
+        </svg>
+        Consumo de Agua
+      </p>
+
+      <div class="cantidad">
+        <h2><span>{{plantation.total_water}}</span>Lts.</h2>
+      </div>
+    </div>
+  
+  </div>
+
+  
 </body>
 </html>

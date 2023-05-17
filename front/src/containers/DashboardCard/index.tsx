@@ -3,6 +3,8 @@ import { PlantIcon } from '../../components/UI/icons/PlantIcon';
 import styles from './styles.module.css'
 import { Link } from 'react-router-dom';
 import { irrigationI } from '../../models/plantations.models';
+import { ClockIcon } from '../../components/UI/icons/ClockIcon';
+import { DropIcon } from '../../components/UI/icons/DropIcon';
 
 
 export const DashboardCard = (
@@ -71,11 +73,11 @@ export const DashboardCard = (
 
           </div>
 
-          <div className="styles more_info">
+          <div className={styles.more_info}>
 
             <div>
-              <span>Programacion de riego</span>
-              <div className="">
+              <span className={styles.sub_title}> <ClockIcon/> Programacion de riego</span>
+              <div className={styles.irrigations}>
                 <ul>
                   {irrigations?.map(irrigation => (
                     <li key={irrigation?.id}><p><span>{irrigation?.start_time}</span> - <span>{irrigation?.end_time}</span></p></li>
@@ -85,7 +87,7 @@ export const DashboardCard = (
             </div>
 
             <div className="">
-              <p>Agua consumida</p>
+              <p className={styles.sub_title}> <DropIcon/> Consumo Agua: {water} Lts.</p>
             </div>
 
           </div>

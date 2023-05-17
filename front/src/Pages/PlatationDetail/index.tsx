@@ -19,6 +19,7 @@ import { IrrigationDetails } from '../../containers/IrrigationDetails'
 import { ModalTimeCountActive } from '../../components/ModalTimeCountActive'
 import { getActivateManualIrrigation } from '../../services/irrigations.service'
 import { plantationI } from '../../models/plantations.models'
+import { PrinterIcon } from '../../components/UI/icons/PrinterIcon'
 
 const index = () => {
 
@@ -104,6 +105,12 @@ const index = () => {
               </span>
             </button>
           </div>
+          
+          <a className={styles.report_link} target='_blank' href={`${import.meta.env.VITE_DOCKER_BACKEND_URL}api/plantation_pdf/${plantation?.id}`}>
+            Ver Reporte
+            <PrinterIcon />
+          </a>
+
         </div>
         
 

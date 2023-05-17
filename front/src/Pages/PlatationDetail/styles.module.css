@@ -97,12 +97,35 @@
   width: min-content;
 }
 
+.report_link {
+  display: flex;
+  border-radius: 1.2rem;
+  gap: .6rem;
+  background: rgba(var(--dark-blue));
+  color: rgba(var(--white));
+  padding: .8rem 1.6rem;
+  transition: .3s all ease;
+  font-weight: bold;
+}
+.report_link svg {
+  fill: none;
+  width: min-content;
+}
+
+.report_link:hover {
+  background: rgba(var(--soft-blue));
+  color: rgba(var(--dark-blue));
+}
+
+
 .extra_info p {
   font-weight: bold;
 }
 .extra_info p span {
   font-weight: normal;
 }
+
+
 
 
 

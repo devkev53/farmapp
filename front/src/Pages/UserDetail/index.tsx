@@ -20,6 +20,7 @@ import { AddressBookIcon } from '../../components/UI/icons/AddressBookIcon';
 import { KeyIcon } from '../../components/UI/icons/keyIcon';
 import { ChangePasswordModal } from '../../components/ChangePasswordModal';
 import { userInfoI } from '../../models';
+import { baseURL } from '../../services/auth.service';
 
 const index = () => {
 
@@ -81,7 +82,7 @@ const index = () => {
               </div>
               {userData?.image === null
                 ? <img src={userData?.url_img} />
-                : <img src={`http://localhost:8000${userData?.url_img}`} />
+                : <img src={`${baseURL}${userData?.url_img}`} />
               }
             </div>
             <p>{userData?.username}</p>

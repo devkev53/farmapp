@@ -7,6 +7,8 @@ import { updateImgUser } from "../../services/users.service";
 import { updateChangeUserProfileLocalStorage } from "../../utilities/localStorage_user.utility";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { PageLoading } from "../UI/PageLoading";
+import { baseURL } from "../../services/auth.service";
+
 export const ChangeImgModal = (
   {data, title, close, lastImg}:
   {
@@ -87,7 +89,7 @@ export const ChangeImgModal = (
             <form ref={formRef} action="">
               <input type="text" name="username" value={data?.username} readOnly/>
               <input type="email" name="email" value={data?.email} readOnly/>
-              <input name="image" onChange={handelInputChange} ref={refInputImg} type="file" required/>
+              <input name="image" onChange={handelInputChange} ref={refInputImg} type="file" accept="image/*" required/>
             </form>
             <picture className={styles.picture_container}>
               <div className={styles.hover_img} onClick={()=>{refInputImg.current!.click()}}>
@@ -95,7 +97,7 @@ export const ChangeImgModal = (
               </div>
               {data?.image === null
                 ? <img className="preview_img" src={img} />
-                : <img className="preview_img" src={`http://localhost:8000${img}`} />
+                : <img className="preview_img" src={`${baseURL}${img}`} />
               }
             </picture>
           </div>
