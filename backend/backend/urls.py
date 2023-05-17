@@ -46,7 +46,7 @@ urlpatterns = [
     
     path('api/<slug:slug>/ground_state/', StateGroundAPIView.as_view(), name='state_ground'),
     path('api/<slug:slug>/add_data_irrigation/', AddStateIrrigationAPIView.as_view(), name='state_ground'),
-
+    path('', include("core.urls"))
   
 ]
 

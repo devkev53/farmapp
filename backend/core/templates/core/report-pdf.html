@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  @page {
+    margin: .8cm;
+    size: landscape;
+    orientation: landscape;
+    /* size: A4; */
+  }
+</style>
+<body>
+  <h1>Report</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Fecha de Creaciín</th>
+        <th>Descripción</th>
+        <th>Dias para Cosecha</th>
+        <th>Agua utilizada</th>
+        <th>Riego Programado</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for plantation in plantations %}
+        <tr>
+          <td>{{plantation.name}}</td>
+          <td>{{plantation.created}}</td>
+          <td>
+            {% if plantation.description %}
+              {{plantation.description}} 
+            {% else %} 
+              <small>No se ha ingresado descripción</small>
+            {% endif %}
+          </td>
+          <td>{{plantation.duration}}</td>
+          <td>{{plantation.total_water}} Lts.</td>
+          <!-- <td>{{plantation.irrigations}}</td> -->
+          <td>{{plantation.name}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
