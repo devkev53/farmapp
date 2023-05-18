@@ -31,8 +31,8 @@ from plantations.api.views.irrigations_views import AddStateIrrigationAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', test, name='test'),
-    path('sendMail', send_mail_to_all, name='sendMail'),
+    # path('', test, name='test'),
+    # path('sendMail', send_mail_to_all, name='sendMail'),
 
 
     path('api/', include('core.api.router')),

@@ -140,6 +140,69 @@
 
 
 
+.options_reports {
+  display: flex;
+  position: relative;
+  /* border-bottom: .1rem solid rgba(var(--dark-blue)); */
+  margin-bottom: 1.2rem;
+}
+.options_reports button {
+  padding: 1.2rem;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+}
+.active {
+  border: .1rem solid rgba(var(--dark-blue));
+  border-bottom: .1rem solid rgba(var(--bg-color));
+  font-weight: bold;
+}
+.options_reports::after {
+  content: '';
+  position: absolute;
+  height: .1rem;
+  width: 100%;
+  background: rgba(var(--dark-blue));
+  bottom: 0;
+  z-index: -1;
+}
+.container_report {
+  display: flex;
+  flex-direction: column;
+}
+.for_dates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .6rem;
+  /* font-weight: bold; */
+  margin-bottom: 2.4rem;
+}
+.options form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  /* width: 100%;; */
+}
+
+
+.download_btn  button{
+  display: flex;
+  width: 100%;
+  max-width: 35rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgb(var(--gold-yellow));
+  border-radius: 1.2rem;
+  gap: .6rem;
+  font-weight: bold;
+}
+.download_btn  button svg {
+  fill: none;
+  width: min-content;
+}
+
+
 
 @media (min-width: 920px) {
   .editIcon:hover {

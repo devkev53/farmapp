@@ -16,7 +16,7 @@ const index = () => {
 
   const geLastPlantations = async() => {
     const response = await callEndpoint(getPlantations())
-    setPlantatios(response.data.slice(0,2))
+    setPlantatios(response.data.slice(0,3))
   }
 
   useEffect(()=>{

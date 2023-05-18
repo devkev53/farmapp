@@ -24,9 +24,20 @@ export const PrivateInterceptor = () => {
       request.headers = newHeaders
       return request
     }
+
+    const updateTypeReportHeader = (request:AxiosRequestConfig) => {
+      const newHeaders = {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/pdf"
+      }
+      request.responseType = 'blob'
+      request.headers = newHeaders
+      return request
+    }
     
 
-    if (request.url?.includes('assets')) return updateTypeAssetsHeader(request)
+    if (request.url?.includes('report')) updateTypeReportHeader(request)
+    if (request.url?.includes('assets')) updateTypeAssetsHeader(request)
     if (request.url?.includes('login')) return request
     request = updateHeader(request)
     

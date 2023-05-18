@@ -14,7 +14,7 @@ from plantations.api.serializers.plantation_serializers import PlantationSeriali
 
 class PlantationViewSet(CustomBaseViewSet):
     serializer_class = PlantationSerializer
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def create(self, request):
         print("Entrando")

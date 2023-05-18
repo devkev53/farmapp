@@ -26,6 +26,9 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 
+# - Method 1
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 # MEDIA CONFIGURATION
 MEDIA_URL = '/media/'
 MEDIA_DIR = BASE_DIR/ 'media'
