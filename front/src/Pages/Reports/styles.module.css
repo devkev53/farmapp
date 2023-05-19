@@ -1,0 +1,237 @@
+.title_container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.6rem;
+}
+
+.title_container h2 {
+  text-transform: capitalize;
+}
+.editIcon {
+  padding: 1.2rem;
+  border-radius: 100%;
+  border-radius: 2.4rem;
+  background: rgb(var(--gold-yellow));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  width: 5rem;
+  transition: .3s all ease;
+  gap: .4rem;
+}
+.editIcon span {
+  color: rgba(var(--white), .87);
+  /* display: none; */
+  position: absolute;
+  transition: .3s all ease;
+  transform: translateX(5rem);
+}
+
+.editIcon svg {
+  fill: none;
+  stroke: rgba(var(--white), .87);
+}
+
+
+.content_page {
+  display: flex;
+  gap: 2.6rem;
+  flex-wrap: wrap;
+  /* grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr)) */
+}
+
+.user_picture {
+  height: 20rem;
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.user_picture .img_container {
+  height: 18rem;
+  width: 18rem;
+  border-radius: 100%;
+  background: rgba(var(--white), .87);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.user_picture .img_container input{
+  display: none;
+}
+
+.hoverContent {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  border-radius: 100%;
+  transition: .3s all ease;
+  position: absolute;
+  background: rgba(51,51,51, .6);
+  backdrop-filter: blur(.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+.hoverContent svg {
+  fill: none;
+  height: 6rem;
+  stroke: rgba(var(--white), .87);
+}
+.user_picture .img_container:hover .hoverContent{
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+
+.user_picture .img_container img {
+  height: 100%;
+  object-fit: cover;
+}
+.user_picture p {
+  height: 2rem;
+  font-weight: bold;
+  color: rgba(var(--dark-blue));
+  display: flex;
+  justify-content: center;
+}
+
+.info_container {
+  padding: 2rem;
+  background: rgba(var(--white), .87);
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+  font-weight: bold;
+  color: rgba(51,51,51, .7);
+  width: min(60rem, 100%);
+  /* height: min-content; */
+  margin: 0 auto;
+}
+.info_container p {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+.info_container svg {
+  fill: none;
+  width: min-content;
+  height: 5rem;
+  min-width: 5rem;
+  padding: .5rem;
+  border-radius: 100%;
+  transition: .3s all ease;
+  background: rgba(var(--soft-blue), .3);
+}
+.info_container p:hover svg {
+  padding: 0;
+  transform: rotate(10deg);
+}
+
+
+
+.options_reports {
+  display: flex;
+  position: relative;
+  /* border-bottom: .1rem solid rgba(var(--dark-blue)); */
+  margin-bottom: 1.2rem;
+}
+.options_reports button {
+  padding: 1.2rem;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+}
+.active {
+  border: .2rem solid rgba(var(--dark-blue));
+  border-bottom: .2rem solid rgba(var(--bg-color));
+  font-weight: bold;
+}
+.options_reports::after {
+  content: '';
+  position: absolute;
+  height: .2rem;
+  width: 100%;
+  background: rgba(var(--dark-blue));
+  bottom: 0;
+  z-index: -1;
+}
+.container_report {
+  display: flex;
+  flex-direction: column;
+}
+.for_dates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .6rem;
+  /* font-weight: bold; */
+  margin-bottom: 2.4rem;
+}
+.options form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2.4rem;
+  /* width: 100%;; */
+}
+
+.download_btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.download_btn  button{
+  display: flex;
+  width: 100%;
+  max-width: 35rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgb(var(--gold-yellow));
+  border-radius: 1.2rem;
+  gap: .6rem;
+  font-weight: bold;
+}
+.download_btn  button svg {
+  fill: none;
+  width: min-content;
+}
+
+
+
+@media (min-width: 620px) {
+  .options form{
+    flex-direction: row;
+    width: 100%;
+  }
+  .options form div {
+    width: 100%;
+  }
+
+  .editIcon:hover {
+    width: 10rem;
+  }
+  .editIcon:hover span {
+    position: relative;
+    font-weight: bold;
+    transform: translateX(0);
+  }
+
+  .info_container {
+    width: min(40rem, 100%);;
+  }
+  /* .user_info {
+    width: min-content;
+  }
+  .user_profile {} */
+}

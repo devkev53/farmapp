@@ -1,0 +1,52 @@
+.container {
+  background: rgba(var(--white));
+  border-radius: 1.2rem;
+  width: 100%;
+  max-width: 50rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: rgba(var(--blue));
+  padding: 1.2rem;
+  color: rgba(var(--white));
+  font-weight: bold;
+}
+.title svg {
+  height: 3rem;
+  fill: none;
+  width: min-content;
+}
+.body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2.6rem;
+  padding: 2.6rem;
+}
+.counter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  align-items: center;
+  color: rgba(var(--dark-blue));
+}
+.counter span {
+  background: rgba(51,51,51,.1);
+  font-size: 2.2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.body  button {
+  width: 100%;
+  max-width: 22rem;
+  padding: 1.2rem;
+  background: rgba(var(--gold-yellow));
+  border-radius: 1.2rem;
+  font-weight: bold;
+}

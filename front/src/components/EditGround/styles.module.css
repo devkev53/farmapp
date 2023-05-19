@@ -1,0 +1,62 @@
+.content_container {
+  margin-bottom: 2.6rem;
+}
+
+.title {
+  margin-bottom: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.options_btns {
+  display: flex;
+  gap: .2rem;
+}
+.edit_btn {
+  padding: .6rem;
+  border-radius: 100%;
+  transition: .3s all ease;
+}
+
+.edit_btn svg{
+  width: min-content;
+  fill: none;
+  stroke: rgba(51,51,51,.5);
+  transition: .3s all ease;
+}
+.edit_btn:hover {
+  background: rgba(51,51,51,.2);
+}
+.edit_btn:hover svg {
+  stroke: rgba(var(--blue));
+}
+.save_btn {
+  padding: .6rem;
+  border-radius: 100%;
+}
+.save_btn:hover {
+  background: rgba(var(--orange));
+  transition: .3s all ease;
+}
+.save_btn:hover svg{
+  stroke: rgba(var(--dark-blue), .87);
+}
+.save_btn svg{
+  width: min-content;
+  stroke: rgba(var(--orange));
+  transition: .3s all ease;
+  fill: none;
+}
+.thscm {
+  text-transform: uppercase;
+}
+@media (min-width: 920px) {
+  .content_container {
+    max-width: calc(50% - (60rem + 2.6rem));
+    min-width: calc(50% - 1.3rem);
+  }
+
+}

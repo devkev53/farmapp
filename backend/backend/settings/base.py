@@ -32,14 +32,18 @@ LOCAL_APPS = [
     'core',
     'users',
     'plantations',
+    'backend',
 ]
 
 THIRD_APPS = [
+    'django_extensions',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'simple_history',
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 
@@ -55,7 +59,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
-      # Cors Headers
+    # Cors Headers
     "corsheaders.middleware.CorsMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
@@ -119,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-gt'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guatemala'
 
 USE_I18N = True
 

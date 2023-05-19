@@ -1,0 +1,41 @@
+.user_detail_content {
+  display: flex;
+  flex-direction: column;
+  /* gap: .6rem; */
+}
+.title_container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.6rem;
+}
+
+.title_container h2 {
+  text-transform: capitalize;
+}
+
+
+
+
+/* CARDS SPACES*/
+.cards_spaces {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr));
+  gap: 1.6rem;
+}
+
+
+@media (min-width: 768px) {
+ 
+  .editIcon:hover {
+    width: 10rem;
+  }
+  .editIcon:hover span {
+    position: relative;
+    font-weight: bold;
+    transform: translateX(0);
+  }
+
+  .info_container {
+    width: min(40rem, 100%);;
+  } 
+}

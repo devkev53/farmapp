@@ -2,8 +2,37 @@ version: '3.9'
 
 
 services:
+  # rabbitmq:
+  #   container_name: 'rabbitmq'
+  #   image: rabbitmq
+  #   ports:
+  #     - '5672:5672'
+  #     - '15672:15672'
+  #   volumes:
+  #       - rabbitmq_data:/var/lib/rabbitmq/
+  #       - rabbitmq_log:/var/log/rabbitmq/
+  #   networks:
+  #     red_web:
+  #       ipv4_address: 192.168.10.30
+      
+  #     red_interna:
+  #       ipv4_address: 192.168.20.30
+  # db:
+  #   image: postgres
+  #   ports:
+  #     - '5432:5432'
 
-  frontend:
+  #   environment:
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_DB=postgres
+
+  #   volumes:
+  #     - ./data/db:/var/lib/postgresql/data/
+
+
+  app:
+    container_name: 'web'
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -14,15 +43,53 @@ services:
     volumes:
       - ./front:/app/front
 
-    depends_on:
-      - backend
+    networks:
+      red_web:
+        ipv4_address: 192.168.10.10
+      
+      red_interna:
+        ipv4_address: 192.168.20.10
+
+    # depends_on:
+    #   - backend
 
   backend: 
+    container_name: 'api'
     build: 
       context: ./backend
       dockerfile: Dockerfile
+    
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    
     ports:
       - '8000:8000'
 
     volumes:
       - ./backend:/app/backend
+
+    networks:
+      red_web:
+        ipv4_address: 192.168.10.20
+      
+      red_interna:
+        ipv4_address: 192.168.20.20
+
+volumes:
+    rabbitmq_data:
+    rabbitmq_log:
+
+networks:
+  red_web:
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+  red_interna:
+    ipam:
+      config:
+        - subnet: 192.168.20.0/24
+
+    # depends_on:
+    #   - db

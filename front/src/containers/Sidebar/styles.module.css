@@ -83,8 +83,9 @@
 }
 .userInfo picture img {
   margin-top: -5rem;
-  height: 10rem;
+  min-height: 10rem;
   width: 10rem;
+  
   border-radius: 100%;
   border: .4rem solid rgba(var(--bg-color));
   background: rgba(var(--soft-blue));
@@ -107,6 +108,7 @@
     position: sticky;
     top: 0;
     max-width: 25rem;
+    min-width: 25rem;
     transition: .3s all ease;
     
   }
@@ -115,6 +117,7 @@
   }
   .sidebar.contract {
     width: 14rem;
+    min-width: 14rem;
   }
   .sidebarContainer {
     width: 100%;
@@ -127,6 +130,12 @@
   }
   .contract .appInfo picture h2 {
     display: none;
+  }
+
+  .contract .userInfo picture p {
+    font-size: 1.8rem;
+    display: none;
+    /* font-weight: bold; */
   }
 
 

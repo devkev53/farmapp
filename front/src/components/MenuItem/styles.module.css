@@ -47,6 +47,16 @@
   fill: rgba(var(--bg-color), 1);
 }
 
+.userIcon svg {
+  fill: none !important;
+  stroke: rgba(var(--bg-color), .7) !important;
+  height: 44px;
+}
+
+.menuItem.activeItem .userIcon svg {
+  stroke: rgba(var(--bg-color), 1) !important;
+}
+
 @media (min-width: 768px) {
   .contract.menuItem a,
   .contract.logoutBtn button {

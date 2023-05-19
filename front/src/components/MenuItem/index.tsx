@@ -8,11 +8,13 @@ import { DashboardIcon } from "../UI/icons/DashboardIcon";
 import { PlantIcon } from "../UI/icons/PlantIcon";
 import { ReportsIcon } from "../UI/icons/ReportsIcon";
 
-import { pathList } from "../../utils/path-list.utility";
+import { pathList } from "../../utilities/path-list.utility";
 import styles from  './styles.module.css'
+import { UserCirle } from "../UI/icons/UserCirleIcon";
+import { UserCheckIcon } from "../UI/icons/UserCheckIcon";
 
 const index = () => {
-  const [isMenuExpand, setIsMenuExpand] = useState()
+  const [isMenuExpand, setIsMenuExpand] = useState<Boolean | unknown>()
   const location = useLocation()
 
   const returnIcon = (path:string) => {
@@ -22,6 +24,8 @@ const index = () => {
       return <PlantIcon />
     } else if (path === '/reports') {
       return <ReportsIcon />
+    } else if (path === '/profile') {
+      return <UserCheckIcon />
     }
   }
 
@@ -36,24 +40,27 @@ const index = () => {
   }
 
   return (
-    pathList.map(path => (
-      <li 
-        onClick={handleclickMenuItem}
-        key={path.path} 
-        className={`
-          ${styles.menuItem}
-          ${isMenuExpand && styles.contract}
-          ${path.path === location.pathname && styles.activeItem}
-        `}
-      >
-        <Link to={path.path}>
-          <i>
-            {returnIcon(path.path)}
-          </i>
-          <span>{path.name}</span>
-        </Link>
-      </li>
-    ))
+    <>
+    {  pathList.map(path => (
+        <li 
+          onClick={handleclickMenuItem}
+          key={path.path} 
+          className={`
+            ${styles.menuItem}
+            ${isMenuExpand && styles.contract}
+            ${path.path === location.pathname && styles.activeItem}
+          `}
+        >
+          <Link to={path.path}>
+            <i className={`${path.path === '/profile' && styles.userIcon}`}>
+              {returnIcon(path.path)}
+            </i>
+            <span>{path.name}</span>
+          </Link>
+        </li>
+      ))}
+    </>
+
   );
 }
 

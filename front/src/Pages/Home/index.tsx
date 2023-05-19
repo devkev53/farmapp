@@ -1,23 +1,64 @@
+import { useEffect, useState } from "react";
+import { PageLoading } from "../../components/UI/PageLoading";
+import { EditIcon } from "../../components/UI/icons/EditIcon";
+import { PlantIcon } from "../../components/UI/icons/PlantIcon";
+import { DashboardCard } from "../../containers/DashboardCard";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFetchAndLoad } from "../../hooks/useFetchAndLoad";
+import styles from './styles.module.css'
+import { getPlantations } from "../../services/plantations.service";
+import { plantationI } from "../../models/plantations.models";
 
 const index = () => {
+
+  const [plantations, setPlantatios] = useState<Array<plantationI>>([])
+  const {isLoading, callEndpoint} = useFetchAndLoad()
+
+  const geLastPlantations = async() => {
+    const response = await callEndpoint(getPlantations())
+    setPlantatios(response.data.slice(0,3))
+  }
+
+  useEffect(()=>{
+    geLastPlantations()
+  },[])
+
+ 
   return (
-    <div className="styles dashboardContainer">
-      <h2>Dashboard desde Docker XD</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+    <>
+      {isLoading && <PageLoading />}
+      <div className={styles.dashboard_content}>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+        <div className={styles.title_container}>
+          <h2>Dashboard</h2>
+          {/* <button onClick={()=>{}} className={styles.editIcon}>
+            <EditIcon />
+            <span>Editar</span>
+          </button> */}
+        </div>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+        <div className={styles.cards_spaces}>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+          {plantations.length  > 0 ?
+            plantations?.map(plant => (
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+              <DashboardCard 
+                key={plant.id} 
+                id={plant.id} 
+                name={plant.name}
+                created={plant?.created}
+                days={plant?.estimated_days_for_harvest.days}
+                porcent={plant?.estimated_days_for_harvest.porcent}
+                irrigations={plant?.irrigation}
+                water={plant?.total_water}  />
+            ))
+          : (<h2>No existen Registros</h2>)
+          }
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
+        </div>
 
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia magni tempore sit perferendis est quibusdam consectetur alias esse assumenda aut aliquid cupiditate, amet impedit similique veritatis aliquam quaerat sint omnis aperiam accusantium quasi excepturi? <br /> Consectetur iure fugiat eius quia at sit ea hic officiis labore eligendi! Earum facere libero dicta, mollitia voluptates ipsum, sequi deserunt quos sunt eos voluptate. Perspiciatis deserunt magnam exercitationem! Accusantium totam sapiente ipsum eveniet iste facilis delectus optio quas. Quam, obcaecati? Placeat consectetur earum ab quasi laborum nisi consequatur sunt soluta eligendi libero provident <br /> eaque ut, aliquid necessitatibus sed molestias? Incidunt nemo consequatur, quidem tempora quae animi esse maxime eos quam officia minima voluptatibus, deserunt vitae! Consequatur deserunt quae pariatur. Consequatur quasi eveniet incidunt cum laudantium vero, pariatur molestias omnis vitae amet asperiores quaerat perspiciatis libero exercitationem fugiat illum dolorum nisi. Obcaecati deserunt necessitatibus ratione veniam eos in? Modi consequatur impedit <br /> blanditiis praesentium culpa, aperiam quam officiis a consequuntur maxime cum nisi neque corrupti quaerat sed dolore error odit quis, nam voluptatibus provident repudiandae ut? Voluptas beatae fugiat vero culpa quia cum repellat accusamus eos, eaque rerum consectetur eligendi illum, exercitationem, corporis dolorum! Rerum quisquam ipsa libero nostrum at expedita voluptatum omnis vitae, totam non eius!</p>
-    </div>
+      </div>
+    </>
     
   );
 }

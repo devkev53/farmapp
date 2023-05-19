@@ -10,10 +10,215 @@ body {
 }
 .right {
   width: 100%;
+  overflow-y: hidden;
 }
+.right h2 {
+  color: rgb(var(--dark-blue));
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+}
+.list_plants {
+  width: 100%;
+  /* background: yellow; */
+  overflow-y: hidden;
+}
+
+.table_container {
+  width: 100%;
+  max-width: 190rem;
+  margin: 0 auto;
+  /* background: #000; */
+  justify-content: center;
+  align-items: center;
+}
+
+.action_btn {
+  /* background: teal; */
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: .3s all ease;
+}
+.action_btn span {
+  /* position: absolute; */
+  display: none;
+  opacity: 0;
+  font-weight: bold;
+  transition: .3s all ease;
+}
+.action_btn svg {
+  fill: none;
+  height: 3rem;
+  width: min-content;
+  transition: .3s all ease;
+}
+
+
+/* INPUT GROUP */
+.input_group {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  margin-bottom: 1.6rem;
+  /* margin-bottom: 1.6rem; */
+}
+
+.input_group div {
+  position: relative;
+  height: 5rem;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(var(--white), .85);
+  border-radius: .8rem;
+  /* margin-bottom: 2rem; */
+}
+
+.input_group div input{
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  padding-bottom: .6rem;
+  /* height: 100%; */
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: none;
+  /* border-bottom: solid .2rem rgba(51,51,51,.3); */
+  /* background: rgba(var(--white), .85); */
+  border-radius: .8rem;
+}
+.input_group div input.error {
+  color: rgba(var(--danger));
+}
+
+.input_group div input:focus {
+  outline: none;
+}
+.input_group textarea:focus {
+  outline: none;
+}
+.input_group div label {
+  color: rgba(51,51,51, .8);
+  font-size: 1.8rem;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 1.6rem;
+  top: 1.6rem;
+  transition:  .2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.input_group div input:focus ~ label,
+.input_group div input[type=date] ~ label,
+.input_group div input[type=time] ~ label,
+.input_group div input:valid ~ label {
+  /* top: -.05rem; */
+  top: .4rem;
+  font-size: 1.2rem;
+  color: rgba(var(--dark-blue));
+} 
+
+
+.bar {
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+
+.bar::before, 
+.bar::after {
+  content: '';
+  height: .2rem;
+  width: 0;
+  bottom: 0;
+  position: absolute;
+  background: rgba(var(--blue));
+  transition: .2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.input_group div input.error ~ .bar::before,
+.input_group div input.error ~ .bar::after {
+  background: rgba(var(--danger));
+}
+
+.bar::before {
+  left: calc(50% - .2rem);
+  border-radius: 1rem;
+}
+.bar::after {
+  right: calc(50% - .2rem);
+  border-radius: 1rem;
+}
+.input_group div input:focus ~ .bar::before,
+.input_group div input:valid ~ .bar::before,
+.input_group div input[type=date] ~ .bar::before,
+.input_group div input[type=time] ~ .bar::before,
+.input_group div input[type=date] ~ .bar::after,
+.input_group div input[type=time] ~ .bar::after,
+.input_group div input:valid ~ .bar::after,
+.input_group div input:focus ~ .bar::after {
+  width: calc(50% - .1rem);
+} 
+.noRequired .content ~ .bar::before,
+.noRequired .content ~ .bar::after {
+  width: calc(50% - .1rem);
+}
+.helptext {
+  /* position: absolute; */
+  /* margin-left: 1.6rem; */
+  /* bottom: -1.8rem; */
+  padding-left: 1.6rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(var(--blue));
+}
+
+
 
 @media (min-width: 768px) {
   #root {
     display: flex;
+    /* max-width: 128rem;
+    margin: 0 auto; */
   }
+
+  .action_btn {
+    /* justify-content: start; */
+    border-radius: 2.4rem;
+    /* width: 10rem; */
+    width: max-content;
+    padding: 0 1.6rem;
+  }
+  .action_btn::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: rgb(var(--dark-blue));
+    top: 50%;
+    transform: skewX(30deg) translate(-150%, -50%);
+    transition: all 0.5s;
+  }
+  .action_btn:hover {
+    background-color: rgb(var(--soft-blue));
+    color: #fff;
+    /* box-shadow: 0 2px 0 2px #0d3b66; */
+  }
+  .action_btn:hover:before {
+    transform: skewX(30deg) translate(150%, -50%);
+    transition-delay: 0.1s;
+  }
+  .action_btn span {
+    display: block;
+    /* position: relative; */
+    /* left: calc(1.6rem + 3rem); */
+    opacity: 1;
+  }
+
 }

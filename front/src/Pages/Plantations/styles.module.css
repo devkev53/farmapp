@@ -1,0 +1,25 @@
+.title_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.6rem;
+}
+.add_link {
+  background: rgba(var(--gold-yellow));
+}
+.add_link span,
+.add_link svg {
+  color: rgba(51,51,51,.9);
+  stroke: rgba(51,51,51,.9);
+}
+
+
+
+@media (min-width: 768px) {
+ .add_link {
+ }
+
+
+
+}
+

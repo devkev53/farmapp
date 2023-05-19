@@ -5,8 +5,19 @@ import './styles/reset.css'
 import './styles/vars.css'
 import './styles/index.css'
 
+import { SnackbarProvider } from 'notistack'
+import { SnackbarUtilitiesConfigurator } from './utilities/snackbar-manager'
+import { PrivateInterceptor, PublicInterceptor } from './interceptors'
+
+PublicInterceptor()
+PrivateInterceptor()
+
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <SnackbarProvider>
+    <SnackbarUtilitiesConfigurator />
+      <App />
+  </SnackbarProvider>
+  // </React.StrictMode>,
 )

@@ -4,62 +4,49 @@ from core.api.views.api_views import CustomBaseViewSet
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework import generics
 
-from plantations.api.serializers.plantation_serializers import PlantationSerializer
+from plantations.models import Plantation
+
+from plantations.api.serializers.plantation_serializers import PlantationSerializer, \
+    CreatePlantationSerializer, ActivateIrrigationSerialzier
 
 class PlantationViewSet(CustomBaseViewSet):
     serializer_class = PlantationSerializer
     permission_classes = (IsAuthenticated,)
 
+    def create(self, request):
+        print("Entrando")
+        print(request.data)
+        if (request.data["area"] == ''):
+            request.data["area"] = 0
+        if (request.data["perimeter"] == ''):
+            request.data["perimeter"] = 0
+        if (request.data["ability"] == ''):
+            request.data["ability"] = 0
+        if (request.data["wilting_point"] == ''):
+            request.data["wilting_point"] = 0
+        instance_serializer = CreatePlantationSerializer(data = request.data)
 
-    # def get_queryset(self, pk=None):
-    #   ''' Obtain the queryset an validate with PK '''
-    #   print(self.queryset)
-    #   if self.queryset is None:
-    #       return self.serializer_class().Meta.model.objects.filter(is_active=True)
-    #   return self.queryset
-    
-    # def get_object(self, pk):
-    #     return get_object_or_404(self.serializer_class.Meta.model, pk=pk)
-    
-    # # List all active plantations
-    # def list(self, request):
-    #     plantations = self.get_queryset()
-    #     plantations_serializers = self.serializer_class(plantations, many=True)
-    #     return Response(plantations_serializers.data, status=status.HTTP_200_OK)
-  
-    # # Create a new Platation
-    # def create(self, request, *args, **kwargs):
-    #     plantation_serialier = self.serializer_class(data = request.data)
+        if instance_serializer.is_valid():
+            print("Data is Ok")
+            instance_serializer.save()
+            return Response(instance_serializer.data, status=status.HTTP_201_CREATED)
 
-    #     if plantation_serialier.is_valid():
-    #         plantation_serialier.save()
-    #         return Response(plantation_serialier.data, status=status.HTTP_201_CREATED)
         
-    #     return Response({
-    #     'error':'check your fields', 'errors':plantation_serialier.errors
-    #     }, status=status.HTTP_400_BAD_REQUEST)
-
-    # # List Detail a Plantation
-    # def retrieve(self, request, pk=None):
-    #     plantation = self.get_object(pk)
-    #     plantation_serializer = self.serializer_class(plantation)
-    #     return Response(plantation_serializer.data)
+        return Response({
+        'error':'check your fields', 'errors':instance_serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
     
-    #   # Update a Plantation
-    # def update(self, request, pk=None):
-    #     plantation = self.get_object(pk)
-    #     plantation_serializer = self.serializer_class(plantation, data=request.data)
-    #     if plantation_serializer.is_valid():
-    #         plantation_serializer.save()
-    #         return Response({'message':'plantation updated successful'})
-    #     return Response({
-    #     'error':'check your fields', 'errors':plantation_serializer.errors
-    #     }, status=status.HTTP_400_BAD_REQUEST)
 
-    # # Delete a Plantation (No Delete to DB is a logical change the status)
-    # def destroy(self, request, pk=None):
-    #     plantation_destroy = self.serializer_class.Meta.model.objects.filter(id=pk).update(is_active=False)
-    #     if plantation_destroy == 1:
-    #         return Response({'message':'plantation deactivate successful'})
-    #     return Response({'error':'plantation not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class IsActiveIrrigation(generics.GenericAPIView):
+
+    def get(self, request, slug=None):
+        queryset = Plantation.objects.filter(thscm=slug, is_active=True).get()
+        activate = queryset.activate_irrigation()
+        return Response({"active": activate}, status=status.HTTP_200_OK)
+        return Response({
+            'error':'check your fields', 'errors':user_serializer.errors
+            }, status=status.HTTP_400_BAD_REQUEST)

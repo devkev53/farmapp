@@ -1,0 +1,71 @@
+.container {
+  background: rgba(var(--white));
+  overflow: hidden;
+  border-radius: 1.2rem;
+  width: 100%;
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.title {
+  padding: 1.6rem;
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  color: rgba(var(--white), .87);
+  background: rgb(var(--soft-blue));
+}
+.title svg {
+  fill: none;
+  width: auto;
+  stroke-width: .28rem;
+  height: 3.5rem;
+  fill: rgb(var(--blue));
+}
+
+.body {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-bottom: .1rem solid rgba(51,51,51,.2);
+}
+.body form input {
+  background: rgba(51,51,51,.02);
+}
+
+
+.options {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 2.6rem;
+  padding: 1.6rem;
+}
+.options button {
+  padding: 1.6rem;
+  width: 100%;
+  max-width: 25rem;
+  border-radius: 1.2rem;
+  transition: .3s all ease;
+}
+
+.options .confirm {
+  background: rgb(var(--success));
+  color: rgba(var(--white), .87);
+  font-weight: bold;
+}
+.options .confirm:hover {
+  background: rgb(99, 163, 3);
+}
+
+.options .cancel {
+  background: rgb(var(--dark-blue));
+  color: rgba(var(--white), .87);
+  font-weight: bold;
+}
+.options .cancel:hover {
+  background: rgba(var(--dark-blue), .5);
+}
+

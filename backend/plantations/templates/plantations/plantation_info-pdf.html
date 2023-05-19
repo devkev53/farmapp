@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <link rel="stylesheet" href="{% static 'plantations/css/plantation_info-pdf.css' %}">
+</head>
+
+<body>
+  <h1 class="title">Plantacion de: {{plantation.name}}</h1>
+  <div class="info">
+    <p>
+      <span>Fecha de Creación: </span>
+      {{plantation.created}}
+    </p>
+    <p>
+      <span>Creado por: </span>
+      {{plantation.created_by}}</p>
+  </div>
+
+  <div class="first_row row">
+
+      <div class="details">
+    
+        <div class="cultive part_detail">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plant" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M7 15h10v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2v-4z" />
+              <path d="M12 9a6 6 0 0 0 -6 -6h-3v2a6 6 0 0 0 6 6h3" />
+              <path d="M12 11a6 6 0 0 1 6 -6h3v1a6 6 0 0 1 -6 6h-3" />
+              <path d="M12 15l0 -6" />
+            </svg>
+          </div>
+          <div class="content">
+            <p>Cultivo</p>
+            <p>{{plantation.name}}</p>
+          </div>
+        </div>
+    
+        <div class="description part_detail">
+    
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-octagon" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M9.103 2h5.794a3 3 0 0 1 2.122 .879l4.101 4.1a3 3 0 0 1 .88 2.125v5.794a3 3 0 0 1 -.879 2.122l-4.1 4.101a3 3 0 0 1 -2.123 .88h-5.795a3 3 0 0 1 -2.122 -.88l-4.101 -4.1a3 3 0 0 1 -.88 -2.124v-5.794a3 3 0 0 1 .879 -2.122l4.1 -4.101a3 3 0 0 1 2.125 -.88z" />
+              <path d="M12 9h.01" />
+              <path d="M11 12h1v4h1" />
+            </svg>
+          </div>
+    
+          <div class="content">
+            <p>Descripción</p>
+            <p>
+              {% if plantation.description %}
+                {{plantation.description}}
+              {% else %}
+                No se ha ingreado descripción
+              {% endif %}
+            </p>
+          </div>
+        </div>
+    
+        <div class="time part_detail">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock-hour-1" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+              <path d="M12 7v5" />
+              <path d="M12 12l2 -3" />
+            </svg>
+          </div>
+          <div class="content">
+            <p>Duración de cosecha</p>
+            <p>{{plantation.duration}} dias aproximadamente</p>
+          </div>
+        </div>
+    
+      </div>
+    
+      <div class="ground_info">
+
+        <div class="thscm part_detail">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />
+              <path d="M8 10v-2h2m6 6v2h-2m-4 0h-2v-2m8 -4v-2h-2" />
+              <path d="M3 10h2" />
+              <path d="M3 14h2" />
+              <path d="M10 3v2" />
+              <path d="M14 3v2" />
+              <path d="M21 10h-2" />
+              <path d="M21 14h-2" />
+              <path d="M14 21v-2" />
+              <path d="M10 21v-2" />
+            </svg>
+          </div>
+          <div class="content">
+            <p><span>ID THSCM:</span> <span class="id_thscm">{{plantation.thscm}}</span></p>
+            <small>Identificador de Modulo Sensor y Control de Temperatura y Humedaed</small>
+          </div>
+        </div>
+        
+        <p>
+          <span>Perimetro: </span>
+          {% if plantation.perimeter %}
+            {{plantation.perimeter}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
+        <p><span>Área:</span>
+          {% if plantation.area %}
+            {{plantation.area}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
+        <p><span>Capcidad:</span>
+          {% if plantation.ability %}
+            {{plantation.ability}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
+        <p><span>Punto de Marchitamiento:</span>
+          {% if plantation.wailting_point %}
+            {{plantation.wailting_point}}
+          {% else %}
+            N/I
+          {% endif %}
+        </p>
+      </div>
+
+  </div>
+
+  <div class="second_row row">
+    
+    <div class="riegos content_card">
+      <p class="title_card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+          <path d="M12 10l0 3l2 0" />
+          <path d="M7 4l-2.75 2" />
+          <path d="M17 4l2.75 2" />
+        </svg>
+        Riegos Programados
+      </p>
+
+      <ul class="riegos_list">
+        {% for irrigation in irrigations %}
+          <li>
+            <span>Inicio: {{irrigation.start_time}}</span>
+            <span> - </span>
+            <span>Fin: {{irrigation.end_time}}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="consumo content_card">
+      <p class="title_card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-droplet" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M7.502 19.423c2.602 2.105 6.395 2.105 8.996 0c2.602 -2.105 3.262 -5.708 1.566 -8.546l-4.89 -7.26c-.42 -.625 -1.287 -.803 -1.936 -.397a1.376 1.376 0 0 0 -.41 .397l-4.893 7.26c-1.695 2.838 -1.035 6.441 1.567 8.546z" />
+        </svg>
+        Consumo de Agua
+      </p>
+
+      <div class="cantidad">
+        <h2><span>{{plantation.total_water}}</span>Lts.</h2>
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="third_row">
+    <h2 class="title">Estado de la tierra</h2>
+    
+    <div class="content_table">
+      <table class="ground">
+        <thead>
+          <tr>
+            <th rowspan="2">Humedad en Aire</th>
+            <th colspan="2" style="border-bottom: 1px solid #ffffff3f;">Temperatura</th>
+            <th rowspan="2">Humedad de la Tierra</th>
+          </tr>
+          <tr>
+            <th>Grados Celcius</th>
+            <th>Grados Farenheit </th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for state in ground_states  %}
+            <tr>
+              <td>{{state.air_humedity}} %</td>
+              <td>{{state.temperature_c}}° C</td>
+              <td>{{state.temperature_f}}° F</td>
+              <td>{{state.ground_humedity}} %</td>
+            </tr>
+          {% endfor %}
+            
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="four_row">
+    <h2 class="title">Ultimos Riegos</h2>
+    
+    <div class="content_table">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Horario de Inicio</th>
+            <th>Duración</th>
+            <th>Cantidad de Agua Utilizada</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for state in irrigations_states %}
+            <tr>
+              <td>{{state.start_time}}</td>
+              <td>{{state.duration}}</td>
+              <td>{{state.plantation}}</td>
+            </tr>
+          {% endfor %}
+            
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <picture>
+      <img src="{% static 'core/imgs/PGII.png' %}" alt="">
+    </picture>
+    <div class="userInfo">
+      <p>
+        <small>
+          Solicitado por: <span>{{requestUser}}</span>
+        </small>
+      </p>
+      <p>
+        <small>
+          Fecha de Solicitud: <span>{% now "SHORT_DATETIME_FORMAT" %}</span>
+        </small>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

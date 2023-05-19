@@ -11,9 +11,11 @@
   height: 6rem;
 }
 main {
+  overflow-x: hidden;
   overflow-Y: scroll;
   height: calc(100vh - 6rem);
-  padding: 2.6rem;
+  
+  padding: 2rem;
 }
 main::-webkit-scrollbar {
   width: 1.4rem;
@@ -32,3 +34,9 @@ main::-webkit-scrollbar-thumb:hover {
   background: rgba(var(--blue));
 }
 
+@media (min-width: 768px) {
+  main {
+    padding: 3.2rem;
+    /* max-width: 128rem; */
+  }
+}

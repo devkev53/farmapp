@@ -1,0 +1,69 @@
+.alertDelete {
+  background: rgba(var(--white), .87);
+  /* padding: 1.6rem; */
+  overflow: hidden;
+  border-radius: 1.2rem;
+  width: 100%;
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.alertDelete .title {
+  padding: 1.6rem;
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  color: rgba(var(--white), .87);
+  background: rgb(var(--danger));
+}
+.alertDelete .title svg {
+  fill: none;
+  width: auto;
+  stroke-width: .28rem;
+  height: 3.5rem;
+}
+.alertDelete .body {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-bottom: .1rem solid rgba(51,51,51,.2);
+}
+.alertDelete .body span {
+  font-weight: bold;
+}
+.alertDelete .options {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 2.6rem;
+  padding: 1.6rem;
+}
+.alertDelete .options button {
+  padding: 1.6rem;
+  /* background: red; */
+  width: 100%;
+  max-width: 25rem;
+  border-radius: 1.2rem;
+  transition: .3s all ease;
+}
+
+.alertDelete .confirm_delete {
+  background: rgb(var(--danger));
+  color: rgba(var(--white), .87);
+  font-weight: bold;
+}
+.alertDelete .confirm_delete:hover {
+  background: rgba(257, 76, 76);
+}
+
+.alertDelete .cancel_delete {
+  background: rgb(var(--blue));
+  color: rgba(var(--white), .87);
+  font-weight: bold;
+}
+.alertDelete .cancel_delete:hover {
+  background: rgba(var(--dark-blue));
+}
+

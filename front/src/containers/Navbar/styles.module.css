@@ -129,26 +129,40 @@
   }
   .userInfo {
     display: flex;
-    width: 30rem;
-    background: rgba(var(--bg-color));
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
   }
   .userInfo picture {
+    /* display: block; */
     height: 100%;
-    display: flex;
-    gap: .6rem;
-    align-items: center;
-    justify-content: flex-end;
+    border-radius: 100%;
+    overflow: hidden;
+    background: rgba(var(--soft-blue));
   }
   .userInfo picture img {
-    height: 5rem;
+    height: 100%;
     width: 5rem;
-    background: rgba(var(--soft-blue));
-    border-radius: 100%;
+    object-fit: cover;
+    transition: .3s all ease;
   }
-  .userInfo picture p {
-    color: rgba(var(--dark-blue));
+  .userInfo p {
+    transition: .3s all ease;
     font-weight: bold;
+    color: rgba(var(--dark-blue));
   }
+
+  
+  
+  /* HOVER USER INFO */
+  .userInfo:hover picture img {
+    transform: scale(130%) rotate(10deg);
+  }
+  .userInfo:hover p {
+    color: rgba(var(--blue));
+  }
+
 
   .userOptions {
     display: flex;

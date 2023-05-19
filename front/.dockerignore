@@ -1,4 +1,7 @@
+.git
 node_modules
-npm-debug.log
+docker-compose.yml
 Dockerfile
+npm-debug.log
+# pnpm-lock.yalm
 yarn-error.log
