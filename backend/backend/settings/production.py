@@ -59,6 +59,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(hours=4),
 }
 
+
 # CORS CONFIGURATION
 # CORS CONFIG
 CORS_ALLOWED_ORIGINS = [
@@ -89,25 +90,3 @@ CORS_ORIGIN_WHITELIST= [
     "http://192.168.0.11:5173",
     "http://192.168.0.17:5173",
 ]
-
-
-# CORREO ELECTRONICO
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 's0p0rt3linea@gmail.com'
-EMAIL_HOST_PASSWORD = 'sepanlsvjikevpkn'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-
-# CELERY SETTINGS
-# CELERY_BROKER_URL = 'amqp://guest:**@localhost:5672//'
-# CELERY_ACCEPT_CONTENT = ['aplication/json']
-# CELERY_RESULT_SERIALIZER = 'json'
-# CELERY_TASK_SERIALIZER = 'json'
-CELERY_TASK_TRACK_STARTED = True
-
-# CELERY_RESULT_BACKEND = 'django-db'
-
-# CELERY SETTINGS
-# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseSheduler'

@@ -25,7 +25,7 @@ class Plantation(BaseModel):
   perimeter = models.FloatField(_('perimeter'), blank=True, null=True)
   ability = models.FloatField(_('ability'), blank=True, null=True)
   wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True)
-  thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True)
+  thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True, unique=True)
 
   class Meta:
     """Meta definition for Plantation."""
