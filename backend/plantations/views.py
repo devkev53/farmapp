@@ -1,7 +1,7 @@
 import string
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
-from plantations.models import Plantation, Irrigation
+from plantations.models import Plantation, Irrigation, State_Ground, State_Irrigation
 from django.utils.crypto import get_random_string
 from django.template.loader import render_to_string
 from django.views.generic import View
@@ -28,26 +28,3 @@ def delete_all_plantations():
     for plantation in plantations:
         plantation.delete()
     return '{} Plantation deleterd successfull'.format()
-
-def plantation_pdf(request, pk):
-    print(pk)
-    try:
-        plantation = Plantation.objects.get(id=pk)
-        irrigations = Irrigation.objects.filter(plantation=plantation)
-        context = {
-            "plantation": plantation,
-            "irrigations": irrigations
-        }
-        html = render_to_string("plantations/plantation_info-pdf.html", context)
-
-        response = HttpResponse(content_type="application/pdf")
-        response["Content-Disposition"] = "inline; report.pdf"
-
-        font_config = FontConfiguration()
-        HTML(string=html).write_pdf(response, font_config=font_config)
-
-        return response
-    
-    except Plantation.DoesNotExist:
-        raise Http404("Plantation does no exist") 
-    

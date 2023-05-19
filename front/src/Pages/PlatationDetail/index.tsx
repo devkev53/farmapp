@@ -20,16 +20,18 @@ import { ModalTimeCountActive } from '../../components/ModalTimeCountActive'
 import { getActivateManualIrrigation } from '../../services/irrigations.service'
 import { plantationI } from '../../models/plantations.models'
 import { PrinterIcon } from '../../components/UI/icons/PrinterIcon'
+import { useGetPlantationReport } from '../../hooks/useGetPlantationReport'
 
 const index = () => {
 
   const [plantation, setPlantation] = useState<plantationI>()
   const [edit, setEdit] = useState(false)
   const [editLoading, setEditLoading] = useState(false)
-  const {isLoading, callEndpoint} = useFetchAndLoad()
 
+  const {isLoading, callEndpoint} = useFetchAndLoad()
   const {isVisible, showModal, closeModal} = useModal()
   const {isVisible:onIrrVisible, showModal:onIrrShow, closeModal:onIrrClose} = useModal()
+  const {getReport} = useGetPlantationReport()
   
   const params = useParams()
   const navigate = useNavigate()
@@ -106,10 +108,10 @@ const index = () => {
             </button>
           </div>
           
-          <a className={styles.report_link} target='_blank' href={`${import.meta.env.VITE_DOCKER_BACKEND_URL}api/plantation_pdf/${plantation?.id}`}>
+          <button className={styles.report_link} onClick={() => getReport(plantation?.id!)}>
             Ver Reporte
             <PrinterIcon />
-          </a>
+          </button>
 
         </div>
         

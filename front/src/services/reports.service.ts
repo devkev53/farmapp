@@ -9,6 +9,11 @@ export const getAll = (data:Object) => {
   return {call: axiosPrivateInstance.post(`${baseURL}api/report_all_pdf`, data, {signal: controller.signal}), controller}
 }
 
+export const getPlantationReport = (id:number) => {
+  const controller = loadAbort()
+  return {call: axiosPrivateInstance.get(`${baseURL}api/plantation_report_pdf/${id}`, {signal: controller.signal}), controller}
+}
+
 
 // export const refreshTokenService = (refreshToken:string) => {
 //   const controller = loadAbort()

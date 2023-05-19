@@ -10,6 +10,8 @@ import { ArrowDown } from '../UI/icons/Arrow-down'
 import { Link } from 'react-router-dom'
 import { EyeShow } from '../UI/icons/EyeShowIcon'
 import { PrinterIcon } from '../UI/icons/PrinterIcon'
+import { DownloadReportBtn } from '../DownloadReportBtn'
+import { useGetPlantationReport } from '../../hooks/useGetPlantationReport'
 
 type Props = {
   data: any[],
@@ -22,6 +24,8 @@ type Props = {
 
 export const AsyncTable = (
   {data, fetchData, columns, pageCount: controlledPageCount, isLoading}:Props) => {
+  
+  const {getReport} = useGetPlantationReport()
 
   const tableInstance = useTable(
     { columns,
@@ -128,14 +132,14 @@ export const AsyncTable = (
                           </p>
                         </span>
                       </Link>
-                      <a className={`${styles.table_button} ${styles.report}`} target='_blank' href={`${import.meta.env.VITE_DOCKER_BACKEND_URL}api/plantation_pdf/${row.original.id}`}>
+                      <button className={`${styles.table_button} ${styles.report}`}  onClick={() => getReport(row.original.id)}>
                         <span>
                           <PrinterIcon/>
                           <p>
                             Report
                           </p>
                         </span>
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 )

@@ -154,7 +154,6 @@ class State_Ground(models.Model):
   # TODO: Define custom methods here
 
 
-
 class State_Irrigation(models.Model):
   """Model definition for State_Irrigation."""
   start_time = models.TimeField(_('Start Time'), auto_now_add=True)
@@ -176,3 +175,24 @@ class State_Irrigation(models.Model):
     return "%s" % (self.plantation)
 
   # TODO: Define custom methods here
+
+  def time_duration(self):
+
+    hours = int((self.duration / 1000) / 3600)
+    if hours < 10:
+      hours = '0' + str(hours)
+    minutes = round(((self.duration / 1000) / 60))
+    if minutes < 10:
+      minutes = '0' + str(minutes)
+    seconds = int((self.duration/1000) % 60)
+    time = str(hours)+':'+str(minutes)+':'+str(seconds)
+    duration = datetime.strptime(time, '%H:%M:%S').time()
+    return duration
+  
+  def aproximate_end_time(self):
+    # start = timedelta(self.start_time)
+    print('**********************************************')
+    print(self.start_time)
+    print('----------------------------------------')
+    print(self.time_duration()) 
+    return 'start'

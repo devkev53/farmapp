@@ -24,7 +24,7 @@ from rest_framework_simplejwt.views import (
 from core.api.views.auth_views import Login, Logout
 from core.views import test, send_mail_to_all
 
-from plantations.views import plantation_pdf
+# from plantations.views import plantation_pdf
 from plantations.api.views.plantation_views import IsActiveIrrigation
 from plantations.api.views.ground_views import StateGroundAPIView
 from plantations.api.views.irrigations_views import AddStateIrrigationAPIView
@@ -41,7 +41,7 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     
-    path('api/plantation_pdf/<int:pk>/', plantation_pdf, name='plantation_pdf'),
+    # path('api/plantation_report_pdf/<int:pk>/', plantation_pdf, name='plantation_pdf'),
     path('api/<slug:slug>/activate-irrigation/', IsActiveIrrigation.as_view(), name='active_irrigation'),
     
     path('api/<slug:slug>/ground_state/', StateGroundAPIView.as_view(), name='state_ground'),

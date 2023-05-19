@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,164 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  
+  <link rel="stylesheet" href="{% static 'plantations/css/plantation_info-pdf.css' %}">
 </head>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
-    vertical-align: baseline;
-  }
-  h1 {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    width: 100%;
-    border-bottom: 4px solid #219ebc;
-  }
-  .title {
-    padding: 12px;
-  }
-  .info {
-    display: flex;
-    gap: 24px;
-    font-size: 12px;
-    padding: 12px;
-  }
-  .info p {
-    margin-right: 12px;
-  }
-  .info p span {
-    font-weight: bold;
-  }
 
-  .first_row {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-
-  .details {
-    font-size: 14px;
-    padding: 24px;
-    border-radius: 12px;
-    background: rgb(247, 247, 247);
-    display: grid;
-    width: 100%;
-    margin-right: 6px;
-  }
-  .part_detail {
-    display: flex;
-    width: fit-content;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-  .part_detail .icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: flex-start;
-  }
-  .part_detail .icon svg {
-    width: min-content;
-  }
-
-  .part_detail .content {
-    width: 100%;
-    margin-left: 12px;
-    /* background: red; */
-  }
-  .part_detail .content p span {
-    font-weight: bold;
-  }
-  .part_detail .content p:first-child {
-    font-weight: bold;
-  }
-
-
-
-
-  .ground_info {
-    font-size: 14px;
-    padding: 24px;
-    border-radius: 12px;
-    background: rgb(247, 247, 247);
-    display: grid;
-    width: 100%;
-    margin-left: 6px;
-  }
-  .id_thscm {
-    font-weight: bold;
-    color: rgb(251, 133, 0);
-  }
-  .ground_info p {
-    margin-bottom: 6px;
-  }
-  .ground_info p span {
-    font-weight: bold;
-  }
-
-  .row {
-    display: flex;
-    width: 100%;
-    margin-bottom: 24px;
-  }
-  .row div:first-child {
-    margin-right: 6px;
-  }
-  .row div:last-child {
-    margin-left: 6px;
-  }
-  .content_card {
-    display: grid;
-    width: 100%;
-    align-items: flex-start;
-    background: #8ecae621;
-    border-radius: 12px;
-    position: relative;
-    padding: 12px;
-  }
-  .title_card {
-    padding: 0 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    border-bottom: 2px solid rgb(2, 48, 71);
-    margin-bottom: 6px;
-  }
-  .title_card svg {
-    height: 32px;
-  }
-  .riegos_list {
-    width: 100%;
-    list-style: none;
-  }
-  .riegos_list li {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgb(250, 250, 250);
-  }
-
-  .cantidad {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(2, 48, 71);
-    position: relative;
-  }
-  .cantidad span {
-    font-size: 56px;
-  }
-
-
-
-</style>
 <body>
   <h1 class="title">Plantacion de: {{plantation.name}}</h1>
   <div class="info">
@@ -333,6 +180,85 @@
   
   </div>
 
-  
+  <div class="third_row">
+    <h2 class="title">Estado de la tierra</h2>
+    
+    <div class="content_table">
+      <table class="ground">
+        <thead>
+          <tr>
+            <th rowspan="2">Humedad en Aire</th>
+            <th colspan="2" style="border-bottom: 1px solid #ffffff3f;">Temperatura</th>
+            <th rowspan="2">Humedad de la Tierra</th>
+          </tr>
+          <tr>
+            <th>Grados Celcius</th>
+            <th>Grados Farenheit </th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for state in ground_states  %}
+            <tr>
+              <td>{{state.air_humedity}} %</td>
+              <td>{{state.temperature_c}}° C</td>
+              <td>{{state.temperature_f}}° F</td>
+              <td>{{state.ground_humedity}} %</td>
+            </tr>
+          {% endfor %}
+            
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="four_row">
+    <h2 class="title">Ultimos Riegos</h2>
+    
+    <div class="content_table">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Horario de Inicio</th>
+            <th>Duración</th>
+            <th>Cantidad de Agua Utilizada</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for state in irrigations_states %}
+            <tr>
+              <td>{{state.start_time}}</td>
+              <td>{{state.duration}}</td>
+              <td>{{state.plantation}}</td>
+            </tr>
+          {% endfor %}
+            
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <picture>
+      <img src="{% static 'core/imgs/PGII.png' %}" alt="">
+    </picture>
+    <div class="userInfo">
+      <p>
+        <small>
+          Solicitado por: <span>{{requestUser}}</span>
+        </small>
+      </p>
+      <p>
+        <small>
+          Fecha de Solicitud: <span>{% now "SHORT_DATETIME_FORMAT" %}</span>
+        </small>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>

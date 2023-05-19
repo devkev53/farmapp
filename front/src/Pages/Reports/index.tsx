@@ -1,23 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { EditIcon } from '../../components/UI/icons/EditIcon';
-import { useAuthContext } from '../../hooks/useAuthContext';
 import styles from './styles.module.css'
 import check from './check.module.css'
 import { useFetchAndLoad } from '../../hooks/useFetchAndLoad';
-import { getByIdUser } from '../../services/users.service';
 import { PageLoading } from '../../components/UI/PageLoading';
-import { useModal } from '../../hooks/useModal';
-import { EditBaseModal } from '../../components/UI/EditBaseModal';
-import { CamAddIcon } from '../../components/UI/icons/CamAddIcon';
-import { ModalContainer } from '../../containers/ModalContainer';
-import { ChangeImgModal } from '../../components/ChangeImgModal';
-import { EditUserModal } from '../../components/EditUserModal';
-import { UserCheckIcon } from '../../components/UI/icons/UserCheckIcon';
-import { CardIdIcon } from '../../components/UI/icons/CardIdIcon';
-import { MailIcon } from '../../components/UI/icons/MailIcon';
-import { PhoneIcon } from '../../components/UI/icons/PhoneIcon';
-import { CakeIcon } from '../../components/UI/icons/CakeIcon';
-import { AddressBookIcon } from '../../components/UI/icons/AddressBookIcon';
 import { getAll } from '../../services/reports.service';
 import { PrinterIcon } from '../../components/UI/icons/PrinterIcon';
 
@@ -66,6 +51,13 @@ const index = () => {
     e.currentTarget.classList.add(`${styles.active}`)
   } 
 
+  useEffect(() => {
+    if (dates===false) {
+      setStart('')
+      setEnd('')
+    }
+  }, [setDates])
+
 
   return (
     <>
@@ -89,7 +81,7 @@ const index = () => {
           <div className={styles.for_dates}>
             <div className={check.checkbox_wrapper_44}>
               <label className={check.toggleButton}>
-                <input type="checkbox" onChange={()=>setDates(!dates)}/>
+                <input type="checkbox" onChange={()=>{setDates(!dates)}}/>
                 <div>
                   <svg viewBox="0 0 44 44">
                     <path transform="translate(-2.000000, -2.000000)" d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"></path>
