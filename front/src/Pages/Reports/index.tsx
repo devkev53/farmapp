@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import check from './check.module.css'
 import { useFetchAndLoad } from '../../hooks/useFetchAndLoad';
 import { PageLoading } from '../../components/UI/PageLoading';
-import { getAll } from '../../services/reports.service';
+import { getAll, getWaterReport } from '../../services/reports.service';
 import { PrinterIcon } from '../../components/UI/icons/PrinterIcon';
 
 const index = () => {
@@ -23,7 +23,7 @@ const index = () => {
     if (reportNumber === 0) {
       response = await callEndpoint(getAll(data))
     } else {
-      return alert("El reporte no existe")
+      response = await callEndpoint(getWaterReport(data))
     }
     console.log(response)
     const blob = response.data

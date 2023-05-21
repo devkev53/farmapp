@@ -3,7 +3,7 @@ import { loadAbort } from '../utilities/load-abort-axios.utility'
 import { axiosPrivateInstance, axiosPublicInstance } from '../utilities/axios-instances'
 
 export const baseURL = import.meta.env.VITE_DOCKER_BACKEND_URL
-const login_url = `${baseURL}login/`
+const login_url = `${baseURL}/login/`
 
 export const loginService = (data:{}) => {
   const controller = loadAbort()

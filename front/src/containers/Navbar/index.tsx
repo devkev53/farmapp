@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { menuSubject } from '../../services/menu-subject.service';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import 'animate.css';
+import { baseURL } from '../../services/auth.service';
 
 const index = () => {
 
@@ -34,7 +35,7 @@ const index = () => {
           <picture>
             {user !== null && user?.image === null 
               ? <img src={user?.url_img} alt={user?.username} />
-              : <img src={`http://localhost:8000${user?.url_img}`} alt={user?.username} />
+              : <img src={`${baseURL}${user?.url_img}`} alt={user?.username} />
             }
           </picture>
           <p>{user !== null && user?.username}</p>

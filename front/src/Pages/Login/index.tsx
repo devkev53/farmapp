@@ -27,16 +27,6 @@ const index = () => {
 
   const formRef = useRef<HTMLFormElement>(null)
 
-  // TESTING
-  // const [morty, setMorty] = useState({} as any)
-  // const fetchMorty = async() => {
-  //   const {data} = await callEndpoint(testingService())
-  //   console.log(data)
-  // }
-
-  // useEffect(()=>{
-  //   fetchMorty()
-  // },[])
   
   const handleSubmit:FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()

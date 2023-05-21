@@ -55,9 +55,10 @@ export const AsyncTable = (
     gotoPage,
     previousPage,
     setPageSize,
-    state: {pageIndex, pageSize, globalFiter},
+    state: {pageIndex, pageSize},
   } = tableInstance
 
+  let globalFiter:any
 
   return (
     <>
