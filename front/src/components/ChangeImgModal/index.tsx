@@ -33,10 +33,10 @@ export const ChangeImgModal = (
     // refInputImg !== null && refInputImg.current.click()
   },[])
 
-  const updateImg = async(id:number, data:{}) => {
+  const updateImg = async(id:number, dataForm:FormData) => {
     setLoading(true)
     try {
-      const response = await callEndpoint(updateImgUser(id, data))
+      const response = await callEndpoint(updateImgUser(id, dataForm))
       if(response.status === 200) {
         const data = updateChangeUserProfileLocalStorage(response.data)
         setLoginData(data)

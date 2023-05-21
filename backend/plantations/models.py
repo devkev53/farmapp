@@ -196,3 +196,7 @@ class State_Irrigation(models.Model):
     print('----------------------------------------')
     print(self.time_duration()) 
     return 'start'
+
+  def aprox_water(self):
+    quantity = round(self.water_quantity, 2)
+    return f'{quantity:,}'.replace(',','.')

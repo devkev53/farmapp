@@ -81,6 +81,7 @@ class UserViewset(PermisionPolicyMixin, viewsets.GenericViewSet):
     def change_img(self, request, pk=None):
         user = self.get_object(pk)
         user_serializer = UserUpdateSerializer(user, data=request.data)
+        print(request.data)
         if user_serializer.is_valid():
             user_serializer.save()
             return Response(user_serializer.data, status=status.HTTP_200_OK)

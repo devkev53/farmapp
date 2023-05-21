@@ -37,22 +37,30 @@ export const PrivateInterceptor = () => {
     
 
     if (request.url?.includes('report')) updateTypeReportHeader(request)
-    if (request.url?.includes('assets')) updateTypeAssetsHeader(request)
+    if (request.url?.includes('assets')) {
+      console.log("Enviando un asset o imagen")
+      return updateTypeAssetsHeader(request)
+    }
     if (request.url?.includes('login')) return request
+    
+    
     request = updateHeader(request)
     
+    if (token) {
+      if (!accessTokenValidate(token)) return request 
+      if (refreshTokenValidate(refreshToken)) {
+        clearUserLocalStorage()
+      }    
+      const response = await refreshTokenService(refreshToken)
+      const {access, refresh} = response.data
+      const data = {token: access, refreshToken: refresh}
+      updateUserLocalStorage(data)
+      
+      request.headers.Authorization = `Bearer ${response.data.access}`
+    }
+    console.log(request)
     
-    if (!accessTokenValidate(token)) return request 
-    if (refreshTokenValidate(refreshToken)) {
-      clearUserLocalStorage()
-    }    
-    const response = await refreshTokenService(refreshToken)
-    const {access, refresh} = response.data
-    const data = {token: access, refreshToken: refresh}
-    updateUserLocalStorage(data)
-
-    request.headers.Authorization = `Bearer ${response.data.access}`
-
+    
     return request
   })
 
@@ -62,11 +70,13 @@ export const PrivateInterceptor = () => {
     },
     (error) => {
       console.log(error)
-      SnackbarUtilities.error(getValidationError(error.code))
+      // SnackbarUtilities.error(getValidationError(error.code))
       return Promise.reject(error)
     }
     )
 }
+
+
 
 export const PublicInterceptor = () => {
   axiosPublicInstance.interceptors.request.use(async(request) => {

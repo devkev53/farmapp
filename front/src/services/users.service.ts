@@ -3,7 +3,7 @@ import { loadAbort } from '../utilities/load-abort-axios.utility'
 import { axiosPrivateInstance, axiosPublicInstance } from '../utilities/axios-instances'
 
 const baseURL = import.meta.env.VITE_DOCKER_BACKEND_URL
-const users_url = `${baseURL}api/users/`
+const users_url = `${baseURL}/api/users/`
 
 export const getPlantations = () => {
   const controller = loadAbort()

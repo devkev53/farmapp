@@ -155,14 +155,25 @@
   border: .2rem solid rgba(var(--dark-blue));
   border-bottom: .2rem solid rgba(var(--bg-color));
   font-weight: bold;
+  position: relative;
 }
+.active::after {
+  content: '';
+  position: absolute;
+  background: rgba(var(--bg-color));
+  height: .2rem;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
 .options_reports::after {
   content: '';
   position: absolute;
   height: .2rem;
   width: 100%;
   background: rgba(var(--dark-blue));
-  bottom: 0;
+  bottom: .05rem;
   z-index: -1;
 }
 .container_report {

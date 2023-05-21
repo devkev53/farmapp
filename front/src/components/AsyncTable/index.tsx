@@ -59,6 +59,7 @@ export const AsyncTable = (
   } = tableInstance
 
   const globalFiter = 0
+
   return (
     <>
       <GlobalFlter

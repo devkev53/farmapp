@@ -13,6 +13,7 @@ const index = () => {
 
   const [plantations, setPlantatios] = useState<Array<plantationI>>([])
   const {isLoading, callEndpoint} = useFetchAndLoad()
+  const {user} = useAuthContext()
 
   const geLastPlantations = async() => {
     const response = await callEndpoint(getPlantations())
@@ -20,8 +21,10 @@ const index = () => {
   }
 
   useEffect(()=>{
-    geLastPlantations()
-  },[])
+    if (user) {
+      geLastPlantations()
+    }
+  },[user])
 
  
   return (
