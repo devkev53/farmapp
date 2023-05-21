@@ -28,10 +28,11 @@ from core.views import test, send_mail_to_all
 from plantations.api.views.plantation_views import IsActiveIrrigation
 from plantations.api.views.ground_views import StateGroundAPIView
 from plantations.api.views.irrigations_views import AddStateIrrigationAPIView
+from core.views import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', test, name='test'),
+    path('', redirect, name='test'),
     # path('sendMail', send_mail_to_all, name='sendMail'),
 
 

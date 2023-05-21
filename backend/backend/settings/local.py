@@ -24,15 +24,15 @@ DATABASES = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/ '../static/'
 
 # - Method 1
-STATICFILES_DIRS = [BASE_DIR / 'static']
+# STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # MEDIA CONFIGURATION
-MEDIA_URL = '/media/'
-MEDIA_DIR = BASE_DIR/ 'media'
-MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR/ '../media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -72,7 +72,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4173",
     "http://192.168.10.10:5173",    
     "http://192.168.20.10:5173",
-    "http://192.168.0.11:5173",
+    "http://192.168.0.14:5173",
     "http://192.168.0.17:5173",
 ]
 CORS_ORIGIN_WHITELIST= [
@@ -86,7 +86,7 @@ CORS_ORIGIN_WHITELIST= [
     "http://localhost:4173",
     "http://192.168.10.10:5173",    
     "http://192.168.20.10:5173",
-    "http://192.168.0.11:5173",
+    "http://192.168.0.14:5173",
     "http://192.168.0.17:5173",
 ]
 
