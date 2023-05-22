@@ -1,5 +1,6 @@
 import { useFetchAndLoad } from "../../hooks/useFetchAndLoad"
 import { getPlantationReport } from "../../services/reports.service"
+import { PageLoading } from "../UI/PageLoading"
 import { PrinterIcon } from "../UI/icons/PrinterIcon"
 
 import styles from './styles.module.css'
@@ -20,13 +21,16 @@ export const DownloadReportBtn = ({id}:{id:number}) => {
   }
 
   return (
-    <button className={styles.report_link} onClick={getReport}>
-      <span>
-        <PrinterIcon/>
-        <p>
-          Report
-        </p>
-      </span>
-    </button>
+    <>
+      {isLoading && <PageLoading/>}
+      <button className={styles.report_link} onClick={getReport}>
+        <span>
+          <PrinterIcon/>
+          <p>
+            Report
+          </p>
+        </span>
+      </button>
+    </>
   );
 }
