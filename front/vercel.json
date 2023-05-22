@@ -1,13 +1,5 @@
 {
-  "routes": [
-    {"src": "/[^.]", "dest": "/", "status": 200},
-    {"src": "/", "dest": "/"},
-    {"src": "/login", "dest": "/login"},
-    {"src": "/create-user", "dest": "/create-user"},
-    {"src": "/reports", "dest": "/reports"},
-    {"src": "/profile", "dest": "/profile"},
-    {"src": "/plantations", "dest": "/plantations"},
-    {"src": "/plantations-detail/[^.]", "dest": "/plantations-detail/[^.]"},
-    {"src": "/add-plantation", "dest": "/add-plantation"}
-  ]
+  "rewrites":  [
+      {"source": "/(.*)", "destination": "/"}
+   ]
 }
