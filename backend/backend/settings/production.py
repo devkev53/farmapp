@@ -7,9 +7,9 @@ from .base import *
 SECRET_KEY = 'django-insecure-nt4t0wy)#tmd!s&1enawmt!a6o*-ptz@my)5lud57jebd^#g^0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['xtestuser.pythonanywhere.com', 'localhost:8000', 'localhost', '127.0.0.1:8000', '127.0.0.1']
+ALLOWED_HOSTS = ['xtestuser.pythonanywhere.com', 'localhost:8000', 'localhost', '127.0.0.1:8000', '127.0.0.1', '*']
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -64,11 +64,14 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "https://farmapp-qz1ezzkuk-kodeprint.vercel.app",
     "http://farmapp-qz1ezzkuk-kodeprint.vercel.app",
-    
+    "192.168.0.21:5173",    
+    "http://192.168.0.21:5173",
 ]
 CORS_ORIGIN_WHITELIST= [
     "https://farmapp-qz1ezzkuk-kodeprint.vercel.app",
     "http://farmapp-qz1ezzkuk-kodeprint.vercel.app",
+    "192.168.0.21:5173",    
+    "http://192.168.0.21:5173",
 ]
 
 

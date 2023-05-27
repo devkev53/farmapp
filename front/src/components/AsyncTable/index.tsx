@@ -12,6 +12,7 @@ import { EyeShow } from '../UI/icons/EyeShowIcon'
 import { PrinterIcon } from '../UI/icons/PrinterIcon'
 import { DownloadReportBtn } from '../DownloadReportBtn'
 import { useGetPlantationReport } from '../../hooks/useGetPlantationReport'
+import { PageLoading } from '../UI/PageLoading'
 
 type Props = {
   data: any[],
@@ -25,7 +26,7 @@ type Props = {
 export const AsyncTable = (
   {data, fetchData, columns, pageCount: controlledPageCount, isLoading}:Props) => {
   
-  const {getReport} = useGetPlantationReport()
+  const {isLoading:reportLoading, getReport} = useGetPlantationReport()
 
   const tableInstance = useTable(
     { columns,
@@ -62,6 +63,7 @@ export const AsyncTable = (
 
   return (
     <>
+      {reportLoading && <PageLoading/>}
       <GlobalFlter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFiter={globalFiter}

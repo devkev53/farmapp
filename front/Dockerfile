@@ -12,8 +12,6 @@ COPY . /app/front/
 
 EXPOSE 5173
 
-# RUN pnpm install serve
-# RUN pnmp run build
 # CMD ["pnpm", "run", "preview"]
-CMD ["pnpm", "run", "dev",]
+CMD ["pnpm", "run", "dev"]
 # CMD ["pnpm", "run", "build"]

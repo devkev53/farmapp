@@ -3,7 +3,7 @@ import { useFetchAndLoad } from "./useFetchAndLoad"
 
 export const useGetPlantationReport = () => {
 
-  const {callEndpoint} = useFetchAndLoad()
+  const {isLoading, callEndpoint} = useFetchAndLoad()
 
   const getReport = async(id:number) => {
     let response = await callEndpoint(getPlantationReport(id))
@@ -16,5 +16,5 @@ export const useGetPlantationReport = () => {
     alink.click() 
   }
 
-  return {getReport}
+  return {getReport, isLoading}
 }

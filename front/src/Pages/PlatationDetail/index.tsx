@@ -31,7 +31,7 @@ const index = () => {
   const {isLoading, callEndpoint} = useFetchAndLoad()
   const {isVisible, showModal, closeModal} = useModal()
   const {isVisible:onIrrVisible, showModal:onIrrShow, closeModal:onIrrClose} = useModal()
-  const {getReport} = useGetPlantationReport()
+  const {isLoading:loadingReport, getReport} = useGetPlantationReport()
   
   const params = useParams()
   const navigate = useNavigate()
@@ -74,6 +74,7 @@ const index = () => {
     <>
       {plantation && onIrrVisible && <ModalTimeCountActive plantatio_id={plantation.id} close={onIrrClose} />}
       {editLoading && <PageLoading />}
+      {loadingReport && <PageLoading/>}
       {isLoading && <PageLoading />}
       <div className="styles dashboardContainer">
         <div className={styles.title_container}>

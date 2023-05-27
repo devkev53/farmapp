@@ -98,7 +98,13 @@ export const ModalTimeCountActive = (
           Riego Manual
         </div>
         <div className={styles.body}>
-          <div className={styles.counter}>
+          <div className={styles.liquidText}>
+            <h3 className={`${styles.loading} ${styles.wave}`}>Regando</h3>
+            <h3 className={`${styles.loading} ${styles.wave}`}>Regando</h3>
+            <h3 className={`${styles.loading} ${styles.wave}`}>Regando</h3>
+            <h3 className={`${styles.loading} ${styles.wave}`}>Regando</h3>
+          </div>
+          {/* <div className={styles.counter}>
             <p>Tiempo de activación del riego</p>
             <h3>
               <span>{time.h >= 10 ? time.h : "0"+time.h}</span>
@@ -107,7 +113,7 @@ export const ModalTimeCountActive = (
               &nbsp;:&nbsp;
               <span>{time.s >= 10 ? time.s : "0"+time.s}</span>
             </h3>
-          </div>
+          </div> */}
           <button onClick={handleStop}>Detener</button>
         </div>
       </div>

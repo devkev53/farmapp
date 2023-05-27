@@ -7,7 +7,7 @@ from .base import *
 SECRET_KEY = 'django-insecure-nt4t0wy)#tmd!s&1enawmt!a6o*-ptz@my)5lud57jebd^#g^0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', '0.0.0.0', 'localhost', '127.0.0.1', '192.168.20.20', '192.168.10.20',]
 
@@ -74,6 +74,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.20.10:5173",
     "http://192.168.0.14:5173",
     "http://192.168.0.17:5173",
+    "http://192.168.0.21:5173",
 ]
 CORS_ORIGIN_WHITELIST= [
     "http://127.0.0.1:5173",
@@ -87,6 +88,7 @@ CORS_ORIGIN_WHITELIST= [
     "http://192.168.10.10:5173",    
     "http://192.168.20.10:5173",
     "http://192.168.0.14:5173",
+    "http://192.168.0.21:5173",
     "http://192.168.0.17:5173",
 ]
 

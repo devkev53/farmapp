@@ -67,8 +67,14 @@ class Plantation(BaseModel):
     today = datetime.today().date()
     days = harvest - today
     porcent = 100 - ((100 * days.days) / self.duration)
+    if porcent >= 100:
+      porcent = 100
+    if days.days <= 0:
+      days = 0
+    else:
+      days = days.days
     porcent = float(round(porcent)) 
-    data = {"days": days.days, "porcent": porcent}
+    data = {"days": days, "porcent": porcent}
     return data
 
   def activate_irrigation(self):

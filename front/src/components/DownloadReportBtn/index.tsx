@@ -20,6 +20,8 @@ export const DownloadReportBtn = ({id}:{id:number}) => {
     alink.click()
   }
 
+  console.log(isLoading)
+
   return (
     <>
       {isLoading && <PageLoading/>}
