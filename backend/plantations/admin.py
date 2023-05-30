@@ -62,7 +62,7 @@ class IrrigationAdmin(admin.ModelAdmin):
 class State_IrrigationAdmin(admin.ModelAdmin):
   '''Admin View for State_Irrigation'''
 
-  list_display = ('pk', 'plantation', 'water_quantity', 'duration', 'start_time', 'time_duration', 'aproximate_end_time')
+  list_display = ('pk', 'plantation', 'water_quantity', 'duration', 'start_time',)
   # list_filter = ('',)
   # inlines = [
   #   Inline,

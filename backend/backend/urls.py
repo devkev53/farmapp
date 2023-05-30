@@ -22,7 +22,6 @@ from rest_framework_simplejwt.views import (
 )
 
 from core.api.views.auth_views import Login, Logout
-from core.views import test, send_mail_to_all
 
 # from plantations.views import plantation_pdf
 from plantations.api.views.plantation_views import IsActiveIrrigation

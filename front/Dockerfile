@@ -11,7 +11,6 @@ RUN pnpm install
 COPY . /app/front/
 
 EXPOSE 5173
+COPY ./entrypoint.sh /
 
-# CMD ["pnpm", "run", "preview"]
-CMD ["pnpm", "run", "dev"]
-# CMD ["pnpm", "run", "build"]
+ENTRYPOINT ["sh", "/entrypoint.sh" ]
