@@ -20,12 +20,11 @@ class Plantation(BaseModel):
   function_Kc = models.FloatField(_('Crop Coefficient'), blank=True, null=True)
   used_water = models.FloatField(_('Used Water'),blank=True, null=True, editable=False)
   is_active = models.BooleanField(_('Is Active'), default=True)
-
   area = models.FloatField(_('area'), blank=True, null=True)
   perimeter = models.FloatField(_('perimeter'), blank=True, null=True)
   ability = models.FloatField(_('ability'), blank=True, null=True)
   wilting_point = models.FloatField(_('wilting_point'), blank=True, null=True)
-  thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True, unique=True)
+  thscm = models.CharField('THSCM', max_length=256, help_text=_('Identifer Number Temperature and humidity sensor control module'), blank=True, null=True)
 
   class Meta:
     """Meta definition for Plantation."""
@@ -41,22 +40,6 @@ class Plantation(BaseModel):
     """Save method for BaseModel."""
     self.thscm = self.thscm.upper()
     super(Plantation, self).save()
-
-  # def get_absolute_url(self):
-  #   """Return absolute url for Plantation."""
-  #   return ('')
-
-  # TODO: Define custom methods here
-
-  # def calculate_all_used_water(self):
-  #   all_used_water = 0
-  #   grounds = Ground.objects.filter(plantation = self.id)
-  #   if grounds != None:
-  #     for ground in grounds:
-  #       print(ground.used_water)
-  #       if ground.used_water:
-  #         all_used_water += ground.used_water
-  #   return all_used_water
   
   def estimated_date_for_harvest(self):
     date = self.created + timedelta(self.duration)
@@ -119,9 +102,12 @@ class Irrigation(BaseModel):
     state = False
     if self.on_irrigation:
       return True
-    now = datetime.now().time()
-    if now >= self.start_time and now <= self.end_time:
-      state = True
+    try:
+      now = datetime.now().time()
+      if now >= self.start_time and now <= self.end_time:
+        state = True
+    except:
+      state = False
     return state
 
   # TODO: Define custom methods here

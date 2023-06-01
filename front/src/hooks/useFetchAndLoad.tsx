@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from "axios"
 import { useEffect, useState } from "react"
 import { AxiosCall } from "../models/axios-call.model"
 
-
 export const useFetchAndLoad = () => {
 
   const [isLoading, setLoading] = useState(false)
@@ -20,6 +19,11 @@ export const useFetchAndLoad = () => {
       result = await axiosCall.call
     } catch (error: any) {
       setLoading(false)
+      if (error.response.data.errors) {
+        for (error in error.response.data) {
+          console.log(error)
+        }
+      }
       throw error
     }
     setLoading(false)

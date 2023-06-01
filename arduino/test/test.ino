@@ -24,6 +24,7 @@ Ticker change_led;
 Ticker read_litros;
 Ticker read_stateIrrigation;
 Ticker post_groundState;
+Ticker time_counter;
 
 // // Clientes HTTP para post y get
 HTTPClient http_ground_post;
@@ -62,6 +63,8 @@ unsigned long tiempoAnterior = 0; // Variable para calcular el tiempo transcurri
 unsigned long pusosAcumulados = 0; // Variable que almacena el numero de pulsos acumulados
 
 // Vars time irrigation
+int timeCounter = 0;
+unsigned long timeTHSCM;
 unsigned long timeStart = 0;
 unsigned long timeEnd = 0;
 String stringTimeDuration;
@@ -79,6 +82,13 @@ int frecuency() {
 
   int frecuencia;
   pulsos = 0;
+}
+
+void getTimecounter() {
+  if (isOnElectroValvule == 1) {
+    timeCounter++;
+    Serial.println("Contador de segundos: " + String(timeCounter));
+  }
 }
 
 // Lee el flujo y el volumen del caudal
@@ -136,8 +146,9 @@ void setup() {
   pinMode(pinWifiLed, OUTPUT);
   pinMode(pinRelay, OUTPUT);
   pinMode(pinFluidSensor, INPUT_PULLUP);
+  pinMode(pinGroundSensor, INPUT);
   digitalWrite(pinWifiLed, LOW);
-
+  timeTHSCM = millis();
 
   // Iniciamos las preferencias
   preferences.begin("server");
@@ -170,6 +181,7 @@ void setup() {
   // read_litros.attach(1, readFluidVolumenLts);
   read_stateIrrigation.attach(5, getStateIrrigation);
   post_groundState.attach(300, postGroundDataSensors);
+  time_counter.attach(1, getTimecounter);
 }
 
 
@@ -290,12 +302,9 @@ void getStateIrrigation() {
       // readVolume = stat;
 
       if (stat) {
-        timeStart = millis();
         onElectroValvule();
       } else {
         if (isOnElectroValvule == 1) {
-          timeEnd = millis();
-          getDuration();
           offElectroValvule();
         }
       }
@@ -319,35 +328,142 @@ void getStateIrrigation() {
 }
 
 
-void getDuration() {
+void getStartTime() {
   unsigned long dd, hh, mm, ss, elapsedTime;
-  elapsedTime = timeEnd - timeStart;
+  String shh, smm, sss;
+  
+  // Dias
+  dd = timeStart/1000/60/60/24;
+  // Restar los Dias del tiempo total
+  timeStart -= dd*1000*60*60*24;
+  
+  // Horas
+  hh = timeStart/1000/60/60;
+  if (hh < 10) {
+    shh = 0 + String(hh);
+  } else {
+    shh = String(hh);
+  }
+  // Restar los Horas del tiempo total
+  timeStart -= hh*1000*60*60;
+  
+  // Minutos
+  mm = timeStart/1000/60;
+  if (mm < 10) {
+    smm = 0 + String(mm);
+  } else {
+    smm = String(mm);
+  }
+  // Restar los Minutos del tiempo total
+  timeStart -= mm*1000*60;
+  
+
+  // Segundos
+  ss = timeStart/1000;
+  if (ss < 10) {
+    sss = 0 + String(ss);
+  } else {
+    sss = String(ss);
+  }
+
+  Serial.println("Tiempo de inicio sin Transformar: " + String(timeStart));
+  Serial.println("Tiempo de inicio: " + String(shh)+":"+String(smm)+":"+String(sss));
+}
+
+void getEndTime() {
+  unsigned long dd, hh, mm, ss, elapsedTime;
+  String shh, smm, sss;
+  
+  // Dias
+  dd = timeEnd/1000/60/60/24;
+  // Restar los Dias del tiempo total
+  timeEnd -= dd*1000*60*60*24;
+  
+  // Horas
+  hh = timeEnd/1000/60/60;
+  if (hh < 10) {
+    shh = 0 + String(hh);
+  } else {
+    shh = String(hh);
+  }
+  // Restar los Horas del tiempo total
+  timeEnd -= hh*1000*60*60;
+  
+  // Minutos
+  mm = timeEnd/1000/60;
+  if (mm < 10) {
+    smm = 0 + String(mm);
+  } else {
+    smm = String(mm);
+  }
+  // Restar los Minutos del tiempo total
+  timeEnd -= mm*1000*60;
+  
+
+  // Segundos
+  ss = timeEnd/1000;
+  if (ss < 10) {
+    sss = 0 + String(ss);
+  } else {
+    sss = String(ss);
+  }
+  
+  Serial.println("Tiempo de Fin sin Transformar: " + String(timeEnd));
+  Serial.println("Tiempo de Fin: " + String(shh)+":"+String(smm)+":"+String(sss));
+}
+
+void getDuration() {
+  getStartTime();
+  getEndTime();
+  unsigned long dd, hh, mm, ss, elapsedTime;
+  String shh, smm, sss;
+  elapsedTime = timeEnd;
+  Serial.println("TimeEnd : " + String(timeEnd));
 
   // Dias
-  dd = elapsedTime/1000/60/60/24;
+  dd = elapsedTime/60/60/24;
   // Restar los Dias del tiempo total
   elapsedTime -= dd*1000*60*60*24;
   
   // Horas
-  hh = elapsedTime/1000/60/60;
+  hh = elapsedTime/60/60;
+  if (hh < 10) {
+    shh = 0 + String(hh);
+  } else {
+    shh = String(hh);
+  }
   // Restar los Horas del tiempo total
   elapsedTime -= hh*1000*60*60;
   
   // Minutos
-  mm = elapsedTime/1000/60;
+  mm = elapsedTime/60;
+  if (mm < 10) {
+    smm = 0 + String(mm);
+  } else {
+    smm = String(mm);
+  }
   // Restar los Minutos del tiempo total
   elapsedTime -= mm*1000*60;
+  
 
   // Segundos
-  ss = elapsedTime/1000;
+  ss = elapsedTime;
+  if (ss < 10) {
+    sss = 0 + String(ss);
+  } else {
+    sss = String(ss);
+  }
 
-  stringTimeDuration = String(hh)+"-"+String(mm)+"-"+String(ss);
+  stringTimeDuration = String(shh)+":"+String(smm)+":"+String(sss);
+  Serial.println("Duracion calculada: " + String(shh)+":"+String(smm)+":"+String(sss));
+
 }
 
 
 void onElectroValvule() {
   isOnElectroValvule = 1;
   digitalWrite(pinRelay, HIGH);
+  timeStart = millis();
   readVolume = true;
 }
 
@@ -356,7 +472,9 @@ void offElectroValvule() {
     isOnElectroValvule = 0;
     readVolume = false;
     digitalWrite(pinRelay, LOW);
+    timeEnd = timeCounter;
     postIrrigationData();
+    timeCounter = 0;
   }
 }
 
@@ -372,6 +490,9 @@ void postIrrigationData() {
   http_irrigation_post.addHeader("Content-Type", "application/json");
 
   StaticJsonDocument<200> data;
+
+  getDuration();
+
 
   data["water_quantity"] = litros;
   data["duration"] = stringTimeDuration;

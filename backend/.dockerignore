@@ -2,3 +2,7 @@ venv
 env
 .env
 Dockerfile
+migrations
+.sqlite3
+*/migrations
+*/.sqlite3

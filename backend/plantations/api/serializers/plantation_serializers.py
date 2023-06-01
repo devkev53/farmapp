@@ -46,6 +46,12 @@ class CreatePlantationSerializer(serializers.ModelSerializer):
             'area', 'perimeter', 'ability',
             'wilting_point', 'thscm',
         )
+    
+    def validate_thscm(self, value):
+        for plantation in  Plantation.objects.filter(is_active=True):
+            if plantation.thscm == value:
+                raise serializers.ValidationError('Este dispositivo, cuenta con una asociación activa')
+        return value
 
 
 class ActivateIrrigationSerialzier(serializers.ModelSerializer):

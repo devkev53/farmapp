@@ -44,9 +44,11 @@ class PlantationViewSet(CustomBaseViewSet):
 class IsActiveIrrigation(generics.GenericAPIView):
 
     def get(self, request, slug=None):
-        queryset = Plantation.objects.filter(thscm=slug, is_active=True).get()
-        activate = queryset.activate_irrigation()
-        return Response({"active": activate}, status=status.HTTP_200_OK)
-        return Response({
-            'error':'check your fields', 'errors':user_serializer.errors
+        try:
+            queryset = Plantation.objects.filter(thscm=slug, is_active=True).get()
+            activate = queryset.activate_irrigation()
+            return Response({"active": activate}, status=status.HTTP_200_OK)
+        except:
+            return Response({
+                'error': 'This device THSCM, no has asociated with plantation..!'
             }, status=status.HTTP_400_BAD_REQUEST)
