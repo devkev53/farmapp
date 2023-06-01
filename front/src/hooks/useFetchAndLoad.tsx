@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios"
 import { useEffect, useState } from "react"
 import { AxiosCall } from "../models/axios-call.model"
+import { SnackbarUtilities } from "../utilities/snackbar-manager"
 
 export const useFetchAndLoad = () => {
 
@@ -19,11 +20,6 @@ export const useFetchAndLoad = () => {
       result = await axiosCall.call
     } catch (error: any) {
       setLoading(false)
-      if (error.response.data.errors) {
-        for (error in error.response.data) {
-          console.log(error)
-        }
-      }
       throw error
     }
     setLoading(false)

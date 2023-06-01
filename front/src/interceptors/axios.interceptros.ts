@@ -70,7 +70,7 @@ export const PrivateInterceptor = () => {
     },
     (error) => {
       console.log(error)
-      // SnackbarUtilities.error(getValidationError(error.code))
+      SnackbarUtilities.error(getValidationError(error.code))
       return Promise.reject(error)
     }
     )
@@ -86,6 +86,6 @@ export const PublicInterceptor = () => {
     (response) => {return response}, 
     (error) => { 
       console.log(error)
-      // SnackbarUtilities.error(error.response.data.error)
+      SnackbarUtilities.error(error.response.data.error)
     })
 }
