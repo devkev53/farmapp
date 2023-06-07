@@ -98,16 +98,18 @@ const index = () => {
           </div>
 
           {/* BOTTON DE RIEGO MANUAL */}
-          <div className="styles group">
-            <button
-              onClick={onIrrShow}
-              className={styles.irrigation_btn}>
-              <span>
-                <DropIcon />
-                Activar Riego
-              </span>
-            </button>
-          </div>
+          {plantation?.irrigation?.length > 0 && (
+            <div className="styles group">
+              <button
+                onClick={onIrrShow}
+                className={styles.irrigation_btn}>
+                <span>
+                  <DropIcon />
+                  Activar Riego
+                </span>
+              </button>
+            </div>
+          )}
           
           <button className={styles.report_link} onClick={() => getReport(plantation?.id!)}>
             Ver Reporte

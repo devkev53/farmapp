@@ -38,6 +38,15 @@ class PlantationViewSet(CustomBaseViewSet):
         return Response({
         'error':'check your fields', 'errors':instance_serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def destroy(self, request, pk=None):
+        try:
+            instance_destroy = self.serializer_class.Meta.model.objects.filter(id=pk)
+            instance_destroy.delete()
+            return Response({'message':'instance deactivate successful'})
+        except:
+            return Response({'error':'instance not found'}, status=status.HTTP_404_NOT_FOUND)
     
 
 
