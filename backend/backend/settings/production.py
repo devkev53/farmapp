@@ -64,12 +64,18 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "https://farmapp-qz1ezzkuk-kodeprint.vercel.app",
     "http://farmapp-qz1ezzkuk-kodeprint.vercel.app",
+    "https://farmapp-devkev53.vercel.app",
+    "http://farmapp-devkev53.vercel.app",
+
     "192.168.0.21:5173",    
     "http://192.168.0.21:5173",
 ]
 CORS_ORIGIN_WHITELIST= [
     "https://farmapp-qz1ezzkuk-kodeprint.vercel.app",
     "http://farmapp-qz1ezzkuk-kodeprint.vercel.app",
+    "https://farmapp-devkev53.vercel.app",
+    "http://farmapp-devkev53.vercel.app",
+
     "192.168.0.21:5173",    
     "http://192.168.0.21:5173",
 ]

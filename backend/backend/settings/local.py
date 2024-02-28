@@ -75,6 +75,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.0.14:5173",
     "http://192.168.0.17:5173",
     "http://192.168.0.21:5173",
+    "https://farmapp-devkev53.vercel.app",
+    "http://farmapp-devkev53.vercel.app",
 ]
 CORS_ORIGIN_WHITELIST= [
     "http://127.0.0.1:5173",
@@ -90,6 +92,8 @@ CORS_ORIGIN_WHITELIST= [
     "http://192.168.0.14:5173",
     "http://192.168.0.21:5173",
     "http://192.168.0.17:5173",
+    "https://farmapp-devkev53.vercel.app",
+    "http://farmapp-devkev53.vercel.app",
 ]
 
 
