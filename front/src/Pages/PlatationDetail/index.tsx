@@ -32,9 +32,11 @@ const index = () => {
   const {isVisible, showModal, closeModal} = useModal()
   const {isVisible:onIrrVisible, showModal:onIrrShow, closeModal:onIrrClose} = useModal()
   const {isLoading:loadingReport, getReport} = useGetPlantationReport()
-  
+
   const params = useParams()
   const navigate = useNavigate()
+
+  const plantationIrrigation = plantation?.irrigation?.length || 0
 
   const getData = async () => {
     try {
@@ -45,7 +47,7 @@ const index = () => {
       navigate('/404')
     }
   }
-  
+
   useEffect(() => {
     const data = getData()
   },[])
@@ -58,7 +60,7 @@ const index = () => {
     }, 1000);
   }
 
-  
+
   const daysToHarvest = () => {
     const today = Date.now()
     // console.log(today)
@@ -98,7 +100,7 @@ const index = () => {
           </div>
 
           {/* BOTTON DE RIEGO MANUAL */}
-          {plantation?.irrigation?.length > 0 && (
+          {plantationIrrigation > 0 && (
             <div className="styles group">
               <button
                 onClick={onIrrShow}
@@ -110,25 +112,25 @@ const index = () => {
               </button>
             </div>
           )}
-          
+
           <button className={styles.report_link} onClick={() => getReport(plantation?.id!)}>
             Ver Reporte
             <PrinterIcon />
           </button>
 
         </div>
-        
+
 
         {/* CONTENIDO PRINCIPAL */}
         <div className={styles.main_content}>
-            
+
           {/* DETALLES */}
           <div className={`${styles.details} ${styles.content_container}`}>
             <div className={styles.title}>
               <h3>Detalles</h3>
             </div>
             <div className={styles.content_info}>
-              
+
               <div className={styles.row}>
                 <PlantIcon />
                 <div>
@@ -136,7 +138,7 @@ const index = () => {
                   <span>{plantation?.name}</span>
                 </div>
               </div>
-              
+
               <div className={styles.row}>
                 <InfoIcon />
                 <div>
@@ -144,7 +146,7 @@ const index = () => {
                   <span>{plantation?.description}</span>
                 </div>
               </div>
-              
+
               <div className={styles.row}>
                 <ClockIcon />
                 <div>
@@ -162,7 +164,7 @@ const index = () => {
           <IrrigationDetails/>
 
           {/* TIERRA */}
-          {plantation && edit 
+          {plantation && edit
             ? (
               <EditGround
                 id={plantation?.id}
@@ -182,7 +184,7 @@ const index = () => {
                     <EditIcon />
                   </button>
                 </div>
-                
+
                 <div className={`${styles.content_info}`}>
 
                   <div className={styles.row}>
@@ -225,12 +227,11 @@ const index = () => {
                   </div>
 
                 </div>
-                
-              </div>    
+
+              </div>
             )
-           }
-          
-          
+          }
+
           {plantation && isVisible && (
             <ModalContainer>
               <ModalDeletePlantation
