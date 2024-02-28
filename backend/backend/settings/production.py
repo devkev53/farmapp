@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-nt4t0wy)#tmd!s&1enawmt!a6o*-ptz@my)5lud57jebd^#g^0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['xtestuser.pythonanywhere.com', 'localhost:8000', 'localhost', '127.0.0.1:8000', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['xtestuser.pythonanywhere.com', 'http://kevinpalma.pythonanywhere.com/', 'localhost:8000', 'localhost', '127.0.0.1:8000', '127.0.0.1', '*']
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
